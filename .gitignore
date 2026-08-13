@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+.env
+
+vectorstore/
+*.db
+
+.vscode/
+.idea/
+
+.DS_Store
+
+evaluation/retrieval_results.json

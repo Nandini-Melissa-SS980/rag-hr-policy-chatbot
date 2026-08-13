@@ -1,0 +1,66 @@
+[
+  {
+    "id": "Q1",
+    "question": "What is the company's policy regarding working from home and remote work arrangements?",
+    "expected": {
+      "policy_id": "HR-207",
+      "section": "4.2"
+    }
+  },
+  {
+    "id": "Q2",
+    "question": "What is the company's policy on employee attendance and working hours?",
+    "expected": {
+      "policy_id": "HR-201",
+      "section": "3.1"
+    }
+  },
+  {
+    "id": "Q3",
+    "question": "What are the rules for requesting and taking annual leave?",
+    "expected": {
+      "policy_id": "HR-202",
+      "section": "2.4"
+    }
+  },
+  {
+    "id": "Q4",
+    "question": "What is the company's policy regarding employee performance reviews and evaluations?",
+    "expected": {
+      "policy_id": "HR-203",
+      "section": "5.1"
+    }
+  },
+  {
+    "id": "Q5",
+    "question": "What are the rules for requesting flexible working arrangements?",
+    "expected": {
+      "policy_id": "HR-204",
+      "section": "4.2"
+    }
+  },
+  {
+    "id": "Q6",
+    "question": "What is the company's policy on employee promotions and eligibility requirements?",
+    "expected": {
+      "policy_id": "HR-205",
+      "section": "3.2"
+    }
+  },
+  {
+    "id": "Q7",
+    "question": "Under what circumstances can an employee work remotely?",
+    "expected": {
+      "policy_id": "HR-207",
+      "section": "4.2"
+    }
+  },
+  {
+    "id": "Q8",
+    "question": "What are the standard working hours employees are expected to follow?",
+    "expected": {
+      "policy_id": "HR-201",
+      "section": "2.1"
+    }
+  }
+]
