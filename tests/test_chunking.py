@@ -109,6 +109,25 @@ def test_extract_section():
     )
 
 
+def test_extract_section_picks_up_the_policy_number():
+    """
+    Documents the section bug: the pattern matches
+    any number, so a chunk opening with the policy
+    header is labelled '201' instead of a section.
+
+    This is why the basic strategy scores 0/8 in
+    the retrieval report — its labels rarely
+    describe the text they are attached to.
+    """
+
+    assert (
+        extract_section(
+            "HR-201 Attendance Policy ID: HR-201"
+        )
+        == "201"
+    )
+
+
 def test_metadata_has_the_required_fields():
 
     chunk = basic_chunk_documents(

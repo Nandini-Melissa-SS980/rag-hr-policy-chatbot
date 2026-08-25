@@ -17,6 +17,11 @@ EMBEDDING_MODEL = os.getenv(
     "BAAI/bge-small-en-v1.5",
 )
 
+RERANK_MODEL = os.getenv(
+    "RERANK_MODEL",
+    "BAAI/bge-reranker-base",
+)
+
 CHROMA_PATH = os.getenv(
     "CHROMA_PATH",
     "./vectorstore",

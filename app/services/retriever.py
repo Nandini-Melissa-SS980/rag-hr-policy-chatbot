@@ -1,11 +1,19 @@
 from app.services.vector_store import VectorStore
 
 
+# How many candidates the reranker sees per
+# requested result. A cross-encoder is slow but
+# accurate, so it is affordable to widen the
+# pool it reorders.
+RERANK_POOL_MULTIPLIER = 3
+
+
 class Retriever:
 
     def __init__(
         self,
         strategy: str = "structure_aware",
+        rerank: bool = False,
     ):
 
         if strategy == "basic":
@@ -28,6 +36,8 @@ class Retriever:
 
         self.strategy = strategy
 
+        self.rerank = rerank
+
         self.vector_store = VectorStore(
             collection
         )
@@ -47,10 +57,34 @@ class Retriever:
                 "region": region
             }
 
-        return self.vector_store.search(
+        candidate_k = top_k
+
+        if self.rerank:
+
+            candidate_k = (
+                top_k
+                * RERANK_POOL_MULTIPLIER
+            )
+
+        results = self.vector_store.search(
             query=question,
-            top_k=top_k,
+            top_k=candidate_k,
             where=where,
+        )
+
+        if not self.rerank:
+            return results
+
+        # Imported lazily so the baseline path
+        # never loads the cross-encoder.
+        from app.services.reranker import (
+            rerank_results,
+        )
+
+        return rerank_results(
+            question,
+            results,
+            top_k=top_k,
         )
 
     @staticmethod

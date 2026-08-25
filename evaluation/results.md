@@ -1,164 +1,213 @@
-# Retrieval Evaluation
+# Retrieval Evaluation — Failure Separation, One Change, Measured
 
-> **Status: not yet run.** `documents/base_handbook/` and `documents/addenda/` are
-> empty, so there is no index to evaluate. Every number below is a target or a
-> worked example, not a measurement. `retrieval_results.json` is a placeholder
-> that records the report schema.
->
-> To produce real results:
->
-> ```bash
-> # 1. add the PDFs
-> #    documents/base_handbook/employee_handbook.pdf
-> #    documents/addenda/HR-201.pdf … HR-207.pdf
-> uvicorn app.main:app --reload
-> curl -X POST http://127.0.0.1:8000/ingest
->
-> # 2. score each golden question against retrieval only
-> curl -X POST http://127.0.0.1:8000/retrieve \
->   -H 'content-type: application/json' \
->   -d '{"question": "How many weeks of paid parental leave am I entitled to?"}'
-> ```
->
-> `/retrieve` returns the ranked chunks with `vector_score`, `keyword_score`,
-> `superseded`, and `superseded_by` — everything the metrics below need. Run it for
-> each entry in `questions.json`, compare `doc_id`s against `expected_docs`, and
-> record the run in `retrieval_results.json` using the schema in that file.
+Week 4 · M2. Separate retrieval failures from generation failures, make
+**exactly one** change, and report the before-and-after number.
 
-## What is being measured
+Run with:
 
-Retrieval is scored on its own, before generation. If the right passage is not in
-the context window, no amount of prompt tuning fixes the answer — so the golden
-set asserts on **which documents come back**, not on answer wording.
+```bash
+python -m evaluation.evaluate_retrieval   # writes retrieval_results.json
+python -m evaluation.inspect_run          # writes inspection.md
+python -m evaluation.inspect_run --answers  # adds generated answers (needs a funded API key)
+```
 
-| Metric | Definition | Target |
+## The harness, frozen before anything was changed
+
+| Setting | Value |
+| --- | --- |
+| Embedding model | `BAAI/bge-small-en-v1.5` (384-d, local, cosine) |
+| Candidate pool | 10 |
+| Scored at | **k = 3** |
+| Golden set | 24 questions, `questions.json` |
+| Hit criterion | retrieved chunk matches expected `(policy_id, section)` |
+| Authoritative arm | `structure_aware` (65 chunks) |
+
+Baseline and change are measured **in one run of one harness**
+(`ARMS` in `evaluate_retrieval.py`), so the ruler cannot drift between
+the before and the after.
+
+### Two harness corrections made before measuring
+
+These are fixes to the *instrument*, not improvements to the app. Neither
+is "the one change".
+
+1. **Scored at k=3, not k=5.** The previous script retrieved and scored
+   at `top_k=5`. It now retrieves 10 and scores at 3, which also records
+   the rank a missed chunk *did* reach — the number that separates a
+   reranking problem from a retrieval problem.
+2. **The golden set was too easy to measure anything.** On the original
+   8 questions the authoritative arm scored **hit@3 = 1.00**. A saturated
+   metric cannot be improved, only damaged, so 16 harder questions were
+   added *before* any baseline was accepted as final. They were designed
+   from the documents — families of near-identical sections, identifier
+   lookups, and zero-overlap paraphrases — not from any observed failure
+   of the change.
+
+### The `basic` arm is not measurable, and that is a labelling bug
+
+`basic` scores **hit@3 = 0.29** — but that number is close to
+meaningless. `extract_section` takes the first number in a blind
+1000-character window, so a chunk opening `HR-201 Attendance…` is
+labelled section `201`. `basic` contains no chunk labelled `2.1`, `3.1`,
+`2.4`, or `5.1`, which several questions expect, so those questions
+cannot hit regardless of retrieval quality.
+
+Pinned by `test_extract_section_picks_up_the_policy_number`. Not fixed —
+fixing it is a different change, and this week allows one.
+
+## 1. Failure labelling, with evidence
+
+Baseline (`structure_aware`, k=3): **21 / 24 hits**. Three misses, all of
+them **retrieval failures**. Evidence from `inspection.md`:
+
+| Q | Question | Expected | Retrieved at ranks 1–3 | Kind |
+| --- | --- | --- | --- | --- |
+| Q11 | How long are flexible working requests kept on file? | HR-204 / 6 | HR-204/3, HR-204/4.2, HR-204/4 | retrieval — right policy, wrong section |
+| Q12 | How long are promotion nominations kept on file? | HR-205 / 5 | HR-205/3.2, HR-205/3.1, HR-205/unknown | retrieval — right policy, wrong section |
+| Q22 | I need a temporary change to my hours for a couple of weeks | HR-204 / 4.1 | HR-201/2, HR-201/2.1, HR-204/2 | retrieval — wrong policy entirely |
+
+The diagnosis is specific: **two of the three are "right document, wrong
+section"**. Q11 and Q12 ask about record retention; each policy has a
+short `Records` section whose wording is nearly identical across HR-203,
+HR-204 and HR-205, and it is dominated by the longer, topic-heavy
+sections of the same policy. Q22 fails differently — "temporary change to
+my hours" pulls HR-201 *Working Hours* instead of HR-204 §4.1 *Informal
+Arrangements*.
+
+### Generation failures could not be observed
+
+Bucket 2 — "right document, wrong answer" — requires running the
+generator. `OPENAI_API_KEY` is configured but the account returns
+`429 insufficient_quota`, so no answers could be produced. This is a
+billing limit, not a code path: `inspect_run.py --answers` produces the
+side-by-side view the moment the key is funded.
+
+What can be stated without the LLM: for all 21 questions that hit at k=3,
+the expected chunk **was** in the context window, so any wrong answer on
+those would necessarily be a generation failure, not a retrieval one.
+
+### A third bucket, checked and empty
+
+`has_good_match` refuses to answer when the top score is below `0.45`. A
+correct chunk retrieved just under that threshold would look like a
+retrieval failure but is really a threshold problem.
+
+Measured: the **lowest** top-1 score across all 24 questions is **0.586**,
+against a threshold of 0.45. The gate never fires on this set, so there
+are zero abstention failures. Worth knowing the bucket is empty rather
+than assuming it.
+
+## 2. The one change: cross-encoder reranking
+
+Chosen from the Phase-1 data, not from preference. Every baseline miss had
+its expected chunk **inside the candidate pool but below rank 3** — that
+is the precise condition reranking addresses, and the condition under
+which hybrid keyword search adds nothing, since the chunk is already
+being fetched.
+
+`app/services/reranker.py` — `BAAI/bge-reranker-base`, loaded once via
+`lru_cache`, mirroring `embeddings.py`. The bi-encoder scores question and
+chunk separately and never compares them; the cross-encoder reads the pair
+together. Retrieval widens to `top_k × 3` candidates and the cross-encoder
+reorders them.
+
+Gated behind `Retriever(strategy, rerank=False)`, imported lazily, so the
+baseline path is byte-identical and both arms run from one codebase. No
+new dependency — `CrossEncoder` ships inside `sentence-transformers`.
+
+The original cosine score is preserved as `vector_score`, because
+`has_good_match` thresholds on the cosine scale and rerank scores are
+unbounded logits.
+
+## 3. Before and after
+
+| Metric | Baseline | + Reranking | Δ |
+| --- | --- | --- | --- |
+| **hit-rate@3** | **0.875** (21/24) | **0.875** (21/24) | **0.000** |
+| hit-rate@1 | 0.500 (12/24) | **0.625** (15/24) | **+0.125** |
+| hit-rate@5 | 0.875 | **0.958** | +0.083 |
+| MRR | 0.667 | **0.774** | +0.107 |
+
+**The headline result is a null.** hit-rate@3 did not move.
+
+That flat number hides real movement in both directions — two fixed, two
+broken, cancelling exactly:
+
+| Outcome | Questions | Rank before → after |
 | --- | --- | --- |
-| `hit_rate_at_k` | Share of in-scope questions with at least one expected document in the top *k* | ≥ 0.95 |
-| `recall_at_k` | Mean fraction of a question's expected documents retrieved | ≥ 0.90 |
-| `mrr` | Mean reciprocal rank of the first expected document | ≥ 0.80 |
-| `precedence_accuracy` | Share of precedence cases where every retrieved *withdrawn* passage was flagged `superseded` | 1.00 |
+| **fixed** | Q12, Q22 | miss → 1, miss → 2 |
+| **newly broken** | Q2, Q16 | 2 → 5, 2 → 8 |
+| improved but already passing | Q4, Q7, Q10, Q13, Q21 | e.g. Q13 3 → 1 |
+| degraded but still passing | Q6, Q18 | 1 → 2 |
+| unchanged | 13 questions | — |
 
-`precedence_accuracy` is the one that has to be perfect. A miss there means the
-chatbot can state a withdrawn entitlement as current policy — the failure mode
-that actually costs the business something.
+So reranking is genuinely good at *ordering* — it recovered two of the
+three baseline misses and lifted hit@1 by 12.5 points and MRR by 0.107 —
+but at k=3 its gains and losses offset. **Had only hit-rate@3 been
+recorded, this change would have looked like it did nothing at all.**
 
-## Golden set
+## 4. What the change did not fix
 
-14 questions in `questions.json`, grouped by what they stress:
+**Q11 — still broken.** Reranking moved HR-204/6 from outside the pool to
+**rank 4**: better, still one place short of k=3. The `Records` sections
+are two lines long and share almost all their wording across three
+policies. Reranking cannot fix that; it is a chunk-granularity problem,
+and the likely real fix is merging very short sections into their parent
+or attaching the policy title to each chunk.
 
-| Category | Count | What it probes |
-| --- | --- | --- |
-| `entitlement` | 4 | Numeric answers (weeks, days, amounts) that must be quoted exactly |
-| `eligibility` | 2 | Service-length and status conditions |
-| `process` | 3 | Notice periods, approvals, deadlines |
-| `lookup` | 1 | Exact identifier ("what does HR-204 say") — the case dense retrieval blurs |
-| `precedence` | 2 | Addendum-overrides-handbook and addendum-overrides-addendum |
-| `out_of_scope` | 2 | Nothing covers it; the system must decline instead of inventing |
+**Q16 — newly broken, 2 → 8.** *"Do I get paid extra for staying late?"*
+expects HR-201/2.3 (*Overtime*). The reranker put HR-202/2.1 and HR-202/2.4
+on top — annual leave sections, which do contain the word *paid*. The
+correct chunk never says "paid extra": the answer is a **negation**
+(overtime is compensated as time off in lieu, not money). A cross-encoder
+rewards lexical-semantic agreement with the question, so a chunk whose
+answer contradicts the question's framing gets pushed down. This is a real
+weakness of reranking, not a labelling artifact.
 
-Several questions are worded the way an employee would ask, deliberately sharing
-no vocabulary with the policy heading ("Am I allowed to work from home full
-time?" against a section titled *Remote and Hybrid Working*). Paraphrase
-robustness is the point.
+**Q2 — newly broken, 2 → 5, but the ground truth is arguable.** *"What is
+the company's policy on employee attendance and working hours?"* expects
+HR-201/3.1. The reranker returned HR-201/1 (*Purpose and Scope*) and the
+policy header. For a question that broad, those are defensible answers and
+the reranker is arguably more right than the label. The label was **not**
+changed after seeing this result — retro-fitting ground truth to flatter a
+change is how an evaluation stops meaning anything. It is recorded as a
+caveat instead.
 
-### Assumed corpus
+**The `basic` arm's section labels** are still wrong, and `region` /
+`effective_date` are still `"unknown"` on every chunk, so region filtering
+still returns nothing (pinned by `test_unknown_region_returns_nothing`).
+Both are out of scope for a one-change week.
 
-`expected_docs` in `questions.json` assumes these topics. **Reconcile them with
-your actual PDFs before trusting any score** — a wrong expectation reads as a
-retrieval failure.
+## 5. Considered and rejected
 
-| Document | Assumed topic | Precedence |
-| --- | --- | --- |
-| `employee_handbook.pdf` | Base handbook, numbered sections (4.1 annual leave, 4.2 parental leave, …) | Overridden by any addendum |
-| `HR-201.pdf` | Bereavement leave | **Superseded by HR-205** |
-| `HR-202.pdf` | Remote and hybrid working, home-office stipend | Current |
-| `HR-203.pdf` | Parental leave | **Supersedes handbook §4.2** |
-| `HR-204.pdf` | Expenses and business travel | Current |
-| `HR-205.pdf` | Bereavement leave update | **Supersedes HR-201** |
-| `HR-207.pdf` | Performance review cycle | Current |
+| Alternative | Why not, on this evidence |
+| --- | --- |
+| **Hybrid BM25 + RRF** | The strongest remaining candidate. Rejected *first* because every baseline miss was already inside the candidate pool — the failure was ordering, not recall, and hybrid's advantage is recall. Worth revisiting for Q11/Q12: both name their policy in the question ("flexible working", "promotion"), which exact-term matching would weight heavily and reranking evidently does not. |
+| **Query rewriting / HyDE** | Aimed at vocabulary mismatch. The `no_overlap` questions (Q17, Q19, Q20) already hit at rank 1, so paraphrase is not this system's bottleneck. |
+| **MMR** | Fixes redundancy in the top-k. Inspection shows the top 3 are distinct sections, not near-duplicates, so there is no redundancy to remove. |
+| **A stronger LLM** | Cannot help. All three failures happen before the model is called — the correct chunk is not in the context window. |
 
-`HR-206` is absent from the corpus. That is per the supplied file list, not an
-oversight — but if it exists in your source set, add it and extend the golden set,
-since a missing addendum is exactly the kind of gap that produces a confidently
-wrong answer about superseded policy.
+## 6. Measurement caveats
 
-## How precedence is scored
+- **24 questions**, so hit-rate@3 moves in steps of 0.042. A one-question
+  change is a 4.2-point swing.
+- The golden set is **self-authored**, from the same six PDFs it scores.
+  It is adversarial by construction but not independent.
+- `recall_at_k` equals `hit_rate_at_k` throughout, because every question
+  has exactly one expected target. Both are reported because they diverge
+  as soon as a question has more than one, and `expected` already accepts
+  a list.
+- Reranking costs a second model pass over 30 candidates per query — the
+  latency is not measured here.
 
-The retriever reads override declarations out of the addenda themselves at
-ingest time (`supersedes Section 4.2`, `supersedes HR-201`), stores them as chunk
-metadata, and applies them at query time:
+## Files
 
-1. Any retrieved addendum contributes its superseded sections and documents.
-2. A retrieved passage matching one of those is flagged `superseded=true`,
-   annotated with the addendum that replaced it, and multiplied by
-   `SUPERSEDED_PENALTY` (0.45) so current policy outranks it.
-3. Section matching is hierarchical: replacing `4.2` also replaces `4.2.1`, but
-   not `4.20`.
-
-Withdrawn passages are demoted, **not dropped**. "What changed about bereavement
-leave?" (Q07) needs the old text — it just has to arrive labelled. The system
-prompt then instructs the model to treat `SUPERSEDED` excerpts as historical and
-name the replacing addendum.
-
-A precedence case counts as passing only when *every* retrieved withdrawn
-document was flagged. Not retrieving it at all is not scored as a precedence
-failure — it shows up as a recall failure instead.
-
-## Reading a failure
-
-`retrieval_results.json` keeps per-chunk `vector_score` and `keyword_score`
-alongside the final score, which usually localises the problem without a
-debugger:
-
-| Symptom | Likely cause | First thing to try |
-| --- | --- | --- |
-| Right document, wrong page/section | Chunks too large — one passage spans two policies | Lower `CHUNK_SIZE_TOKENS` (350 → 250) |
-| `keyword_score` high, `vector_score` low, expected doc missing | Paraphrase gap the embedding model can't bridge | Raise `KEYWORD_WEIGHT`, or move to a stronger embedding model |
-| Identifier lookups (Q10) fail | Lexical signal underweighted | Raise `KEYWORD_WEIGHT` (0.25 → 0.4) |
-| Expected doc present but ranked last | Candidate pool too shallow before re-ranking | Raise `CANDIDATE_K` |
-| `precedence_ok` false | The override sentence didn't match the loader's regex | Check `supersedes_sections` in the chunk metadata; the wording in the PDF may differ |
-| Answer correct but `grounded: false` | Model answered without emitting citation markers | Check the excerpt headers reached the prompt intact |
-| Out-of-scope question returns a confident answer | `MIN_SCORE` is 0.0, so weak matches still reach the model | Raise `MIN_SCORE` until Q13/Q14 return nothing |
-
-## Tuning order
-
-Retrieval parameters interact, so change one at a time and re-score. Scoring via
-`/retrieve` never calls the model, so a full sweep of the golden set costs
-nothing but the local embedding pass.
-
-1. **Chunk size / overlap** — the largest single effect. Section-boundary splits
-   already prevent two policies sharing a chunk; size controls how much
-   surrounding context each answer gets.
-2. **`keyword_weight`** — trades paraphrase robustness against exact-identifier
-   precision. 0.25 is a starting point, not a finding.
-3. **`candidate_k`** — cheap. Raise it before touching anything else if an
-   expected document is retrieved but ranked low.
-4. **`min_score`** — the abstention threshold. Tune it against the out-of-scope
-   questions specifically; raising it to fix a false positive will start costing
-   recall elsewhere.
-5. **Embedding model** — last, because it invalidates the whole index. Re-ingest
-   is required.
-
-## Known limitations
-
-- **Scanned PDFs yield nothing.** `pypdf` extracts text, not images. A scanned
-  handbook needs OCR upstream; the loader logs a warning and produces zero pages,
-  and `/ingest` returns 422 rather than silently indexing an empty corpus.
-- **Override detection is regex-based.** It handles "supersedes Section 4.2" and
-  "replaces HR-201". An addendum that conveys the same thing in prose ("the
-  parental leave provisions of the handbook no longer apply") will not be
-  detected, and the stale passage will not be flagged. Verify
-  `supersedes_sections` metadata after ingesting a new addendum.
-- **Effective dates are parsed, not compared.** Precedence comes from explicit
-  supersession statements, not from date ordering. Two undeclared conflicting
-  addenda would both be presented as current — the prompt instructs the model to
-  surface the conflict rather than pick one.
-- **No answer-quality scoring yet.** Only retrieval is measured. Faithfulness
-  scoring (does every claim in the answer trace to a cited excerpt?) would need a
-  second pass, most usefully as an LLM-judge over the `answer_must_contain` fields
-  already present in `questions.json`.
-- **Scoring is manual.** There is no runner script in this project — `/retrieve`
-  is the interface, and aggregating the metrics across the golden set is left to
-  whatever you drive it from.
-- **The tests' fake embedder is lexical, not semantic.** Unit tests verify ranking
-  mechanics and precedence logic; they do not tell you whether the real embedding
-  model retrieves well. That is what this evaluation is for.
+| File | Role |
+| --- | --- |
+| `questions.json` | 24-question golden set, tagged by category |
+| `metrics.py` | hit-rate@k, recall@k, MRR |
+| `evaluate_retrieval.py` | frozen harness; all three arms; before/after comparison |
+| `inspect_run.py` | writes `inspection.md` |
+| `inspection.md` | the side-by-side view failures were labelled from |
+| `retrieval_results.json` | full measured run, per-question ranks |
+| `../app/services/reranker.py` | the one change |

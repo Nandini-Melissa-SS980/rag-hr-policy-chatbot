@@ -1,6 +1,7 @@
 [
   {
     "id": "Q1",
+    "category": "paraphrase",
     "question": "What is the company's policy regarding working from home and remote work arrangements?",
     "expected": {
       "policy_id": "HR-207",
@@ -9,6 +10,7 @@
   },
   {
     "id": "Q2",
+    "category": "paraphrase",
     "question": "What is the company's policy on employee attendance and working hours?",
     "expected": {
       "policy_id": "HR-201",
@@ -17,6 +19,7 @@
   },
   {
     "id": "Q3",
+    "category": "paraphrase",
     "question": "What are the rules for requesting and taking annual leave?",
     "expected": {
       "policy_id": "HR-202",
@@ -25,6 +28,7 @@
   },
   {
     "id": "Q4",
+    "category": "paraphrase",
     "question": "What is the company's policy regarding employee performance reviews and evaluations?",
     "expected": {
       "policy_id": "HR-203",
@@ -33,6 +37,7 @@
   },
   {
     "id": "Q5",
+    "category": "paraphrase",
     "question": "What are the rules for requesting flexible working arrangements?",
     "expected": {
       "policy_id": "HR-204",
@@ -41,6 +46,7 @@
   },
   {
     "id": "Q6",
+    "category": "paraphrase",
     "question": "What is the company's policy on employee promotions and eligibility requirements?",
     "expected": {
       "policy_id": "HR-205",
@@ -49,6 +55,7 @@
   },
   {
     "id": "Q7",
+    "category": "paraphrase",
     "question": "Under what circumstances can an employee work remotely?",
     "expected": {
       "policy_id": "HR-207",
@@ -57,10 +64,155 @@
   },
   {
     "id": "Q8",
+    "category": "paraphrase",
     "question": "What are the standard working hours employees are expected to follow?",
     "expected": {
       "policy_id": "HR-201",
       "section": "2.1"
+    }
+  },
+  {
+    "id": "Q9",
+    "category": "lookup",
+    "question": "What version number is the remote and hybrid working policy?",
+    "expected": {
+      "policy_id": "HR-207",
+      "section": "207"
+    }
+  },
+  {
+    "id": "Q10",
+    "category": "lookup",
+    "question": "What is the policy ID for annual leave?",
+    "expected": {
+      "policy_id": "HR-202",
+      "section": "202"
+    }
+  },
+  {
+    "id": "Q11",
+    "category": "near_duplicate",
+    "question": "How long are flexible working requests kept on file?",
+    "expected": {
+      "policy_id": "HR-204",
+      "section": "6"
+    }
+  },
+  {
+    "id": "Q12",
+    "category": "near_duplicate",
+    "question": "How long are promotion nominations kept on file?",
+    "expected": {
+      "policy_id": "HR-205",
+      "section": "5"
+    }
+  },
+  {
+    "id": "Q13",
+    "category": "near_duplicate",
+    "question": "How long are performance ratings kept on file?",
+    "expected": {
+      "policy_id": "HR-203",
+      "section": "6"
+    }
+  },
+  {
+    "id": "Q14",
+    "category": "eligibility",
+    "question": "How long must I work here before I can ask to change my working pattern?",
+    "expected": {
+      "policy_id": "HR-204",
+      "section": "3"
+    }
+  },
+  {
+    "id": "Q15",
+    "category": "eligibility",
+    "question": "Who is allowed to work in a hybrid way?",
+    "expected": {
+      "policy_id": "HR-207",
+      "section": "3"
+    }
+  },
+  {
+    "id": "Q16",
+    "category": "no_overlap",
+    "question": "Do I get paid extra for staying late?",
+    "expected": {
+      "policy_id": "HR-201",
+      "section": "2.3"
+    }
+  },
+  {
+    "id": "Q17",
+    "category": "no_overlap",
+    "question": "How long a break am I owed on a long day?",
+    "expected": {
+      "policy_id": "HR-201",
+      "section": "2.2"
+    }
+  },
+  {
+    "id": "Q18",
+    "category": "no_overlap",
+    "question": "What happens if I do not tell anyone I am not coming in?",
+    "expected": {
+      "policy_id": "HR-201",
+      "section": "3.2"
+    }
+  },
+  {
+    "id": "Q19",
+    "category": "no_overlap",
+    "question": "How many unused days can I move into next year?",
+    "expected": {
+      "policy_id": "HR-202",
+      "section": "2.5"
+    }
+  },
+  {
+    "id": "Q20",
+    "category": "no_overlap",
+    "question": "How often should my manager sit down with me one to one?",
+    "expected": {
+      "policy_id": "HR-203",
+      "section": "4"
+    }
+  },
+  {
+    "id": "Q21",
+    "category": "cross_policy",
+    "question": "How many days each week must I be in the office?",
+    "expected": {
+      "policy_id": "HR-207",
+      "section": "4.2"
+    }
+  },
+  {
+    "id": "Q22",
+    "category": "cross_policy",
+    "question": "I need a temporary change to my hours for a couple of weeks, what should I do?",
+    "expected": {
+      "policy_id": "HR-204",
+      "section": "4.1"
+    }
+  },
+  {
+    "id": "Q23",
+    "category": "process",
+    "question": "When do promotion nominations open?",
+    "expected": {
+      "policy_id": "HR-205",
+      "section": "3.1"
+    }
+  },
+  {
+    "id": "Q24",
+    "category": "process",
+    "question": "Can my request to work differently be turned down?",
+    "expected": {
+      "policy_id": "HR-204",
+      "section": "5"
     }
   }
 ]
