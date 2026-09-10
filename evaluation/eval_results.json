@@ -1,0 +1,617 @@
+{
+  "config": {
+    "strategy": "structure_aware",
+    "top_k": 3,
+    "judge_version": "v1",
+    "assertions": [
+      "refusal_is_correct",
+      "sources_present",
+      "sections_resolve"
+    ],
+    "judged_criteria": [
+      "policy_correctness"
+    ]
+  },
+  "by_mode": {
+    "out_of_scope": {
+      "cases": 6,
+      "judge_pass": 0,
+      "judged": 0,
+      "refusal_is_correct": {
+        "ran": 6,
+        "passed": 0
+      },
+      "sources_present": {
+        "ran": 0,
+        "passed": 0
+      },
+      "sections_resolve": {
+        "ran": 0,
+        "passed": 0
+      }
+    },
+    "empty_chunk": {
+      "cases": 6,
+      "judge_pass": 0,
+      "judged": 0,
+      "refusal_is_correct": {
+        "ran": 6,
+        "passed": 6
+      },
+      "sources_present": {
+        "ran": 0,
+        "passed": 0
+      },
+      "sections_resolve": {
+        "ran": 0,
+        "passed": 0
+      }
+    },
+    "wrong_policy": {
+      "cases": 5,
+      "judge_pass": 0,
+      "judged": 0,
+      "refusal_is_correct": {
+        "ran": 5,
+        "passed": 5
+      },
+      "sources_present": {
+        "ran": 0,
+        "passed": 0
+      },
+      "sections_resolve": {
+        "ran": 0,
+        "passed": 0
+      }
+    },
+    "unciteable": {
+      "cases": 4,
+      "judge_pass": 0,
+      "judged": 0,
+      "refusal_is_correct": {
+        "ran": 4,
+        "passed": 4
+      },
+      "sources_present": {
+        "ran": 0,
+        "passed": 0
+      },
+      "sections_resolve": {
+        "ran": 0,
+        "passed": 0
+      }
+    },
+    "near_miss": {
+      "cases": 6,
+      "judge_pass": 0,
+      "judged": 0,
+      "refusal_is_correct": {
+        "ran": 6,
+        "passed": 6
+      },
+      "sources_present": {
+        "ran": 0,
+        "passed": 0
+      },
+      "sections_resolve": {
+        "ran": 0,
+        "passed": 0
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "E01",
+      "mode": "out_of_scope",
+      "question": "How much maternity leave do I get?",
+      "regression": true,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": false,
+          "detail": "answered a question the documents do not cover"
+        }
+      },
+      "assertions_passed": false,
+      "judge": null
+    },
+    {
+      "id": "E02",
+      "mode": "out_of_scope",
+      "question": "What is the pension contribution?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": false,
+          "detail": "answered a question the documents do not cover"
+        }
+      },
+      "assertions_passed": false,
+      "judge": null
+    },
+    {
+      "id": "E03",
+      "mode": "out_of_scope",
+      "question": "Do we get private health insurance?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": false,
+          "detail": "answered a question the documents do not cover"
+        }
+      },
+      "assertions_passed": false,
+      "judge": null
+    },
+    {
+      "id": "E04",
+      "mode": "out_of_scope",
+      "question": "How do I claim travel expenses?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": false,
+          "detail": "answered a question the documents do not cover"
+        }
+      },
+      "assertions_passed": false,
+      "judge": null
+    },
+    {
+      "id": "E05",
+      "mode": "out_of_scope",
+      "question": "Is there a training budget?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": false,
+          "detail": "answered a question the documents do not cover"
+        }
+      },
+      "assertions_passed": false,
+      "judge": null
+    },
+    {
+      "id": "E06",
+      "mode": "out_of_scope",
+      "question": "What is the dress code?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": false,
+          "detail": "answered a question the documents do not cover"
+        }
+      },
+      "assertions_passed": false,
+      "judge": null
+    },
+    {
+      "id": "E07",
+      "mode": "empty_chunk",
+      "question": "How many days of annual leave do I get?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        }
+      },
+      "assertions_passed": true,
+      "judge": null
+    },
+    {
+      "id": "E08",
+      "mode": "empty_chunk",
+      "question": "What are my standard working hours?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        }
+      },
+      "assertions_passed": true,
+      "judge": null
+    },
+    {
+      "id": "E09",
+      "mode": "empty_chunk",
+      "question": "How do I request annual leave?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        }
+      },
+      "assertions_passed": true,
+      "judge": null
+    },
+    {
+      "id": "E10",
+      "mode": "empty_chunk",
+      "question": "How am I rated in my performance review?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        }
+      },
+      "assertions_passed": true,
+      "judge": null
+    },
+    {
+      "id": "E11",
+      "mode": "empty_chunk",
+      "question": "Can I carry unused leave into next year?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        }
+      },
+      "assertions_passed": true,
+      "judge": null
+    },
+    {
+      "id": "E12",
+      "mode": "empty_chunk",
+      "question": "When are promotions considered?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        }
+      },
+      "assertions_passed": true,
+      "judge": null
+    },
+    {
+      "id": "E13",
+      "mode": "wrong_policy",
+      "question": "How do I book time off?",
+      "regression": true,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        }
+      },
+      "assertions_passed": true,
+      "judge": null
+    },
+    {
+      "id": "E14",
+      "mode": "wrong_policy",
+      "question": "Which days do I have to come into the office?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        }
+      },
+      "assertions_passed": true,
+      "judge": null
+    },
+    {
+      "id": "E15",
+      "mode": "wrong_policy",
+      "question": "I need a temporary change to my hours for a couple of weeks, what should I do?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        }
+      },
+      "assertions_passed": true,
+      "judge": null
+    },
+    {
+      "id": "E16",
+      "mode": "wrong_policy",
+      "question": "Do I get paid extra for staying late?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        }
+      },
+      "assertions_passed": true,
+      "judge": null
+    },
+    {
+      "id": "E17",
+      "mode": "wrong_policy",
+      "question": "How long must I work here before I can request flexible working?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        }
+      },
+      "assertions_passed": true,
+      "judge": null
+    },
+    {
+      "id": "E18",
+      "mode": "unciteable",
+      "question": "Can I work from another country for a few weeks?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        }
+      },
+      "assertions_passed": true,
+      "judge": null
+    },
+    {
+      "id": "E19",
+      "mode": "unciteable",
+      "question": "What happens if my promotion nomination is unsuccessful?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        }
+      },
+      "assertions_passed": true,
+      "judge": null
+    },
+    {
+      "id": "E20",
+      "mode": "unciteable",
+      "question": "When do I have to report an absence?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        }
+      },
+      "assertions_passed": true,
+      "judge": null
+    },
+    {
+      "id": "E21",
+      "mode": "unciteable",
+      "question": "How much notice is given if a fully remote arrangement is withdrawn?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        }
+      },
+      "assertions_passed": true,
+      "judge": null
+    },
+    {
+      "id": "E22",
+      "mode": "near_miss",
+      "question": "How long is my lunch break?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        }
+      },
+      "assertions_passed": true,
+      "judge": null
+    },
+    {
+      "id": "E23",
+      "mode": "near_miss",
+      "question": "How long are flexible working requests kept on file?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        }
+      },
+      "assertions_passed": true,
+      "judge": null
+    },
+    {
+      "id": "E24",
+      "mode": "near_miss",
+      "question": "How long are promotion nominations kept on file?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        }
+      },
+      "assertions_passed": true,
+      "judge": null
+    },
+    {
+      "id": "E25",
+      "mode": "near_miss",
+      "question": "How long are performance ratings kept on file?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        }
+      },
+      "assertions_passed": true,
+      "judge": null
+    },
+    {
+      "id": "E26",
+      "mode": "near_miss",
+      "question": "How long a rest break am I entitled to on a long day?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        }
+      },
+      "assertions_passed": true,
+      "judge": null
+    },
+    {
+      "id": "E27",
+      "mode": "near_miss",
+      "question": "Can my flexible working request be declined?",
+      "regression": false,
+      "abstained": false,
+      "answer": null,
+      "sources": [],
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.', 'type': 'insufficient_quota', 'param': None, 'code': 'credit_balance_exhausted'}}",
+      "blocked": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        }
+      },
+      "assertions_passed": true,
+      "judge": null
+    }
+  ]
+}

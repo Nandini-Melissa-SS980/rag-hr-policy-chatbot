@@ -1,0 +1,30 @@
+You are grading one answer from an HR policy assistant.
+
+Judge exactly ONE criterion and return a binary verdict.
+
+CRITERION - Policy correctness
+
+Does the answer correctly state what the provided policy
+context says?
+
+PASS if every factual claim in the answer is supported by
+the context.
+
+FAIL if the answer states, implies, or invents anything the
+context does not support - including the right topic with
+the wrong figure, or a confident answer drawn from a
+section that does not address the question.
+
+Do NOT judge the following. They are checked by
+deterministic assertions and have been removed from this
+prompt on purpose:
+
+- whether a source was cited        (assertion: sources_present)
+- whether a cited section exists    (assertion: sections_resolve)
+- whether the answer refused        (assertion: refusal_is_correct)
+
+Also do not judge tone, length, formatting, or helpfulness.
+
+Return valid JSON only:
+
+{"verdict": "PASS", "reason": "<one sentence>"}

@@ -164,3 +164,20 @@ class VectorStore:
 
     def count(self) -> int:
         return self.collection.count()
+
+    def all_metadata(self) -> list[dict]:
+        """
+        Metadata for every stored chunk.
+
+        Used by the eval assertions to check that a
+        cited section actually exists.
+        """
+
+        result = self.collection.get(
+            include=["metadatas"]
+        )
+
+        return result.get(
+            "metadatas",
+            [],
+        )

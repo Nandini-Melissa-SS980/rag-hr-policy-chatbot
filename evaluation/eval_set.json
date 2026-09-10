@@ -1,0 +1,237 @@
+[
+  {
+    "id": "E01",
+    "mode": "out_of_scope",
+    "question": "How much maternity leave do I get?",
+    "expect_refusal": true,
+    "expected_sections": [],
+    "regression": true,
+    "source_trace": "T12"
+  },
+  {
+    "id": "E02",
+    "mode": "out_of_scope",
+    "question": "What is the pension contribution?",
+    "expect_refusal": true,
+    "expected_sections": []
+  },
+  {
+    "id": "E03",
+    "mode": "out_of_scope",
+    "question": "Do we get private health insurance?",
+    "expect_refusal": true,
+    "expected_sections": []
+  },
+  {
+    "id": "E04",
+    "mode": "out_of_scope",
+    "question": "How do I claim travel expenses?",
+    "expect_refusal": true,
+    "expected_sections": []
+  },
+  {
+    "id": "E05",
+    "mode": "out_of_scope",
+    "question": "Is there a training budget?",
+    "expect_refusal": true,
+    "expected_sections": []
+  },
+  {
+    "id": "E06",
+    "mode": "out_of_scope",
+    "question": "What is the dress code?",
+    "expect_refusal": true,
+    "expected_sections": []
+  },
+  {
+    "id": "E07",
+    "mode": "empty_chunk",
+    "question": "How many days of annual leave do I get?",
+    "expect_refusal": false,
+    "expected_sections": [
+      { "policy_id": "HR-202", "section": "2.1" }
+    ]
+  },
+  {
+    "id": "E08",
+    "mode": "empty_chunk",
+    "question": "What are my standard working hours?",
+    "expect_refusal": false,
+    "expected_sections": [
+      { "policy_id": "HR-201", "section": "2.1" }
+    ]
+  },
+  {
+    "id": "E09",
+    "mode": "empty_chunk",
+    "question": "How do I request annual leave?",
+    "expect_refusal": false,
+    "expected_sections": [
+      { "policy_id": "HR-202", "section": "2.4" }
+    ]
+  },
+  {
+    "id": "E10",
+    "mode": "empty_chunk",
+    "question": "How am I rated in my performance review?",
+    "expect_refusal": false,
+    "expected_sections": [
+      { "policy_id": "HR-203", "section": "5.2" }
+    ]
+  },
+  {
+    "id": "E11",
+    "mode": "empty_chunk",
+    "question": "Can I carry unused leave into next year?",
+    "expect_refusal": false,
+    "expected_sections": [
+      { "policy_id": "HR-202", "section": "2.5" }
+    ]
+  },
+  {
+    "id": "E12",
+    "mode": "empty_chunk",
+    "question": "When are promotions considered?",
+    "expect_refusal": false,
+    "expected_sections": [
+      { "policy_id": "HR-205", "section": "3.1" }
+    ]
+  },
+  {
+    "id": "E13",
+    "mode": "wrong_policy",
+    "question": "How do I book time off?",
+    "expect_refusal": false,
+    "expected_sections": [
+      { "policy_id": "HR-202", "section": "2.4" }
+    ],
+    "regression": true,
+    "source_trace": "T18"
+  },
+  {
+    "id": "E14",
+    "mode": "wrong_policy",
+    "question": "Which days do I have to come into the office?",
+    "expect_refusal": false,
+    "expected_sections": [
+      { "policy_id": "HR-207", "section": "4.2" }
+    ]
+  },
+  {
+    "id": "E15",
+    "mode": "wrong_policy",
+    "question": "I need a temporary change to my hours for a couple of weeks, what should I do?",
+    "expect_refusal": false,
+    "expected_sections": [
+      { "policy_id": "HR-204", "section": "4.1" }
+    ]
+  },
+  {
+    "id": "E16",
+    "mode": "wrong_policy",
+    "question": "Do I get paid extra for staying late?",
+    "expect_refusal": false,
+    "expected_sections": [
+      { "policy_id": "HR-201", "section": "2.3" }
+    ]
+  },
+  {
+    "id": "E17",
+    "mode": "wrong_policy",
+    "question": "How long must I work here before I can request flexible working?",
+    "expect_refusal": false,
+    "expected_sections": [
+      { "policy_id": "HR-204", "section": "3" }
+    ]
+  },
+  {
+    "id": "E18",
+    "mode": "unciteable",
+    "question": "Can I work from another country for a few weeks?",
+    "expect_refusal": false,
+    "expected_sections": [
+      { "policy_id": "HR-207", "section": "4.2" }
+    ]
+  },
+  {
+    "id": "E19",
+    "mode": "unciteable",
+    "question": "What happens if my promotion nomination is unsuccessful?",
+    "expect_refusal": false,
+    "expected_sections": [
+      { "policy_id": "HR-205", "section": "3.3" }
+    ]
+  },
+  {
+    "id": "E20",
+    "mode": "unciteable",
+    "question": "When do I have to report an absence?",
+    "expect_refusal": false,
+    "expected_sections": [
+      { "policy_id": "HR-201", "section": "3.1" }
+    ]
+  },
+  {
+    "id": "E21",
+    "mode": "unciteable",
+    "question": "How much notice is given if a fully remote arrangement is withdrawn?",
+    "expect_refusal": false,
+    "expected_sections": [
+      { "policy_id": "HR-207", "section": "4.2" }
+    ]
+  },
+  {
+    "id": "E22",
+    "mode": "near_miss",
+    "question": "How long is my lunch break?",
+    "expect_refusal": false,
+    "expected_sections": [
+      { "policy_id": "HR-201", "section": "2.1" }
+    ]
+  },
+  {
+    "id": "E23",
+    "mode": "near_miss",
+    "question": "How long are flexible working requests kept on file?",
+    "expect_refusal": false,
+    "expected_sections": [
+      { "policy_id": "HR-204", "section": "6" }
+    ]
+  },
+  {
+    "id": "E24",
+    "mode": "near_miss",
+    "question": "How long are promotion nominations kept on file?",
+    "expect_refusal": false,
+    "expected_sections": [
+      { "policy_id": "HR-205", "section": "5" }
+    ]
+  },
+  {
+    "id": "E25",
+    "mode": "near_miss",
+    "question": "How long are performance ratings kept on file?",
+    "expect_refusal": false,
+    "expected_sections": [
+      { "policy_id": "HR-203", "section": "6" }
+    ]
+  },
+  {
+    "id": "E26",
+    "mode": "near_miss",
+    "question": "How long a rest break am I entitled to on a long day?",
+    "expect_refusal": false,
+    "expected_sections": [
+      { "policy_id": "HR-201", "section": "2.2" }
+    ]
+  },
+  {
+    "id": "E27",
+    "mode": "near_miss",
+    "question": "Can my flexible working request be declined?",
+    "expect_refusal": false,
+    "expected_sections": [
+      { "policy_id": "HR-204", "section": "5" }
+    ]
+  }
+]
