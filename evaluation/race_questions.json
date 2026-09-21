@@ -1,0 +1,72 @@
+[
+  {
+    "id": "R01",
+    "question": "What notice period must E-1002 give if they resign?",
+    "expected_value": "7",
+    "branching": true,
+    "why": "Tenure is 14 months, so the under-two-years notice rule applies rather than the standard one."
+  },
+  {
+    "id": "R02",
+    "question": "What notice period must E-1001 give if they resign?",
+    "expected_value": "30",
+    "branching": true,
+    "why": "Tenure is 38 months, so the two-years-or-more rule applies. Same question shape as R01, opposite branch."
+  },
+  {
+    "id": "R03",
+    "question": "How much notice does E-1004 need to give?",
+    "expected_value": "15",
+    "branching": true,
+    "why": "India, 8 months of service, so the under-two-years figure differs from the UK one."
+  },
+  {
+    "id": "R04",
+    "question": "How much notice does E-1005 need to give?",
+    "expected_value": "14",
+    "branching": true,
+    "why": "US, 30 months, so the two-years-or-more figure applies."
+  },
+  {
+    "id": "R05",
+    "question": "What is the notice period for E-1006?",
+    "expected_value": "7",
+    "branching": true,
+    "why": "UK, 5 months, fixed term. Step 3 cannot be chosen without step 2."
+  },
+  {
+    "id": "R06",
+    "question": "Which jurisdiction is E-1003 employed in?",
+    "expected_value": "India",
+    "branching": false,
+    "why": "Single record lookup, no dependent step."
+  },
+  {
+    "id": "R07",
+    "question": "How many months of service does E-1002 have?",
+    "expected_value": "14",
+    "branching": false,
+    "why": "Single record lookup."
+  },
+  {
+    "id": "R08",
+    "question": "What is the statutory minimum annual leave in the UK?",
+    "expected_value": "28",
+    "branching": false,
+    "why": "Single statutory table lookup, no employee involved."
+  },
+  {
+    "id": "R09",
+    "question": "How many days of paid annual leave does the company give full-time employees?",
+    "expected_value": "25",
+    "branching": false,
+    "why": "Handbook lookup only, HR-202 section 2.1."
+  },
+  {
+    "id": "R10",
+    "question": "Is E-1004 a permanent or a fixed-term employee?",
+    "expected_value": "fixed_term",
+    "branching": false,
+    "why": "Single record lookup."
+  }
+]

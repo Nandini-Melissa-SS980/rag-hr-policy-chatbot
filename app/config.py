@@ -22,6 +22,25 @@ RERANK_MODEL = os.getenv(
     "BAAI/bge-reranker-base",
 )
 
+
+# Token prices for the Week 7 agent-vs-workflow
+# race, in USD per million tokens. Left at zero on
+# purpose: set them from the provider's pricing page
+# so the cost column is real rather than invented.
+INPUT_COST_PER_1M = float(
+    os.getenv(
+        "INPUT_COST_PER_1M",
+        "0.0",
+    )
+)
+
+OUTPUT_COST_PER_1M = float(
+    os.getenv(
+        "OUTPUT_COST_PER_1M",
+        "0.0",
+    )
+)
+
 CHROMA_PATH = os.getenv(
     "CHROMA_PATH",
     "./vectorstore",

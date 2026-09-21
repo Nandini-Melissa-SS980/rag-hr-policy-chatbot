@@ -1,0 +1,48 @@
+Budget termination demo
+
+Driven by a stub model that always requests another tool call, so the run can only end on a budget. No API needed.
+
+====================================================
+max_iterations fires first
+====================================================
+budgets: iterations=4 tokens=1000000 cost=0.0 seconds=600
+
+[ 1] think        lap 1: asking the model what to do next
+[ 2] tool_call    get_employee_record({"employee_id": "E-1002"})
+[ 3] observation  {"employee_id": "E-1002", "jurisdiction": "UK", "tenure_months": 14, "employment_type": "permanent", "has_two_years_service": false}
+[ 4] think        lap 2: asking the model what to do next
+[ 5] tool_call    get_employee_record({"employee_id": "E-1002"})
+[ 6] observation  {"employee_id": "E-1002", "jurisdiction": "UK", "tenure_months": 14, "employment_type": "permanent", "has_two_years_service": false}
+[ 7] think        lap 3: asking the model what to do next
+[ 8] tool_call    get_employee_record({"employee_id": "E-1002"})
+[ 9] observation  {"employee_id": "E-1002", "jurisdiction": "UK", "tenure_months": 14, "employment_type": "permanent", "has_two_years_service": false}
+[10] think        lap 4: asking the model what to do next
+[11] tool_call    get_employee_record({"employee_id": "E-1002"})
+[12] observation  {"employee_id": "E-1002", "jurisdiction": "UK", "tenure_months": 14, "employment_type": "permanent", "has_two_years_service": false}
+[13] terminated   budget max_iterations reached after 4 iteration(s)
+
+terminated_by : max_iterations
+iterations    : 4
+total_tokens  : 5120
+answer        : Stopped before reaching an answer.
+
+====================================================
+max_tokens fires first
+====================================================
+budgets: iterations=50 tokens=3000 cost=0.0 seconds=600
+
+[ 1] think        lap 1: asking the model what to do next
+[ 2] tool_call    get_employee_record({"employee_id": "E-1002"})
+[ 3] observation  {"employee_id": "E-1002", "jurisdiction": "UK", "tenure_months": 14, "employment_type": "permanent", "has_two_years_service": false}
+[ 4] think        lap 2: asking the model what to do next
+[ 5] tool_call    get_employee_record({"employee_id": "E-1002"})
+[ 6] observation  {"employee_id": "E-1002", "jurisdiction": "UK", "tenure_months": 14, "employment_type": "permanent", "has_two_years_service": false}
+[ 7] think        lap 3: asking the model what to do next
+[ 8] tool_call    get_employee_record({"employee_id": "E-1002"})
+[ 9] observation  {"employee_id": "E-1002", "jurisdiction": "UK", "tenure_months": 14, "employment_type": "permanent", "has_two_years_service": false}
+[10] terminated   budget max_tokens reached after 3 iteration(s)
+
+terminated_by : max_tokens
+iterations    : 3
+total_tokens  : 3840
+answer        : Stopped before reaching an answer.
