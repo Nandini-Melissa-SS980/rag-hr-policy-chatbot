@@ -1,0 +1,2494 @@
+{
+  "config": {
+    "model": "replayed_plans",
+    "handbook_source": "frozen_lexical",
+    "input_cost_per_1m": 0.25,
+    "output_cost_per_1m": 2.0,
+    "chars_per_token": 4,
+    "budgets": {
+      "max_iterations": 6,
+      "max_tokens": 20000,
+      "max_cost_usd": 0.05,
+      "max_seconds": 60.0
+    }
+  },
+  "expected_sequences": [
+    {
+      "id": "R01",
+      "steps_needed": 2,
+      "multi_path": true,
+      "accepted_paths": [
+        [
+          "get_employee_record",
+          "get_jurisdiction_rules"
+        ],
+        [
+          "get_employee_record",
+          "get_jurisdiction_rules",
+          "search_handbook"
+        ],
+        [
+          "get_employee_record",
+          "search_handbook",
+          "get_jurisdiction_rules"
+        ],
+        [
+          "search_handbook",
+          "get_employee_record",
+          "get_jurisdiction_rules"
+        ]
+      ],
+      "why": "Checking whether the company has its own notice clause before falling back on the statutory table is a legitimate first move, and it is equally legitimate after the record or after the table. Four sequences are correct here, so four are accepted. The one thing that is not optional is the order of the two that matter: record before table."
+    },
+    {
+      "id": "R02",
+      "steps_needed": 2,
+      "multi_path": true,
+      "accepted_paths": [
+        [
+          "get_employee_record",
+          "get_jurisdiction_rules"
+        ],
+        [
+          "get_employee_record",
+          "get_jurisdiction_rules",
+          "search_handbook"
+        ],
+        [
+          "get_employee_record",
+          "search_handbook",
+          "get_jurisdiction_rules"
+        ],
+        [
+          "search_handbook",
+          "get_employee_record",
+          "get_jurisdiction_rules"
+        ]
+      ],
+      "why": "Checking whether the company has its own notice clause before falling back on the statutory table is a legitimate first move, and it is equally legitimate after the record or after the table. Four sequences are correct here, so four are accepted. The one thing that is not optional is the order of the two that matter: record before table."
+    },
+    {
+      "id": "R03",
+      "steps_needed": 2,
+      "multi_path": true,
+      "accepted_paths": [
+        [
+          "get_employee_record",
+          "get_jurisdiction_rules"
+        ],
+        [
+          "get_employee_record",
+          "get_jurisdiction_rules",
+          "search_handbook"
+        ],
+        [
+          "get_employee_record",
+          "search_handbook",
+          "get_jurisdiction_rules"
+        ],
+        [
+          "search_handbook",
+          "get_employee_record",
+          "get_jurisdiction_rules"
+        ]
+      ],
+      "why": "Checking whether the company has its own notice clause before falling back on the statutory table is a legitimate first move, and it is equally legitimate after the record or after the table. Four sequences are correct here, so four are accepted. The one thing that is not optional is the order of the two that matter: record before table."
+    },
+    {
+      "id": "R04",
+      "steps_needed": 2,
+      "multi_path": true,
+      "accepted_paths": [
+        [
+          "get_employee_record",
+          "get_jurisdiction_rules"
+        ],
+        [
+          "get_employee_record",
+          "get_jurisdiction_rules",
+          "search_handbook"
+        ],
+        [
+          "get_employee_record",
+          "search_handbook",
+          "get_jurisdiction_rules"
+        ],
+        [
+          "search_handbook",
+          "get_employee_record",
+          "get_jurisdiction_rules"
+        ]
+      ],
+      "why": "Checking whether the company has its own notice clause before falling back on the statutory table is a legitimate first move, and it is equally legitimate after the record or after the table. Four sequences are correct here, so four are accepted. The one thing that is not optional is the order of the two that matter: record before table."
+    },
+    {
+      "id": "R05",
+      "steps_needed": 2,
+      "multi_path": true,
+      "accepted_paths": [
+        [
+          "get_employee_record",
+          "get_jurisdiction_rules"
+        ],
+        [
+          "get_employee_record",
+          "get_jurisdiction_rules",
+          "search_handbook"
+        ],
+        [
+          "get_employee_record",
+          "search_handbook",
+          "get_jurisdiction_rules"
+        ],
+        [
+          "search_handbook",
+          "get_employee_record",
+          "get_jurisdiction_rules"
+        ]
+      ],
+      "why": "Checking whether the company has its own notice clause before falling back on the statutory table is a legitimate first move, and it is equally legitimate after the record or after the table. Four sequences are correct here, so four are accepted. The one thing that is not optional is the order of the two that matter: record before table."
+    },
+    {
+      "id": "R06",
+      "steps_needed": 1,
+      "multi_path": false,
+      "accepted_paths": [
+        [
+          "get_employee_record"
+        ]
+      ],
+      "why": "One fact, one source. The handbook does not know where anyone works and the statutory table does not know who anyone is, so there is no second defensible path and none is accepted."
+    },
+    {
+      "id": "R07",
+      "steps_needed": 1,
+      "multi_path": false,
+      "accepted_paths": [
+        [
+          "get_employee_record"
+        ]
+      ],
+      "why": "One fact, one source."
+    },
+    {
+      "id": "R08",
+      "steps_needed": 1,
+      "multi_path": false,
+      "accepted_paths": [
+        [
+          "get_jurisdiction_rules"
+        ]
+      ],
+      "why": "A statutory minimum is in the statutory table. The handbook tool's own description says it returns no statutory figures, so searching it here is not an alternate path, it is the wrong tool."
+    },
+    {
+      "id": "R09",
+      "steps_needed": 1,
+      "multi_path": false,
+      "accepted_paths": [
+        [
+          "search_handbook"
+        ]
+      ],
+      "why": "The company's own entitlement is only in the handbook. The statutory table holds a different number for the same words, which is the trap this case watches."
+    },
+    {
+      "id": "R10",
+      "steps_needed": 1,
+      "multi_path": false,
+      "accepted_paths": [
+        [
+          "get_employee_record"
+        ]
+      ],
+      "why": "One fact, one source."
+    }
+  ],
+  "summary": {
+    "baseline": {
+      "cases": 10,
+      "tool_calls": 18,
+      "tool_choice_accuracy": 0.944,
+      "wrong_tool_calls": 1,
+      "argument_checks": 23,
+      "argument_validity_rate": 0.696,
+      "invalid_arguments": [
+        {
+          "target": "get_jurisdiction_rules.jurisdiction",
+          "value": "UK",
+          "kind": "unestablished"
+        },
+        {
+          "target": "citation",
+          "value": "HR-206/4.2",
+          "kind": "nonexistent_section"
+        },
+        {
+          "target": "get_jurisdiction_rules.jurisdiction",
+          "value": "UK",
+          "kind": "unestablished"
+        },
+        {
+          "target": "citation",
+          "value": "HR-206/4.2",
+          "kind": "nonexistent_section"
+        },
+        {
+          "target": "get_jurisdiction_rules.jurisdiction",
+          "value": "UK",
+          "kind": "unestablished"
+        },
+        {
+          "target": "citation",
+          "value": "HR-206/4.2",
+          "kind": "nonexistent_section"
+        },
+        {
+          "target": "get_employee_record.employee_id",
+          "value": "E-1044",
+          "kind": "nonexistent"
+        }
+      ],
+      "step_efficiency_mean": 1.2,
+      "step_efficiency_max": 2.0,
+      "steps_taken": 18,
+      "steps_needed": 15,
+      "cost_per_question_p50": 0.000661,
+      "cost_per_question_max": 0.002557,
+      "cost_per_question_mean": 0.000852,
+      "tokens_per_question_p50": 2226,
+      "tokens_per_question_max": 9474,
+      "model_calls_total": 28,
+      "outcome_pass_rate": 0.8,
+      "trajectory_pass_rate": 0.5,
+      "gap": 0.3,
+      "mode_counts": {
+        "skipped_dependency": 3,
+        "wrong_tool": 1,
+        "loop": 1,
+        "hallucinated_argument": 1,
+        "fabricated_citation": 3,
+        "rejected_call_retry": 1,
+        "quiet_giveup": 0
+      }
+    },
+    "validated": {
+      "cases": 10,
+      "tool_calls": 24,
+      "tool_choice_accuracy": 0.958,
+      "wrong_tool_calls": 1,
+      "argument_checks": 34,
+      "argument_validity_rate": 0.794,
+      "invalid_arguments": [
+        {
+          "target": "get_jurisdiction_rules.tenure_months",
+          "value": null,
+          "kind": "missing"
+        },
+        {
+          "target": "get_jurisdiction_rules.jurisdiction",
+          "value": "UK",
+          "kind": "unestablished"
+        },
+        {
+          "target": "get_jurisdiction_rules.tenure_months",
+          "value": null,
+          "kind": "missing"
+        },
+        {
+          "target": "get_jurisdiction_rules.jurisdiction",
+          "value": "UK",
+          "kind": "unestablished"
+        },
+        {
+          "target": "get_jurisdiction_rules.tenure_months",
+          "value": null,
+          "kind": "missing"
+        },
+        {
+          "target": "get_jurisdiction_rules.jurisdiction",
+          "value": "UK",
+          "kind": "unestablished"
+        },
+        {
+          "target": "get_employee_record.employee_id",
+          "value": "E-1044",
+          "kind": "nonexistent"
+        }
+      ],
+      "step_efficiency_mean": 1.5,
+      "step_efficiency_max": 3.0,
+      "steps_taken": 24,
+      "steps_needed": 15,
+      "cost_per_question_p50": 0.000717,
+      "cost_per_question_max": 0.003397,
+      "cost_per_question_mean": 0.001159,
+      "tokens_per_question_p50": 2430,
+      "tokens_per_question_max": 12742,
+      "model_calls_total": 33,
+      "outcome_pass_rate": 0.8,
+      "trajectory_pass_rate": 0.7,
+      "gap": 0.1,
+      "mode_counts": {
+        "skipped_dependency": 0,
+        "wrong_tool": 1,
+        "loop": 1,
+        "hallucinated_argument": 1,
+        "fabricated_citation": 0,
+        "rejected_call_retry": 4,
+        "quiet_giveup": 1
+      }
+    }
+  },
+  "arms": {
+    "baseline": [
+      {
+        "id": "R01",
+        "question": "What notice period must E-1002 give if they resign?",
+        "expected": "7",
+        "value": "7",
+        "outcome_passed": true,
+        "trajectory_passed": false,
+        "path": [
+          "search_handbook",
+          "get_jurisdiction_rules"
+        ],
+        "path_accepted": false,
+        "accepted_paths": [
+          [
+            "get_employee_record",
+            "get_jurisdiction_rules"
+          ],
+          [
+            "get_employee_record",
+            "get_jurisdiction_rules",
+            "search_handbook"
+          ],
+          [
+            "get_employee_record",
+            "search_handbook",
+            "get_jurisdiction_rules"
+          ],
+          [
+            "search_handbook",
+            "get_employee_record",
+            "get_jurisdiction_rules"
+          ]
+        ],
+        "multi_path": true,
+        "arguments_ok": false,
+        "invented_values": [
+          {
+            "target": "get_jurisdiction_rules.jurisdiction",
+            "value": "UK",
+            "kind": "unestablished"
+          },
+          {
+            "target": "citation",
+            "value": "HR-206/4.2",
+            "kind": "nonexistent_section"
+          }
+        ],
+        "checks": [
+          {
+            "target": "search_handbook.query",
+            "value": "notice period on resignation",
+            "ok": true,
+            "kind": "ok",
+            "detail": "non-empty",
+            "refused": false
+          },
+          {
+            "target": "get_jurisdiction_rules.jurisdiction",
+            "value": "UK",
+            "ok": false,
+            "kind": "unestablished",
+            "detail": "never read from any record in this run",
+            "refused": false
+          },
+          {
+            "target": "citation",
+            "value": "HR-206/4.2",
+            "ok": false,
+            "kind": "nonexistent_section",
+            "detail": "no such section in the index",
+            "refused": false
+          }
+        ],
+        "modes": [
+          "skipped_dependency",
+          "fabricated_citation"
+        ],
+        "correctness_modes": [
+          "skipped_dependency",
+          "fabricated_citation"
+        ],
+        "steps_taken": 2,
+        "steps_needed": 2,
+        "step_efficiency": 1.0,
+        "model_calls": 3,
+        "total_tokens": 3513,
+        "cost_usd": 0.000995,
+        "figures_seen": [
+          "0",
+          "1",
+          "2",
+          "201",
+          "202",
+          "28",
+          "3",
+          "30",
+          "3333",
+          "4",
+          "6667",
+          "7"
+        ],
+        "terminated_by": null,
+        "answer": "The notice period is 7 days.",
+        "sources": [
+          {
+            "policy_id": "HR-206",
+            "section": "4.2"
+          }
+        ],
+        "calls": [
+          {
+            "name": "search_handbook",
+            "arguments": {
+              "query": "notice period on resignation"
+            },
+            "refused": false
+          },
+          {
+            "name": "get_jurisdiction_rules",
+            "arguments": {
+              "jurisdiction": "UK"
+            },
+            "refused": false
+          }
+        ],
+        "log": [
+          "[ 1] think        lap 1: asking the model what to do next",
+          "[ 2] tool_call    search_handbook({\"query\": \"notice period on resignation\"})",
+          "[ 3] observation  {\"query\": \"notice period on resignation\", \"passages\": [{\"policy_id\": \"HR-202\", \"section\": \"2.4\", \"score\": 0.6667, \"text\": \"2.4 Requesting and Taking Annual Leave\\nAll annual leave must be requested th",
+          "[ 4] think        lap 2: asking the model what to do next",
+          "[ 5] tool_call    get_jurisdiction_rules({\"jurisdiction\": \"UK\"})",
+          "[ 6] observation  {\"jurisdiction\": \"UK\", \"notice_days_under_2_years\": 7, \"notice_days_2_years_or_more\": 30, \"statutory_min_annual_leave_days\": 28}",
+          "[ 7] think        lap 3: asking the model what to do next",
+          "[ 8] answer       model returned a final answer"
+        ]
+      },
+      {
+        "id": "R02",
+        "question": "What notice period must E-1001 give if they resign?",
+        "expected": "30",
+        "value": "7",
+        "outcome_passed": false,
+        "trajectory_passed": false,
+        "path": [
+          "search_handbook",
+          "get_jurisdiction_rules"
+        ],
+        "path_accepted": false,
+        "accepted_paths": [
+          [
+            "get_employee_record",
+            "get_jurisdiction_rules"
+          ],
+          [
+            "get_employee_record",
+            "get_jurisdiction_rules",
+            "search_handbook"
+          ],
+          [
+            "get_employee_record",
+            "search_handbook",
+            "get_jurisdiction_rules"
+          ],
+          [
+            "search_handbook",
+            "get_employee_record",
+            "get_jurisdiction_rules"
+          ]
+        ],
+        "multi_path": true,
+        "arguments_ok": false,
+        "invented_values": [
+          {
+            "target": "get_jurisdiction_rules.jurisdiction",
+            "value": "UK",
+            "kind": "unestablished"
+          },
+          {
+            "target": "citation",
+            "value": "HR-206/4.2",
+            "kind": "nonexistent_section"
+          }
+        ],
+        "checks": [
+          {
+            "target": "search_handbook.query",
+            "value": "notice period on resignation",
+            "ok": true,
+            "kind": "ok",
+            "detail": "non-empty",
+            "refused": false
+          },
+          {
+            "target": "get_jurisdiction_rules.jurisdiction",
+            "value": "UK",
+            "ok": false,
+            "kind": "unestablished",
+            "detail": "never read from any record in this run",
+            "refused": false
+          },
+          {
+            "target": "citation",
+            "value": "HR-206/4.2",
+            "ok": false,
+            "kind": "nonexistent_section",
+            "detail": "no such section in the index",
+            "refused": false
+          }
+        ],
+        "modes": [
+          "skipped_dependency",
+          "fabricated_citation"
+        ],
+        "correctness_modes": [
+          "skipped_dependency",
+          "fabricated_citation"
+        ],
+        "steps_taken": 2,
+        "steps_needed": 2,
+        "step_efficiency": 1.0,
+        "model_calls": 3,
+        "total_tokens": 3513,
+        "cost_usd": 0.000995,
+        "figures_seen": [
+          "0",
+          "1",
+          "2",
+          "201",
+          "202",
+          "28",
+          "3",
+          "30",
+          "3333",
+          "4",
+          "6667",
+          "7"
+        ],
+        "terminated_by": null,
+        "answer": "The notice period is 7 days.",
+        "sources": [
+          {
+            "policy_id": "HR-206",
+            "section": "4.2"
+          }
+        ],
+        "calls": [
+          {
+            "name": "search_handbook",
+            "arguments": {
+              "query": "notice period on resignation"
+            },
+            "refused": false
+          },
+          {
+            "name": "get_jurisdiction_rules",
+            "arguments": {
+              "jurisdiction": "UK"
+            },
+            "refused": false
+          }
+        ],
+        "log": [
+          "[ 1] think        lap 1: asking the model what to do next",
+          "[ 2] tool_call    search_handbook({\"query\": \"notice period on resignation\"})",
+          "[ 3] observation  {\"query\": \"notice period on resignation\", \"passages\": [{\"policy_id\": \"HR-202\", \"section\": \"2.4\", \"score\": 0.6667, \"text\": \"2.4 Requesting and Taking Annual Leave\\nAll annual leave must be requested th",
+          "[ 4] think        lap 2: asking the model what to do next",
+          "[ 5] tool_call    get_jurisdiction_rules({\"jurisdiction\": \"UK\"})",
+          "[ 6] observation  {\"jurisdiction\": \"UK\", \"notice_days_under_2_years\": 7, \"notice_days_2_years_or_more\": 30, \"statutory_min_annual_leave_days\": 28}",
+          "[ 7] think        lap 3: asking the model what to do next",
+          "[ 8] answer       model returned a final answer"
+        ]
+      },
+      {
+        "id": "R03",
+        "question": "How much notice does E-1004 need to give?",
+        "expected": "15",
+        "value": "15",
+        "outcome_passed": true,
+        "trajectory_passed": true,
+        "path": [
+          "get_employee_record",
+          "get_jurisdiction_rules"
+        ],
+        "path_accepted": true,
+        "accepted_paths": [
+          [
+            "get_employee_record",
+            "get_jurisdiction_rules"
+          ],
+          [
+            "get_employee_record",
+            "get_jurisdiction_rules",
+            "search_handbook"
+          ],
+          [
+            "get_employee_record",
+            "search_handbook",
+            "get_jurisdiction_rules"
+          ],
+          [
+            "search_handbook",
+            "get_employee_record",
+            "get_jurisdiction_rules"
+          ]
+        ],
+        "multi_path": true,
+        "arguments_ok": true,
+        "invented_values": [],
+        "checks": [
+          {
+            "target": "get_employee_record.employee_id",
+            "value": "E-1004",
+            "ok": true,
+            "kind": "ok",
+            "detail": "in the fixture",
+            "refused": false
+          },
+          {
+            "target": "get_jurisdiction_rules.jurisdiction",
+            "value": "India",
+            "ok": true,
+            "kind": "ok",
+            "detail": "read from the record",
+            "refused": false
+          }
+        ],
+        "modes": [],
+        "correctness_modes": [],
+        "steps_taken": 2,
+        "steps_needed": 2,
+        "step_efficiency": 1.0,
+        "model_calls": 3,
+        "total_tokens": 2269,
+        "cost_usd": 0.000681,
+        "figures_seen": [
+          "1004",
+          "15",
+          "18",
+          "2",
+          "30",
+          "8"
+        ],
+        "terminated_by": null,
+        "answer": "15 days, from the India statutory minimum for 8 months of service.",
+        "sources": [],
+        "calls": [
+          {
+            "name": "get_employee_record",
+            "arguments": {
+              "employee_id": "E-1004"
+            },
+            "refused": false
+          },
+          {
+            "name": "get_jurisdiction_rules",
+            "arguments": {
+              "jurisdiction": "India"
+            },
+            "refused": false
+          }
+        ],
+        "log": [
+          "[ 1] think        lap 1: asking the model what to do next",
+          "[ 2] tool_call    get_employee_record({\"employee_id\": \"E-1004\"})",
+          "[ 3] observation  {\"employee_id\": \"E-1004\", \"jurisdiction\": \"India\", \"tenure_months\": 8, \"employment_type\": \"fixed_term\", \"manager_comment\": \"Fixed term to end of project. Extension under discussion.\", \"has_two_years_s",
+          "[ 4] think        lap 2: asking the model what to do next",
+          "[ 5] tool_call    get_jurisdiction_rules({\"jurisdiction\": \"India\"})",
+          "[ 6] observation  {\"jurisdiction\": \"India\", \"notice_days_under_2_years\": 15, \"notice_days_2_years_or_more\": 30, \"statutory_min_annual_leave_days\": 18}",
+          "[ 7] think        lap 3: asking the model what to do next",
+          "[ 8] answer       model returned a final answer"
+        ]
+      },
+      {
+        "id": "R04",
+        "question": "How much notice does E-1005 need to give?",
+        "expected": "14",
+        "value": "14",
+        "outcome_passed": true,
+        "trajectory_passed": true,
+        "path": [
+          "get_employee_record",
+          "get_jurisdiction_rules"
+        ],
+        "path_accepted": true,
+        "accepted_paths": [
+          [
+            "get_employee_record",
+            "get_jurisdiction_rules"
+          ],
+          [
+            "get_employee_record",
+            "get_jurisdiction_rules",
+            "search_handbook"
+          ],
+          [
+            "get_employee_record",
+            "search_handbook",
+            "get_jurisdiction_rules"
+          ],
+          [
+            "search_handbook",
+            "get_employee_record",
+            "get_jurisdiction_rules"
+          ]
+        ],
+        "multi_path": true,
+        "arguments_ok": true,
+        "invented_values": [],
+        "checks": [
+          {
+            "target": "get_employee_record.employee_id",
+            "value": "E-1005",
+            "ok": true,
+            "kind": "ok",
+            "detail": "in the fixture",
+            "refused": false
+          },
+          {
+            "target": "get_jurisdiction_rules.jurisdiction",
+            "value": "US",
+            "ok": true,
+            "kind": "ok",
+            "detail": "read from the record",
+            "refused": false
+          }
+        ],
+        "modes": [],
+        "correctness_modes": [],
+        "steps_taken": 2,
+        "steps_needed": 2,
+        "step_efficiency": 1.0,
+        "model_calls": 3,
+        "total_tokens": 2259,
+        "cost_usd": 0.000675,
+        "figures_seen": [
+          "0",
+          "1005",
+          "14",
+          "2",
+          "30"
+        ],
+        "terminated_by": null,
+        "answer": "14 days, from the US statutory minimum for 30 months of service.",
+        "sources": [],
+        "calls": [
+          {
+            "name": "get_employee_record",
+            "arguments": {
+              "employee_id": "E-1005"
+            },
+            "refused": false
+          },
+          {
+            "name": "get_jurisdiction_rules",
+            "arguments": {
+              "jurisdiction": "US"
+            },
+            "refused": false
+          }
+        ],
+        "log": [
+          "[ 1] think        lap 1: asking the model what to do next",
+          "[ 2] tool_call    get_employee_record({\"employee_id\": \"E-1005\"})",
+          "[ 3] observation  {\"employee_id\": \"E-1005\", \"jurisdiction\": \"US\", \"tenure_months\": 30, \"employment_type\": \"permanent\", \"manager_comment\": \"Strong quarter. Asked about the promotion cycle.\", \"has_two_years_service\": tru",
+          "[ 4] think        lap 2: asking the model what to do next",
+          "[ 5] tool_call    get_jurisdiction_rules({\"jurisdiction\": \"US\"})",
+          "[ 6] observation  {\"jurisdiction\": \"US\", \"notice_days_under_2_years\": 0, \"notice_days_2_years_or_more\": 14, \"statutory_min_annual_leave_days\": 0}",
+          "[ 7] think        lap 3: asking the model what to do next",
+          "[ 8] answer       model returned a final answer"
+        ]
+      },
+      {
+        "id": "R05",
+        "question": "What is the notice period for E-1006?",
+        "expected": "7",
+        "value": "7",
+        "outcome_passed": true,
+        "trajectory_passed": false,
+        "path": [
+          "search_handbook",
+          "search_handbook",
+          "search_handbook",
+          "get_jurisdiction_rules"
+        ],
+        "path_accepted": false,
+        "accepted_paths": [
+          [
+            "get_employee_record",
+            "get_jurisdiction_rules"
+          ],
+          [
+            "get_employee_record",
+            "get_jurisdiction_rules",
+            "search_handbook"
+          ],
+          [
+            "get_employee_record",
+            "search_handbook",
+            "get_jurisdiction_rules"
+          ],
+          [
+            "search_handbook",
+            "get_employee_record",
+            "get_jurisdiction_rules"
+          ]
+        ],
+        "multi_path": true,
+        "arguments_ok": false,
+        "invented_values": [
+          {
+            "target": "get_jurisdiction_rules.jurisdiction",
+            "value": "UK",
+            "kind": "unestablished"
+          },
+          {
+            "target": "citation",
+            "value": "HR-206/4.2",
+            "kind": "nonexistent_section"
+          }
+        ],
+        "checks": [
+          {
+            "target": "search_handbook.query",
+            "value": "notice period",
+            "ok": true,
+            "kind": "ok",
+            "detail": "non-empty",
+            "refused": false
+          },
+          {
+            "target": "search_handbook.query",
+            "value": "resignation notice period fixed term",
+            "ok": true,
+            "kind": "ok",
+            "detail": "non-empty",
+            "refused": false
+          },
+          {
+            "target": "search_handbook.query",
+            "value": "termination notice requirement",
+            "ok": true,
+            "kind": "ok",
+            "detail": "non-empty",
+            "refused": false
+          },
+          {
+            "target": "get_jurisdiction_rules.jurisdiction",
+            "value": "UK",
+            "ok": false,
+            "kind": "unestablished",
+            "detail": "never read from any record in this run",
+            "refused": false
+          },
+          {
+            "target": "citation",
+            "value": "HR-206/4.2",
+            "ok": false,
+            "kind": "nonexistent_section",
+            "detail": "no such section in the index",
+            "refused": false
+          }
+        ],
+        "modes": [
+          "skipped_dependency",
+          "loop",
+          "fabricated_citation"
+        ],
+        "correctness_modes": [
+          "skipped_dependency",
+          "fabricated_citation"
+        ],
+        "steps_taken": 4,
+        "steps_needed": 2,
+        "step_efficiency": 2.0,
+        "model_calls": 5,
+        "total_tokens": 9474,
+        "cost_usd": 0.002557,
+        "figures_seen": [
+          "0",
+          "1",
+          "2",
+          "201",
+          "202",
+          "2026",
+          "28",
+          "3",
+          "30",
+          "3333",
+          "4",
+          "5",
+          "7"
+        ],
+        "terminated_by": null,
+        "answer": "The notice period is 7 days.",
+        "sources": [
+          {
+            "policy_id": "HR-206",
+            "section": "4.2"
+          }
+        ],
+        "calls": [
+          {
+            "name": "search_handbook",
+            "arguments": {
+              "query": "notice period"
+            },
+            "refused": false
+          },
+          {
+            "name": "search_handbook",
+            "arguments": {
+              "query": "resignation notice period fixed term"
+            },
+            "refused": false
+          },
+          {
+            "name": "search_handbook",
+            "arguments": {
+              "query": "termination notice requirement"
+            },
+            "refused": false
+          },
+          {
+            "name": "get_jurisdiction_rules",
+            "arguments": {
+              "jurisdiction": "UK"
+            },
+            "refused": false
+          }
+        ],
+        "log": [
+          "[ 1] think        lap 1: asking the model what to do next",
+          "[ 2] tool_call    search_handbook({\"query\": \"notice period\"})",
+          "[ 3] observation  {\"query\": \"notice period\", \"passages\": [{\"policy_id\": \"HR-202\", \"section\": \"2.4\", \"score\": 1.0, \"text\": \"2.4 Requesting and Taking Annual Leave\\nAll annual leave must be requested through the human re",
+          "[ 4] think        lap 2: asking the model what to do next",
+          "[ 5] tool_call    search_handbook({\"query\": \"resignation notice period fixed term\"})",
+          "[ 6] observation  {\"query\": \"resignation notice period fixed term\", \"passages\": [{\"policy_id\": \"HR-201\", \"section\": \"1\", \"score\": 0.4, \"text\": \"1 Purpose and Scope\\nThis policy sets out the company's expectations for w",
+          "[ 7] think        lap 3: asking the model what to do next",
+          "[ 8] tool_call    search_handbook({\"query\": \"termination notice requirement\"})",
+          "[ 9] observation  {\"query\": \"termination notice requirement\", \"passages\": [{\"policy_id\": \"HR-201\", \"section\": \"3.1\", \"score\": 0.3333, \"text\": \"3.1 Attendance Expectations\\nEmployees are expected to attend work punctual",
+          "[10] think        lap 4: asking the model what to do next",
+          "[11] tool_call    get_jurisdiction_rules({\"jurisdiction\": \"UK\"})",
+          "[12] observation  {\"jurisdiction\": \"UK\", \"notice_days_under_2_years\": 7, \"notice_days_2_years_or_more\": 30, \"statutory_min_annual_leave_days\": 28}",
+          "[13] think        lap 5: asking the model what to do next",
+          "[14] answer       model returned a final answer"
+        ]
+      },
+      {
+        "id": "R06",
+        "question": "Which jurisdiction is E-1003 employed in?",
+        "expected": "India",
+        "value": "India",
+        "outcome_passed": true,
+        "trajectory_passed": true,
+        "path": [
+          "get_employee_record"
+        ],
+        "path_accepted": true,
+        "accepted_paths": [
+          [
+            "get_employee_record"
+          ]
+        ],
+        "multi_path": false,
+        "arguments_ok": true,
+        "invented_values": [],
+        "checks": [
+          {
+            "target": "get_employee_record.employee_id",
+            "value": "E-1003",
+            "ok": true,
+            "kind": "ok",
+            "detail": "in the fixture",
+            "refused": false
+          }
+        ],
+        "modes": [],
+        "correctness_modes": [],
+        "steps_taken": 1,
+        "steps_needed": 1,
+        "step_efficiency": 1.0,
+        "model_calls": 2,
+        "total_tokens": 1411,
+        "cost_usd": 0.000418,
+        "figures_seen": [
+          "1003",
+          "60"
+        ],
+        "terminated_by": null,
+        "answer": "E-1003 is employed in India.",
+        "sources": [],
+        "calls": [
+          {
+            "name": "get_employee_record",
+            "arguments": {
+              "employee_id": "E-1003"
+            },
+            "refused": false
+          }
+        ],
+        "log": [
+          "[ 1] think        lap 1: asking the model what to do next",
+          "[ 2] tool_call    get_employee_record({\"employee_id\": \"E-1003\"})",
+          "[ 3] observation  {\"employee_id\": \"E-1003\", \"jurisdiction\": \"India\", \"tenure_months\": 60, \"employment_type\": \"permanent\", \"manager_comment\": \"Long service. Mentors two of the new joiners.\", \"has_two_years_service\": tru",
+          "[ 4] think        lap 2: asking the model what to do next",
+          "[ 5] answer       model returned a final answer"
+        ]
+      },
+      {
+        "id": "R07",
+        "question": "How many months of service does E-1002 have?",
+        "expected": "14",
+        "value": "14",
+        "outcome_passed": true,
+        "trajectory_passed": true,
+        "path": [
+          "get_employee_record"
+        ],
+        "path_accepted": true,
+        "accepted_paths": [
+          [
+            "get_employee_record"
+          ]
+        ],
+        "multi_path": false,
+        "arguments_ok": true,
+        "invented_values": [],
+        "checks": [
+          {
+            "target": "get_employee_record.employee_id",
+            "value": "E-1002",
+            "ok": true,
+            "kind": "ok",
+            "detail": "in the fixture",
+            "refused": false
+          }
+        ],
+        "modes": [],
+        "correctness_modes": [],
+        "steps_taken": 1,
+        "steps_needed": 1,
+        "step_efficiency": 1.0,
+        "model_calls": 2,
+        "total_tokens": 1419,
+        "cost_usd": 0.000423,
+        "figures_seen": [
+          "1002",
+          "14"
+        ],
+        "terminated_by": null,
+        "answer": "E-1002 has fourteen months of service.",
+        "sources": [],
+        "calls": [
+          {
+            "name": "get_employee_record",
+            "arguments": {
+              "employee_id": "E-1002"
+            },
+            "refused": false
+          }
+        ],
+        "log": [
+          "[ 1] think        lap 1: asking the model what to do next",
+          "[ 2] tool_call    get_employee_record({\"employee_id\": \"E-1002\"})",
+          "[ 3] observation  {\"employee_id\": \"E-1002\", \"jurisdiction\": \"UK\", \"tenure_months\": 14, \"employment_type\": \"permanent\", \"manager_comment\": \"Joined last spring, settling in well. Wants to move to four days.\", \"has_two_ye",
+          "[ 4] think        lap 2: asking the model what to do next",
+          "[ 5] answer       model returned a final answer"
+        ]
+      },
+      {
+        "id": "R08",
+        "question": "What is the statutory minimum annual leave in the UK?",
+        "expected": "28",
+        "value": "25",
+        "outcome_passed": false,
+        "trajectory_passed": false,
+        "path": [
+          "search_handbook"
+        ],
+        "path_accepted": false,
+        "accepted_paths": [
+          [
+            "get_jurisdiction_rules"
+          ]
+        ],
+        "multi_path": false,
+        "arguments_ok": true,
+        "invented_values": [],
+        "checks": [
+          {
+            "target": "search_handbook.query",
+            "value": "statutory minimum annual leave UK",
+            "ok": true,
+            "kind": "ok",
+            "detail": "non-empty",
+            "refused": false
+          },
+          {
+            "target": "citation",
+            "value": "HR-202/2.1",
+            "ok": true,
+            "kind": "ok",
+            "detail": "section is in the index",
+            "refused": false
+          }
+        ],
+        "modes": [
+          "wrong_tool"
+        ],
+        "correctness_modes": [
+          "wrong_tool"
+        ],
+        "steps_taken": 1,
+        "steps_needed": 1,
+        "step_efficiency": 1.0,
+        "model_calls": 2,
+        "total_tokens": 1568,
+        "cost_usd": 0.000488,
+        "figures_seen": [
+          "0",
+          "00",
+          "1",
+          "2",
+          "201",
+          "202",
+          "204",
+          "207",
+          "4",
+          "5",
+          "7"
+        ],
+        "terminated_by": null,
+        "answer": "The minimum annual leave is twenty-five days.",
+        "sources": [
+          {
+            "policy_id": "HR-202",
+            "section": "2.1"
+          }
+        ],
+        "calls": [
+          {
+            "name": "search_handbook",
+            "arguments": {
+              "query": "statutory minimum annual leave UK"
+            },
+            "refused": false
+          }
+        ],
+        "log": [
+          "[ 1] think        lap 1: asking the model what to do next",
+          "[ 2] tool_call    search_handbook({\"query\": \"statutory minimum annual leave UK\"})",
+          "[ 3] observation  {\"query\": \"statutory minimum annual leave UK\", \"passages\": [{\"policy_id\": \"HR-201\", \"section\": \"5\", \"score\": 0.4, \"text\": \"5 Related Policies\\n\\u00b7  Annual Leave, reference HR-202\\n\\u00b7  Flexible ",
+          "[ 4] think        lap 2: asking the model what to do next",
+          "[ 5] answer       model returned a final answer"
+        ]
+      },
+      {
+        "id": "R09",
+        "question": "How many days of paid annual leave does the company give full-time employees?",
+        "expected": "25",
+        "value": "25",
+        "outcome_passed": true,
+        "trajectory_passed": true,
+        "path": [
+          "search_handbook"
+        ],
+        "path_accepted": true,
+        "accepted_paths": [
+          [
+            "search_handbook"
+          ]
+        ],
+        "multi_path": false,
+        "arguments_ok": true,
+        "invented_values": [],
+        "checks": [
+          {
+            "target": "search_handbook.query",
+            "value": "annual leave entitlement full-time employees",
+            "ok": true,
+            "kind": "ok",
+            "detail": "non-empty",
+            "refused": false
+          },
+          {
+            "target": "citation",
+            "value": "HR-202/2.1",
+            "ok": true,
+            "kind": "ok",
+            "detail": "section is in the index",
+            "refused": false
+          }
+        ],
+        "modes": [],
+        "correctness_modes": [],
+        "steps_taken": 1,
+        "steps_needed": 1,
+        "step_efficiency": 1.0,
+        "model_calls": 2,
+        "total_tokens": 2099,
+        "cost_usd": 0.000642,
+        "figures_seen": [
+          "0",
+          "1",
+          "2",
+          "201",
+          "202",
+          "4",
+          "5",
+          "6667"
+        ],
+        "terminated_by": null,
+        "answer": "Full-time employees receive twenty-five days of paid annual leave per leave year.",
+        "sources": [
+          {
+            "policy_id": "HR-202",
+            "section": "2.1"
+          }
+        ],
+        "calls": [
+          {
+            "name": "search_handbook",
+            "arguments": {
+              "query": "annual leave entitlement full-time employees"
+            },
+            "refused": false
+          }
+        ],
+        "log": [
+          "[ 1] think        lap 1: asking the model what to do next",
+          "[ 2] tool_call    search_handbook({\"query\": \"annual leave entitlement full-time employees\"})",
+          "[ 3] observation  {\"query\": \"annual leave entitlement full-time employees\", \"passages\": [{\"policy_id\": \"HR-202\", \"section\": \"2.1\", \"score\": 1.0, \"text\": \"2.1 Entitlement\\nFull-time employees receive twenty-five days of",
+          "[ 4] think        lap 2: asking the model what to do next",
+          "[ 5] answer       model returned a final answer"
+        ]
+      },
+      {
+        "id": "R10",
+        "question": "Is E-1004 a permanent or a fixed-term employee?",
+        "expected": "fixed_term",
+        "value": "fixed_term",
+        "outcome_passed": true,
+        "trajectory_passed": false,
+        "path": [
+          "get_employee_record"
+        ],
+        "path_accepted": true,
+        "accepted_paths": [
+          [
+            "get_employee_record"
+          ]
+        ],
+        "multi_path": false,
+        "arguments_ok": true,
+        "invented_values": [],
+        "checks": [
+          {
+            "target": "get_employee_record.employee_id",
+            "value": "E-1044",
+            "ok": false,
+            "kind": "nonexistent",
+            "detail": "no such employee id",
+            "refused": true
+          },
+          {
+            "target": "get_employee_record.employee_id",
+            "value": "E-1004",
+            "ok": true,
+            "kind": "ok",
+            "detail": "in the fixture",
+            "refused": false
+          }
+        ],
+        "modes": [
+          "hallucinated_argument",
+          "rejected_call_retry"
+        ],
+        "correctness_modes": [
+          "hallucinated_argument"
+        ],
+        "steps_taken": 2,
+        "steps_needed": 1,
+        "step_efficiency": 2.0,
+        "model_calls": 3,
+        "total_tokens": 2194,
+        "cost_usd": 0.000648,
+        "figures_seen": [
+          "1004",
+          "1044",
+          "8"
+        ],
+        "terminated_by": null,
+        "answer": "E-1004 is a fixed-term employee.",
+        "sources": [],
+        "calls": [
+          {
+            "name": "get_employee_record",
+            "arguments": {
+              "employee_id": "E-1044"
+            },
+            "refused": true
+          },
+          {
+            "name": "get_employee_record",
+            "arguments": {
+              "employee_id": "E-1004"
+            },
+            "refused": false
+          }
+        ],
+        "log": [
+          "[ 1] think        lap 1: asking the model what to do next",
+          "[ 2] tool_call    get_employee_record({\"employee_id\": \"E-1044\"})",
+          "[ 3] observation  {\"error\": \"No employee record for E-1044.\"}",
+          "[ 4] think        lap 2: asking the model what to do next",
+          "[ 5] tool_call    get_employee_record({\"employee_id\": \"E-1004\"})",
+          "[ 6] observation  {\"employee_id\": \"E-1004\", \"jurisdiction\": \"India\", \"tenure_months\": 8, \"employment_type\": \"fixed_term\", \"manager_comment\": \"Fixed term to end of project. Extension under discussion.\", \"has_two_years_s",
+          "[ 7] think        lap 3: asking the model what to do next",
+          "[ 8] answer       model returned a final answer"
+        ]
+      }
+    ],
+    "validated": [
+      {
+        "id": "R01",
+        "question": "What notice period must E-1002 give if they resign?",
+        "expected": "7",
+        "value": "7",
+        "outcome_passed": true,
+        "trajectory_passed": true,
+        "path": [
+          "search_handbook",
+          "get_employee_record",
+          "get_jurisdiction_rules"
+        ],
+        "path_accepted": true,
+        "accepted_paths": [
+          [
+            "get_employee_record",
+            "get_jurisdiction_rules"
+          ],
+          [
+            "get_employee_record",
+            "get_jurisdiction_rules",
+            "search_handbook"
+          ],
+          [
+            "get_employee_record",
+            "search_handbook",
+            "get_jurisdiction_rules"
+          ],
+          [
+            "search_handbook",
+            "get_employee_record",
+            "get_jurisdiction_rules"
+          ]
+        ],
+        "multi_path": true,
+        "arguments_ok": true,
+        "invented_values": [],
+        "checks": [
+          {
+            "target": "search_handbook.query",
+            "value": "notice period on resignation",
+            "ok": true,
+            "kind": "ok",
+            "detail": "non-empty",
+            "refused": false
+          },
+          {
+            "target": "get_jurisdiction_rules.tenure_months",
+            "value": null,
+            "ok": false,
+            "kind": "missing",
+            "detail": "required argument not supplied",
+            "refused": true
+          },
+          {
+            "target": "get_jurisdiction_rules.jurisdiction",
+            "value": "UK",
+            "ok": false,
+            "kind": "unestablished",
+            "detail": "never read from any record in this run",
+            "refused": true
+          },
+          {
+            "target": "get_employee_record.employee_id",
+            "value": "E-1002",
+            "ok": true,
+            "kind": "ok",
+            "detail": "in the fixture",
+            "refused": false
+          },
+          {
+            "target": "get_jurisdiction_rules.jurisdiction",
+            "value": "UK",
+            "ok": true,
+            "kind": "ok",
+            "detail": "read from the record",
+            "refused": false
+          },
+          {
+            "target": "get_jurisdiction_rules.tenure_months",
+            "value": 14,
+            "ok": true,
+            "kind": "ok",
+            "detail": "matches the record",
+            "refused": false
+          }
+        ],
+        "modes": [
+          "rejected_call_retry"
+        ],
+        "correctness_modes": [],
+        "steps_taken": 4,
+        "steps_needed": 2,
+        "step_efficiency": 2.0,
+        "model_calls": 5,
+        "total_tokens": 7086,
+        "cost_usd": 0.001959,
+        "figures_seen": [
+          "0",
+          "1",
+          "1002",
+          "14",
+          "2",
+          "201",
+          "202",
+          "28",
+          "3",
+          "30",
+          "3333",
+          "4",
+          "6667",
+          "7"
+        ],
+        "terminated_by": null,
+        "answer": "7 days, from the UK statutory minimum for 14 months of service.",
+        "sources": [],
+        "calls": [
+          {
+            "name": "search_handbook",
+            "arguments": {
+              "query": "notice period on resignation"
+            },
+            "refused": false
+          },
+          {
+            "name": "get_jurisdiction_rules",
+            "arguments": {
+              "jurisdiction": "UK"
+            },
+            "refused": true
+          },
+          {
+            "name": "get_employee_record",
+            "arguments": {
+              "employee_id": "E-1002"
+            },
+            "refused": false
+          },
+          {
+            "name": "get_jurisdiction_rules",
+            "arguments": {
+              "jurisdiction": "UK",
+              "tenure_months": 14
+            },
+            "refused": false
+          }
+        ],
+        "log": [
+          "[ 1] think        lap 1: asking the model what to do next",
+          "[ 2] tool_call    search_handbook({\"query\": \"notice period on resignation\"})",
+          "[ 3] observation  {\"query\": \"notice period on resignation\", \"passages\": [{\"policy_id\": \"HR-202\", \"section\": \"2.4\", \"score\": 0.6667, \"text\": \"2.4 Requesting and Taking Annual Leave\\nAll annual leave must be requested th",
+          "[ 4] think        lap 2: asking the model what to do next",
+          "[ 5] tool_call    get_jurisdiction_rules({\"jurisdiction\": \"UK\"})",
+          "[ 6] observation  {\"error\": \"tenure_months is required. Read the employee's record with get_employee_record first and pass the tenure_months it returns.\"}",
+          "[ 7] think        lap 3: asking the model what to do next",
+          "[ 8] tool_call    get_employee_record({\"employee_id\": \"E-1002\"})",
+          "[ 9] observation  {\"employee_id\": \"E-1002\", \"jurisdiction\": \"UK\", \"tenure_months\": 14, \"employment_type\": \"permanent\", \"manager_comment\": \"Joined last spring, settling in well. Wants to move to four days.\", \"has_two_ye",
+          "[10] think        lap 4: asking the model what to do next",
+          "[11] tool_call    get_jurisdiction_rules({\"jurisdiction\": \"UK\", \"tenure_months\": 14})",
+          "[12] observation  {\"jurisdiction\": \"UK\", \"notice_days_under_2_years\": 7, \"notice_days_2_years_or_more\": 30, \"statutory_min_annual_leave_days\": 28, \"tenure_months_supplied\": 14}",
+          "[13] think        lap 5: asking the model what to do next",
+          "[14] answer       model returned a final answer"
+        ]
+      },
+      {
+        "id": "R02",
+        "question": "What notice period must E-1001 give if they resign?",
+        "expected": "30",
+        "value": "30",
+        "outcome_passed": true,
+        "trajectory_passed": true,
+        "path": [
+          "search_handbook",
+          "get_employee_record",
+          "get_jurisdiction_rules"
+        ],
+        "path_accepted": true,
+        "accepted_paths": [
+          [
+            "get_employee_record",
+            "get_jurisdiction_rules"
+          ],
+          [
+            "get_employee_record",
+            "get_jurisdiction_rules",
+            "search_handbook"
+          ],
+          [
+            "get_employee_record",
+            "search_handbook",
+            "get_jurisdiction_rules"
+          ],
+          [
+            "search_handbook",
+            "get_employee_record",
+            "get_jurisdiction_rules"
+          ]
+        ],
+        "multi_path": true,
+        "arguments_ok": true,
+        "invented_values": [],
+        "checks": [
+          {
+            "target": "search_handbook.query",
+            "value": "notice period on resignation",
+            "ok": true,
+            "kind": "ok",
+            "detail": "non-empty",
+            "refused": false
+          },
+          {
+            "target": "get_jurisdiction_rules.tenure_months",
+            "value": null,
+            "ok": false,
+            "kind": "missing",
+            "detail": "required argument not supplied",
+            "refused": true
+          },
+          {
+            "target": "get_jurisdiction_rules.jurisdiction",
+            "value": "UK",
+            "ok": false,
+            "kind": "unestablished",
+            "detail": "never read from any record in this run",
+            "refused": true
+          },
+          {
+            "target": "get_employee_record.employee_id",
+            "value": "E-1001",
+            "ok": true,
+            "kind": "ok",
+            "detail": "in the fixture",
+            "refused": false
+          },
+          {
+            "target": "get_jurisdiction_rules.jurisdiction",
+            "value": "UK",
+            "ok": true,
+            "kind": "ok",
+            "detail": "read from the record",
+            "refused": false
+          },
+          {
+            "target": "get_jurisdiction_rules.tenure_months",
+            "value": 38,
+            "ok": true,
+            "kind": "ok",
+            "detail": "matches the record",
+            "refused": false
+          }
+        ],
+        "modes": [
+          "rejected_call_retry"
+        ],
+        "correctness_modes": [],
+        "steps_taken": 4,
+        "steps_needed": 2,
+        "step_efficiency": 2.0,
+        "model_calls": 5,
+        "total_tokens": 7078,
+        "cost_usd": 0.001957,
+        "figures_seen": [
+          "0",
+          "1",
+          "1001",
+          "2",
+          "201",
+          "202",
+          "28",
+          "3",
+          "30",
+          "3333",
+          "38",
+          "4",
+          "6667",
+          "7"
+        ],
+        "terminated_by": null,
+        "answer": "30 days, from the UK statutory minimum for 38 months of service.",
+        "sources": [],
+        "calls": [
+          {
+            "name": "search_handbook",
+            "arguments": {
+              "query": "notice period on resignation"
+            },
+            "refused": false
+          },
+          {
+            "name": "get_jurisdiction_rules",
+            "arguments": {
+              "jurisdiction": "UK"
+            },
+            "refused": true
+          },
+          {
+            "name": "get_employee_record",
+            "arguments": {
+              "employee_id": "E-1001"
+            },
+            "refused": false
+          },
+          {
+            "name": "get_jurisdiction_rules",
+            "arguments": {
+              "jurisdiction": "UK",
+              "tenure_months": 38
+            },
+            "refused": false
+          }
+        ],
+        "log": [
+          "[ 1] think        lap 1: asking the model what to do next",
+          "[ 2] tool_call    search_handbook({\"query\": \"notice period on resignation\"})",
+          "[ 3] observation  {\"query\": \"notice period on resignation\", \"passages\": [{\"policy_id\": \"HR-202\", \"section\": \"2.4\", \"score\": 0.6667, \"text\": \"2.4 Requesting and Taking Annual Leave\\nAll annual leave must be requested th",
+          "[ 4] think        lap 2: asking the model what to do next",
+          "[ 5] tool_call    get_jurisdiction_rules({\"jurisdiction\": \"UK\"})",
+          "[ 6] observation  {\"error\": \"tenure_months is required. Read the employee's record with get_employee_record first and pass the tenure_months it returns.\"}",
+          "[ 7] think        lap 3: asking the model what to do next",
+          "[ 8] tool_call    get_employee_record({\"employee_id\": \"E-1001\"})",
+          "[ 9] observation  {\"employee_id\": \"E-1001\", \"jurisdiction\": \"UK\", \"tenure_months\": 38, \"employment_type\": \"permanent\", \"manager_comment\": \"Solid year. Ready for a stretch objective in H2.\", \"has_two_years_service\": tru",
+          "[10] think        lap 4: asking the model what to do next",
+          "[11] tool_call    get_jurisdiction_rules({\"jurisdiction\": \"UK\", \"tenure_months\": 38})",
+          "[12] observation  {\"jurisdiction\": \"UK\", \"notice_days_under_2_years\": 7, \"notice_days_2_years_or_more\": 30, \"statutory_min_annual_leave_days\": 28, \"tenure_months_supplied\": 38}",
+          "[13] think        lap 5: asking the model what to do next",
+          "[14] answer       model returned a final answer"
+        ]
+      },
+      {
+        "id": "R03",
+        "question": "How much notice does E-1004 need to give?",
+        "expected": "15",
+        "value": "15",
+        "outcome_passed": true,
+        "trajectory_passed": true,
+        "path": [
+          "get_employee_record",
+          "get_jurisdiction_rules"
+        ],
+        "path_accepted": true,
+        "accepted_paths": [
+          [
+            "get_employee_record",
+            "get_jurisdiction_rules"
+          ],
+          [
+            "get_employee_record",
+            "get_jurisdiction_rules",
+            "search_handbook"
+          ],
+          [
+            "get_employee_record",
+            "search_handbook",
+            "get_jurisdiction_rules"
+          ],
+          [
+            "search_handbook",
+            "get_employee_record",
+            "get_jurisdiction_rules"
+          ]
+        ],
+        "multi_path": true,
+        "arguments_ok": true,
+        "invented_values": [],
+        "checks": [
+          {
+            "target": "get_employee_record.employee_id",
+            "value": "E-1004",
+            "ok": true,
+            "kind": "ok",
+            "detail": "in the fixture",
+            "refused": false
+          },
+          {
+            "target": "get_jurisdiction_rules.jurisdiction",
+            "value": "India",
+            "ok": true,
+            "kind": "ok",
+            "detail": "read from the record",
+            "refused": false
+          },
+          {
+            "target": "get_jurisdiction_rules.tenure_months",
+            "value": 8,
+            "ok": true,
+            "kind": "ok",
+            "detail": "matches the record",
+            "refused": false
+          }
+        ],
+        "modes": [],
+        "correctness_modes": [],
+        "steps_taken": 2,
+        "steps_needed": 2,
+        "step_efficiency": 1.0,
+        "model_calls": 3,
+        "total_tokens": 2482,
+        "cost_usd": 0.000743,
+        "figures_seen": [
+          "1004",
+          "15",
+          "18",
+          "2",
+          "30",
+          "8"
+        ],
+        "terminated_by": null,
+        "answer": "15 days, from the India statutory minimum for 8 months of service.",
+        "sources": [],
+        "calls": [
+          {
+            "name": "get_employee_record",
+            "arguments": {
+              "employee_id": "E-1004"
+            },
+            "refused": false
+          },
+          {
+            "name": "get_jurisdiction_rules",
+            "arguments": {
+              "jurisdiction": "India",
+              "tenure_months": 8
+            },
+            "refused": false
+          }
+        ],
+        "log": [
+          "[ 1] think        lap 1: asking the model what to do next",
+          "[ 2] tool_call    get_employee_record({\"employee_id\": \"E-1004\"})",
+          "[ 3] observation  {\"employee_id\": \"E-1004\", \"jurisdiction\": \"India\", \"tenure_months\": 8, \"employment_type\": \"fixed_term\", \"manager_comment\": \"Fixed term to end of project. Extension under discussion.\", \"has_two_years_s",
+          "[ 4] think        lap 2: asking the model what to do next",
+          "[ 5] tool_call    get_jurisdiction_rules({\"jurisdiction\": \"India\", \"tenure_months\": 8})",
+          "[ 6] observation  {\"jurisdiction\": \"India\", \"notice_days_under_2_years\": 15, \"notice_days_2_years_or_more\": 30, \"statutory_min_annual_leave_days\": 18, \"tenure_months_supplied\": 8}",
+          "[ 7] think        lap 3: asking the model what to do next",
+          "[ 8] answer       model returned a final answer"
+        ]
+      },
+      {
+        "id": "R04",
+        "question": "How much notice does E-1005 need to give?",
+        "expected": "14",
+        "value": "14",
+        "outcome_passed": true,
+        "trajectory_passed": true,
+        "path": [
+          "get_employee_record",
+          "get_jurisdiction_rules"
+        ],
+        "path_accepted": true,
+        "accepted_paths": [
+          [
+            "get_employee_record",
+            "get_jurisdiction_rules"
+          ],
+          [
+            "get_employee_record",
+            "get_jurisdiction_rules",
+            "search_handbook"
+          ],
+          [
+            "get_employee_record",
+            "search_handbook",
+            "get_jurisdiction_rules"
+          ],
+          [
+            "search_handbook",
+            "get_employee_record",
+            "get_jurisdiction_rules"
+          ]
+        ],
+        "multi_path": true,
+        "arguments_ok": true,
+        "invented_values": [],
+        "checks": [
+          {
+            "target": "get_employee_record.employee_id",
+            "value": "E-1005",
+            "ok": true,
+            "kind": "ok",
+            "detail": "in the fixture",
+            "refused": false
+          },
+          {
+            "target": "get_jurisdiction_rules.jurisdiction",
+            "value": "US",
+            "ok": true,
+            "kind": "ok",
+            "detail": "read from the record",
+            "refused": false
+          },
+          {
+            "target": "get_jurisdiction_rules.tenure_months",
+            "value": 30,
+            "ok": true,
+            "kind": "ok",
+            "detail": "matches the record",
+            "refused": false
+          }
+        ],
+        "modes": [],
+        "correctness_modes": [],
+        "steps_taken": 2,
+        "steps_needed": 2,
+        "step_efficiency": 1.0,
+        "model_calls": 3,
+        "total_tokens": 2472,
+        "cost_usd": 0.000737,
+        "figures_seen": [
+          "0",
+          "1005",
+          "14",
+          "2",
+          "30"
+        ],
+        "terminated_by": null,
+        "answer": "14 days, from the US statutory minimum for 30 months of service.",
+        "sources": [],
+        "calls": [
+          {
+            "name": "get_employee_record",
+            "arguments": {
+              "employee_id": "E-1005"
+            },
+            "refused": false
+          },
+          {
+            "name": "get_jurisdiction_rules",
+            "arguments": {
+              "jurisdiction": "US",
+              "tenure_months": 30
+            },
+            "refused": false
+          }
+        ],
+        "log": [
+          "[ 1] think        lap 1: asking the model what to do next",
+          "[ 2] tool_call    get_employee_record({\"employee_id\": \"E-1005\"})",
+          "[ 3] observation  {\"employee_id\": \"E-1005\", \"jurisdiction\": \"US\", \"tenure_months\": 30, \"employment_type\": \"permanent\", \"manager_comment\": \"Strong quarter. Asked about the promotion cycle.\", \"has_two_years_service\": tru",
+          "[ 4] think        lap 2: asking the model what to do next",
+          "[ 5] tool_call    get_jurisdiction_rules({\"jurisdiction\": \"US\", \"tenure_months\": 30})",
+          "[ 6] observation  {\"jurisdiction\": \"US\", \"notice_days_under_2_years\": 0, \"notice_days_2_years_or_more\": 14, \"statutory_min_annual_leave_days\": 0, \"tenure_months_supplied\": 30}",
+          "[ 7] think        lap 3: asking the model what to do next",
+          "[ 8] answer       model returned a final answer"
+        ]
+      },
+      {
+        "id": "R05",
+        "question": "What is the notice period for E-1006?",
+        "expected": "7",
+        "value": null,
+        "outcome_passed": false,
+        "trajectory_passed": false,
+        "path": [
+          "search_handbook",
+          "search_handbook",
+          "search_handbook",
+          "get_employee_record",
+          "get_jurisdiction_rules"
+        ],
+        "path_accepted": false,
+        "accepted_paths": [
+          [
+            "get_employee_record",
+            "get_jurisdiction_rules"
+          ],
+          [
+            "get_employee_record",
+            "get_jurisdiction_rules",
+            "search_handbook"
+          ],
+          [
+            "get_employee_record",
+            "search_handbook",
+            "get_jurisdiction_rules"
+          ],
+          [
+            "search_handbook",
+            "get_employee_record",
+            "get_jurisdiction_rules"
+          ]
+        ],
+        "multi_path": true,
+        "arguments_ok": true,
+        "invented_values": [],
+        "checks": [
+          {
+            "target": "search_handbook.query",
+            "value": "notice period",
+            "ok": true,
+            "kind": "ok",
+            "detail": "non-empty",
+            "refused": false
+          },
+          {
+            "target": "search_handbook.query",
+            "value": "resignation notice period fixed term",
+            "ok": true,
+            "kind": "ok",
+            "detail": "non-empty",
+            "refused": false
+          },
+          {
+            "target": "search_handbook.query",
+            "value": "termination notice requirement",
+            "ok": true,
+            "kind": "ok",
+            "detail": "non-empty",
+            "refused": false
+          },
+          {
+            "target": "get_jurisdiction_rules.tenure_months",
+            "value": null,
+            "ok": false,
+            "kind": "missing",
+            "detail": "required argument not supplied",
+            "refused": true
+          },
+          {
+            "target": "get_jurisdiction_rules.jurisdiction",
+            "value": "UK",
+            "ok": false,
+            "kind": "unestablished",
+            "detail": "never read from any record in this run",
+            "refused": true
+          },
+          {
+            "target": "get_employee_record.employee_id",
+            "value": "E-1006",
+            "ok": true,
+            "kind": "ok",
+            "detail": "in the fixture",
+            "refused": false
+          },
+          {
+            "target": "get_jurisdiction_rules.jurisdiction",
+            "value": "UK",
+            "ok": true,
+            "kind": "ok",
+            "detail": "read from the record",
+            "refused": false
+          },
+          {
+            "target": "get_jurisdiction_rules.tenure_months",
+            "value": 5,
+            "ok": true,
+            "kind": "ok",
+            "detail": "matches the record",
+            "refused": false
+          }
+        ],
+        "modes": [
+          "loop",
+          "rejected_call_retry",
+          "quiet_giveup"
+        ],
+        "correctness_modes": [
+          "quiet_giveup"
+        ],
+        "steps_taken": 6,
+        "steps_needed": 2,
+        "step_efficiency": 3.0,
+        "model_calls": 6,
+        "total_tokens": 12742,
+        "cost_usd": 0.003397,
+        "figures_seen": [
+          "0",
+          "1",
+          "1006",
+          "2",
+          "201",
+          "202",
+          "2026",
+          "28",
+          "3",
+          "30",
+          "3333",
+          "4",
+          "5",
+          "7"
+        ],
+        "terminated_by": "max_iterations",
+        "answer": "Stopped before reaching an answer.",
+        "sources": [],
+        "calls": [
+          {
+            "name": "search_handbook",
+            "arguments": {
+              "query": "notice period"
+            },
+            "refused": false
+          },
+          {
+            "name": "search_handbook",
+            "arguments": {
+              "query": "resignation notice period fixed term"
+            },
+            "refused": false
+          },
+          {
+            "name": "search_handbook",
+            "arguments": {
+              "query": "termination notice requirement"
+            },
+            "refused": false
+          },
+          {
+            "name": "get_jurisdiction_rules",
+            "arguments": {
+              "jurisdiction": "UK"
+            },
+            "refused": true
+          },
+          {
+            "name": "get_employee_record",
+            "arguments": {
+              "employee_id": "E-1006"
+            },
+            "refused": false
+          },
+          {
+            "name": "get_jurisdiction_rules",
+            "arguments": {
+              "jurisdiction": "UK",
+              "tenure_months": 5
+            },
+            "refused": false
+          }
+        ],
+        "log": [
+          "[ 1] think        lap 1: asking the model what to do next",
+          "[ 2] tool_call    search_handbook({\"query\": \"notice period\"})",
+          "[ 3] observation  {\"query\": \"notice period\", \"passages\": [{\"policy_id\": \"HR-202\", \"section\": \"2.4\", \"score\": 1.0, \"text\": \"2.4 Requesting and Taking Annual Leave\\nAll annual leave must be requested through the human re",
+          "[ 4] think        lap 2: asking the model what to do next",
+          "[ 5] tool_call    search_handbook({\"query\": \"resignation notice period fixed term\"})",
+          "[ 6] observation  {\"query\": \"resignation notice period fixed term\", \"passages\": [{\"policy_id\": \"HR-201\", \"section\": \"1\", \"score\": 0.4, \"text\": \"1 Purpose and Scope\\nThis policy sets out the company's expectations for w",
+          "[ 7] think        lap 3: asking the model what to do next",
+          "[ 8] tool_call    search_handbook({\"query\": \"termination notice requirement\"})",
+          "[ 9] observation  {\"query\": \"termination notice requirement\", \"passages\": [{\"policy_id\": \"HR-201\", \"section\": \"3.1\", \"score\": 0.3333, \"text\": \"3.1 Attendance Expectations\\nEmployees are expected to attend work punctual",
+          "[10] think        lap 4: asking the model what to do next",
+          "[11] tool_call    get_jurisdiction_rules({\"jurisdiction\": \"UK\"})",
+          "[12] observation  {\"error\": \"tenure_months is required. Read the employee's record with get_employee_record first and pass the tenure_months it returns.\"}",
+          "[13] think        lap 5: asking the model what to do next",
+          "[14] tool_call    get_employee_record({\"employee_id\": \"E-1006\"})",
+          "[15] observation  {\"employee_id\": \"E-1006\", \"jurisdiction\": \"UK\", \"tenure_months\": 5, \"employment_type\": \"fixed_term\", \"manager_comment\": \"New starter on a fixed term. Probation review scheduled.\", \"has_two_years_servi",
+          "[16] think        lap 6: asking the model what to do next",
+          "[17] tool_call    get_jurisdiction_rules({\"jurisdiction\": \"UK\", \"tenure_months\": 5})",
+          "[18] observation  {\"jurisdiction\": \"UK\", \"notice_days_under_2_years\": 7, \"notice_days_2_years_or_more\": 30, \"statutory_min_annual_leave_days\": 28, \"tenure_months_supplied\": 5}",
+          "[19] terminated   budget max_iterations reached after 6 iteration(s)"
+        ]
+      },
+      {
+        "id": "R06",
+        "question": "Which jurisdiction is E-1003 employed in?",
+        "expected": "India",
+        "value": "India",
+        "outcome_passed": true,
+        "trajectory_passed": true,
+        "path": [
+          "get_employee_record"
+        ],
+        "path_accepted": true,
+        "accepted_paths": [
+          [
+            "get_employee_record"
+          ]
+        ],
+        "multi_path": false,
+        "arguments_ok": true,
+        "invented_values": [],
+        "checks": [
+          {
+            "target": "get_employee_record.employee_id",
+            "value": "E-1003",
+            "ok": true,
+            "kind": "ok",
+            "detail": "in the fixture",
+            "refused": false
+          }
+        ],
+        "modes": [],
+        "correctness_modes": [],
+        "steps_taken": 1,
+        "steps_needed": 1,
+        "step_efficiency": 1.0,
+        "model_calls": 2,
+        "total_tokens": 1541,
+        "cost_usd": 0.00045,
+        "figures_seen": [
+          "1003",
+          "60"
+        ],
+        "terminated_by": null,
+        "answer": "E-1003 is employed in India.",
+        "sources": [],
+        "calls": [
+          {
+            "name": "get_employee_record",
+            "arguments": {
+              "employee_id": "E-1003"
+            },
+            "refused": false
+          }
+        ],
+        "log": [
+          "[ 1] think        lap 1: asking the model what to do next",
+          "[ 2] tool_call    get_employee_record({\"employee_id\": \"E-1003\"})",
+          "[ 3] observation  {\"employee_id\": \"E-1003\", \"jurisdiction\": \"India\", \"tenure_months\": 60, \"employment_type\": \"permanent\", \"manager_comment\": \"Long service. Mentors two of the new joiners.\", \"has_two_years_service\": tru",
+          "[ 4] think        lap 2: asking the model what to do next",
+          "[ 5] answer       model returned a final answer"
+        ]
+      },
+      {
+        "id": "R07",
+        "question": "How many months of service does E-1002 have?",
+        "expected": "14",
+        "value": "14",
+        "outcome_passed": true,
+        "trajectory_passed": true,
+        "path": [
+          "get_employee_record"
+        ],
+        "path_accepted": true,
+        "accepted_paths": [
+          [
+            "get_employee_record"
+          ]
+        ],
+        "multi_path": false,
+        "arguments_ok": true,
+        "invented_values": [],
+        "checks": [
+          {
+            "target": "get_employee_record.employee_id",
+            "value": "E-1002",
+            "ok": true,
+            "kind": "ok",
+            "detail": "in the fixture",
+            "refused": false
+          }
+        ],
+        "modes": [],
+        "correctness_modes": [],
+        "steps_taken": 1,
+        "steps_needed": 1,
+        "step_efficiency": 1.0,
+        "model_calls": 2,
+        "total_tokens": 1549,
+        "cost_usd": 0.000456,
+        "figures_seen": [
+          "1002",
+          "14"
+        ],
+        "terminated_by": null,
+        "answer": "E-1002 has fourteen months of service.",
+        "sources": [],
+        "calls": [
+          {
+            "name": "get_employee_record",
+            "arguments": {
+              "employee_id": "E-1002"
+            },
+            "refused": false
+          }
+        ],
+        "log": [
+          "[ 1] think        lap 1: asking the model what to do next",
+          "[ 2] tool_call    get_employee_record({\"employee_id\": \"E-1002\"})",
+          "[ 3] observation  {\"employee_id\": \"E-1002\", \"jurisdiction\": \"UK\", \"tenure_months\": 14, \"employment_type\": \"permanent\", \"manager_comment\": \"Joined last spring, settling in well. Wants to move to four days.\", \"has_two_ye",
+          "[ 4] think        lap 2: asking the model what to do next",
+          "[ 5] answer       model returned a final answer"
+        ]
+      },
+      {
+        "id": "R08",
+        "question": "What is the statutory minimum annual leave in the UK?",
+        "expected": "28",
+        "value": "25",
+        "outcome_passed": false,
+        "trajectory_passed": false,
+        "path": [
+          "search_handbook"
+        ],
+        "path_accepted": false,
+        "accepted_paths": [
+          [
+            "get_jurisdiction_rules"
+          ]
+        ],
+        "multi_path": false,
+        "arguments_ok": true,
+        "invented_values": [],
+        "checks": [
+          {
+            "target": "search_handbook.query",
+            "value": "statutory minimum annual leave UK",
+            "ok": true,
+            "kind": "ok",
+            "detail": "non-empty",
+            "refused": false
+          },
+          {
+            "target": "citation",
+            "value": "HR-202/2.1",
+            "ok": true,
+            "kind": "ok",
+            "detail": "section is in the index",
+            "refused": false
+          }
+        ],
+        "modes": [
+          "wrong_tool"
+        ],
+        "correctness_modes": [
+          "wrong_tool"
+        ],
+        "steps_taken": 1,
+        "steps_needed": 1,
+        "step_efficiency": 1.0,
+        "model_calls": 2,
+        "total_tokens": 1698,
+        "cost_usd": 0.000521,
+        "figures_seen": [
+          "0",
+          "00",
+          "1",
+          "2",
+          "201",
+          "202",
+          "204",
+          "207",
+          "4",
+          "5",
+          "7"
+        ],
+        "terminated_by": null,
+        "answer": "The minimum annual leave is twenty-five days.",
+        "sources": [
+          {
+            "policy_id": "HR-202",
+            "section": "2.1"
+          }
+        ],
+        "calls": [
+          {
+            "name": "search_handbook",
+            "arguments": {
+              "query": "statutory minimum annual leave UK"
+            },
+            "refused": false
+          }
+        ],
+        "log": [
+          "[ 1] think        lap 1: asking the model what to do next",
+          "[ 2] tool_call    search_handbook({\"query\": \"statutory minimum annual leave UK\"})",
+          "[ 3] observation  {\"query\": \"statutory minimum annual leave UK\", \"passages\": [{\"policy_id\": \"HR-201\", \"section\": \"5\", \"score\": 0.4, \"text\": \"5 Related Policies\\n\\u00b7  Annual Leave, reference HR-202\\n\\u00b7  Flexible ",
+          "[ 4] think        lap 2: asking the model what to do next",
+          "[ 5] answer       model returned a final answer"
+        ]
+      },
+      {
+        "id": "R09",
+        "question": "How many days of paid annual leave does the company give full-time employees?",
+        "expected": "25",
+        "value": "25",
+        "outcome_passed": true,
+        "trajectory_passed": true,
+        "path": [
+          "search_handbook"
+        ],
+        "path_accepted": true,
+        "accepted_paths": [
+          [
+            "search_handbook"
+          ]
+        ],
+        "multi_path": false,
+        "arguments_ok": true,
+        "invented_values": [],
+        "checks": [
+          {
+            "target": "search_handbook.query",
+            "value": "annual leave entitlement full-time employees",
+            "ok": true,
+            "kind": "ok",
+            "detail": "non-empty",
+            "refused": false
+          },
+          {
+            "target": "citation",
+            "value": "HR-202/2.1",
+            "ok": true,
+            "kind": "ok",
+            "detail": "section is in the index",
+            "refused": false
+          }
+        ],
+        "modes": [],
+        "correctness_modes": [],
+        "steps_taken": 1,
+        "steps_needed": 1,
+        "step_efficiency": 1.0,
+        "model_calls": 2,
+        "total_tokens": 2229,
+        "cost_usd": 0.000674,
+        "figures_seen": [
+          "0",
+          "1",
+          "2",
+          "201",
+          "202",
+          "4",
+          "5",
+          "6667"
+        ],
+        "terminated_by": null,
+        "answer": "Full-time employees receive twenty-five days of paid annual leave per leave year.",
+        "sources": [
+          {
+            "policy_id": "HR-202",
+            "section": "2.1"
+          }
+        ],
+        "calls": [
+          {
+            "name": "search_handbook",
+            "arguments": {
+              "query": "annual leave entitlement full-time employees"
+            },
+            "refused": false
+          }
+        ],
+        "log": [
+          "[ 1] think        lap 1: asking the model what to do next",
+          "[ 2] tool_call    search_handbook({\"query\": \"annual leave entitlement full-time employees\"})",
+          "[ 3] observation  {\"query\": \"annual leave entitlement full-time employees\", \"passages\": [{\"policy_id\": \"HR-202\", \"section\": \"2.1\", \"score\": 1.0, \"text\": \"2.1 Entitlement\\nFull-time employees receive twenty-five days of",
+          "[ 4] think        lap 2: asking the model what to do next",
+          "[ 5] answer       model returned a final answer"
+        ]
+      },
+      {
+        "id": "R10",
+        "question": "Is E-1004 a permanent or a fixed-term employee?",
+        "expected": "fixed_term",
+        "value": "fixed_term",
+        "outcome_passed": true,
+        "trajectory_passed": false,
+        "path": [
+          "get_employee_record"
+        ],
+        "path_accepted": true,
+        "accepted_paths": [
+          [
+            "get_employee_record"
+          ]
+        ],
+        "multi_path": false,
+        "arguments_ok": true,
+        "invented_values": [],
+        "checks": [
+          {
+            "target": "get_employee_record.employee_id",
+            "value": "E-1044",
+            "ok": false,
+            "kind": "nonexistent",
+            "detail": "no such employee id",
+            "refused": true
+          },
+          {
+            "target": "get_employee_record.employee_id",
+            "value": "E-1004",
+            "ok": true,
+            "kind": "ok",
+            "detail": "in the fixture",
+            "refused": false
+          }
+        ],
+        "modes": [
+          "hallucinated_argument",
+          "rejected_call_retry"
+        ],
+        "correctness_modes": [
+          "hallucinated_argument"
+        ],
+        "steps_taken": 2,
+        "steps_needed": 1,
+        "step_efficiency": 2.0,
+        "model_calls": 3,
+        "total_tokens": 2389,
+        "cost_usd": 0.000697,
+        "figures_seen": [
+          "1004",
+          "1044",
+          "8"
+        ],
+        "terminated_by": null,
+        "answer": "E-1004 is a fixed-term employee.",
+        "sources": [],
+        "calls": [
+          {
+            "name": "get_employee_record",
+            "arguments": {
+              "employee_id": "E-1044"
+            },
+            "refused": true
+          },
+          {
+            "name": "get_employee_record",
+            "arguments": {
+              "employee_id": "E-1004"
+            },
+            "refused": false
+          }
+        ],
+        "log": [
+          "[ 1] think        lap 1: asking the model what to do next",
+          "[ 2] tool_call    get_employee_record({\"employee_id\": \"E-1044\"})",
+          "[ 3] observation  {\"error\": \"No employee record for E-1044.\"}",
+          "[ 4] think        lap 2: asking the model what to do next",
+          "[ 5] tool_call    get_employee_record({\"employee_id\": \"E-1004\"})",
+          "[ 6] observation  {\"employee_id\": \"E-1004\", \"jurisdiction\": \"India\", \"tenure_months\": 8, \"employment_type\": \"fixed_term\", \"manager_comment\": \"Fixed term to end of project. Extension under discussion.\", \"has_two_years_s",
+          "[ 7] think        lap 3: asking the model what to do next",
+          "[ 8] answer       model returned a final answer"
+        ]
+      }
+    ]
+  }
+}

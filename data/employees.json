@@ -1,41 +1,47 @@
 {
-  "_note": "Fixture data for the Week 7 agent exercise. Not real employees, and the jurisdiction rules are invented for the exercise rather than legal fact.",
+  "_note": "Fixture data for the Week 7 agent exercise, extended in Week 8 with a manager_comment field. Not real employees, and the jurisdiction rules are invented for the exercise rather than legal fact. manager_comment is free text a manager typed: it is the one field in this fixture that nobody in this repo controls the wording of, which is why injection_probe.py attacks through it. The committed comments are all benign; the poisoned one is injected at run time so that no eval can be run against a poisoned record by accident.",
   "employees": {
     "E-1001": {
       "employee_id": "E-1001",
       "jurisdiction": "UK",
       "tenure_months": 38,
-      "employment_type": "permanent"
+      "employment_type": "permanent",
+      "manager_comment": "Solid year. Ready for a stretch objective in H2."
     },
     "E-1002": {
       "employee_id": "E-1002",
       "jurisdiction": "UK",
       "tenure_months": 14,
-      "employment_type": "permanent"
+      "employment_type": "permanent",
+      "manager_comment": "Joined last spring, settling in well. Wants to move to four days."
     },
     "E-1003": {
       "employee_id": "E-1003",
       "jurisdiction": "India",
       "tenure_months": 60,
-      "employment_type": "permanent"
+      "employment_type": "permanent",
+      "manager_comment": "Long service. Mentors two of the new joiners."
     },
     "E-1004": {
       "employee_id": "E-1004",
       "jurisdiction": "India",
       "tenure_months": 8,
-      "employment_type": "fixed_term"
+      "employment_type": "fixed_term",
+      "manager_comment": "Fixed term to end of project. Extension under discussion."
     },
     "E-1005": {
       "employee_id": "E-1005",
       "jurisdiction": "US",
       "tenure_months": 30,
-      "employment_type": "permanent"
+      "employment_type": "permanent",
+      "manager_comment": "Strong quarter. Asked about the promotion cycle."
     },
     "E-1006": {
       "employee_id": "E-1006",
       "jurisdiction": "UK",
       "tenure_months": 5,
-      "employment_type": "fixed_term"
+      "employment_type": "fixed_term",
+      "manager_comment": "New starter on a fixed term. Probation review scheduled."
     }
   },
   "jurisdiction_rules": {

@@ -211,8 +211,18 @@ def run_agent(
     question: str,
     model_call,
     budgets: Budgets | None = None,
+    tool_schemas: list | None = None,
+    tool_call=None,
 ) -> dict:
     """
+    The toolset is injected for the same reason the
+    model is: the Week-8 trajectory eval runs a
+    baseline arm and a mitigated arm in one process,
+    and they must differ only in the tools, not in
+    the loop. Both default to the module-level
+    toolset, so calling this with two arguments is
+    the Week-7 behaviour exactly.
+
     `model_call(instructions, items, tools)` returns
 
         {
@@ -226,6 +236,18 @@ def run_agent(
     """
 
     budgets = budgets or Budgets()
+
+    schemas = (
+        TOOL_SCHEMAS
+        if tool_schemas is None
+        else tool_schemas
+    )
+
+    dispatch = (
+        call_tool
+        if tool_call is None
+        else tool_call
+    )
 
     usage = Usage()
 
@@ -276,7 +298,7 @@ def run_agent(
         response = model_call(
             SYSTEM_PROMPT,
             items,
-            TOOL_SCHEMAS,
+            schemas,
         )
 
         usage.add(
@@ -320,7 +342,7 @@ def run_agent(
                 f"{name}({json.dumps(arguments)})",
             )
 
-            result = call_tool(
+            result = dispatch(
                 name,
                 arguments,
             )

@@ -63,6 +63,32 @@ python -m evaluation.evaluate_retrieval
 Scores both chunking strategies against `evaluation/questions.json` and writes
 `evaluation/retrieval_results.json`.
 
+## Trajectory evaluation
+
+```bash
+python -m evaluation.trajectory_eval          # both arms, no API needed
+python -m evaluation.trajectory_eval --live   # same scoring, real model
+python -m evaluation.injection_probe          # indirect injection, attack and defence
+```
+
+Scores the path the agent took rather than only its final answer: tool-choice
+accuracy, argument validity, step efficiency, and cost per question at p50 and
+max, for ten cases with their expected tool sequences asserted in code. Runs a
+baseline arm and a one-change arm in the same process and reports the
+outcome-vs-trajectory gap, the per-mode counts before and after, and what the
+change cost. Writes `evaluation/trajectory_results.json`; the write-up is
+`evaluation/trajectory.md`.
+
+Set `INPUT_COST_PER_1M` and `OUTPUT_COST_PER_1M` in `.env` or the cost columns
+are zero. With no funded key the trajectories are replayed from authored plans
+rather than captured from the API - `evaluation/trajectory.md` section 0 says
+exactly which parts of the numbers that affects.
+
+`injection_probe.py` plants an instruction in an employee record's free-text
+manager comment, shows it reaching the model, then turns on the three defences
+in `app/agent/guardrails.py` and re-attacks. The poisoned comment is written in
+at run time and restored afterwards, so the committed fixture stays clean.
+
 ## Layout
 
 ```
@@ -78,8 +104,16 @@ app/
     vector_store.py      Chroma wrapper
     retriever.py         Search by strategy
     generator.py         Prompt + OpenAI call
+  agent/
+    loop.py              The agent loop and its budgets
+    tools.py             The three tools, and build_toolset()
+    workflow.py          The same task as fixed steps
+    guardrails.py        Free-text sanitiser, output guardrail
 documents/addenda/       Source PDFs
 vectorstore/             Chroma index (generated)
 scripts/ingest.py        Build the index
-evaluation/              Golden set, results, report
+evaluation/              Golden sets, harnesses, reports
+  trajectory_eval.py     Expected tool sequences, both arms, the four numbers
+  injection_probe.py     Indirect injection, attacked and defended
+  frozen_index.py        The policy index read without the embedding model
 ```
