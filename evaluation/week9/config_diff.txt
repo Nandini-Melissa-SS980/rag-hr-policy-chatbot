@@ -1,0 +1,17 @@
+--- C:/Users/NANDIN~1/AppData/Local/Temp/claude/d--HR-Policy-Chatbot/aa30ab51-7a22-43d4-b6bd-7b4f5b1c2c6d/scratchpad/mcp_servers.before.json	2026-09-25 17:56:12.413221900 +0530
++++ mcp_servers.json	2026-09-25 17:56:12.513926700 +0530
+@@ -5,6 +5,14 @@
+       "command": "${PYTHON}",
+       "args": ["-m", "mcp_servers.policy_server"],
+       "enabled": true
++    },
++    "hris": {
++      "command": "${PYTHON}",
++      "args": ["-m", "mcp_servers.hris_server"],
++      "enabled": true,
++      "env": {
++        "HRIS_SCOPES": "hris:leave,hris:grade"
++      }
+     }
+   }
+ }

@@ -1,0 +1,30 @@
+Agent module diff: server one  ->  server one + HRIS
+Generated 2026-09-25T12:26:56Z
+
+$ diff -ru --exclude=__pycache__ <agent before adding HRIS> app/agent
+(no output - the two trees are byte-identical)
+
+$ diff ... ; echo $?
+0
+
+Independent check against the last commit (Week 8), taken after
+the HRIS server was added and called:
+
+$ git diff --stat HEAD -- app/agent/
+(no output - nothing under app/agent/ is modified)
+
+$ git status --short
+?? app/mcp/
+?? evaluation/week9/
+?? mcp_servers.json
+?? mcp_servers/
+
+Every entry is '??' (untracked, new). No tracked file is modified,
+so the whole week is additive: two servers, a client, and a config
+file. app/agent/loop.py, tools.py, model.py, guardrails.py and
+workflow.py are exactly as Week 8 left them.
+
+Why this works: run_agent already accepts tool_schemas and tool_call
+(added in Week 8 so the trajectory eval could run two arms). The MCP
+client fills those two arguments. The agent is never told where its
+tools come from, so new servers cannot require agent edits.

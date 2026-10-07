@@ -1,0 +1,37 @@
+{
+  "stage": "after (server one + two)",
+  "server_count": 2,
+  "tool_count": 4,
+  "by_server": {
+    "policy": [
+      "search_handbook",
+      "get_policy_version"
+    ],
+    "hris": [
+      "get_leave_balance",
+      "get_grade_band"
+    ]
+  },
+  "tools": [
+    {
+      "server": "policy",
+      "name": "policy__search_handbook",
+      "description": "Find the passages of the company HR handbook that\n    answer a question about company policy.\n\n    U"
+    },
+    {
+      "server": "policy",
+      "name": "policy__get_policy_version",
+      "description": "Find which edition of the handbook was in force\n    on a given date.\n\n    Use this before quoting a "
+    },
+    {
+      "server": "hris",
+      "name": "hris__get_leave_balance",
+      "description": "Read how many days of annual leave one employee\n    has accrued and not yet taken.\n\n    Use this whe"
+    },
+    {
+      "server": "hris",
+      "name": "hris__get_grade_band",
+      "description": "Read one employee's grade band.\n\n    Use this only when the question turns on\n    seniority, such as"
+    }
+  ]
+}

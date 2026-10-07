@@ -9,3 +9,4 @@ pydantic
 pytest
 httpx
 streamlit
+mcp>=2.0

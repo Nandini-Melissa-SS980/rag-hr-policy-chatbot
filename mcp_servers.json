@@ -1,0 +1,18 @@
+{
+  "_comment": "Servers the agent discovers tools from. Adding a block here is the only change needed to give the agent new tools; no Python is edited. ${PYTHON} is the interpreter running the host.",
+  "mcpServers": {
+    "policy": {
+      "command": "${PYTHON}",
+      "args": ["-m", "mcp_servers.policy_server"],
+      "enabled": true
+    },
+    "hris": {
+      "command": "${PYTHON}",
+      "args": ["-m", "mcp_servers.hris_server"],
+      "enabled": true,
+      "env": {
+        "HRIS_SCOPES": "hris:leave,hris:grade"
+      }
+    }
+  }
+}

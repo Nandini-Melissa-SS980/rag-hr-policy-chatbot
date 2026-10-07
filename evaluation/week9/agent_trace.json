@@ -1,0 +1,64 @@
+{
+  "question": "How many days of annual leave does employee HR-1002 have left, and what does the policy say the full-time entitlement is?",
+  "tools_invoked": [
+    "hris__get_leave_balance",
+    "policy__search_handbook"
+  ],
+  "tools_from_hris": [
+    "hris__get_leave_balance"
+  ],
+  "answer": "HR-1002 has 7.0 days of accrued leave remaining. The handbook grants full-time employees twenty-five days per leave year.",
+  "value": "7.0",
+  "log": [
+    "[ 1] think        lap 1: asking the model what to do next",
+    "[ 2] tool_call    hris__get_leave_balance({\"employee_id\": \"HR-1002\"})",
+    "[ 3] observation  {\"employee_id\": \"HR-1002\", \"accrued_leave_days\": 7.0, \"leave_year_ends\": \"2026-12-31\"}",
+    "[ 4] think        lap 2: asking the model what to do next",
+    "[ 5] tool_call    policy__search_handbook({\"query\": \"annual leave entitlement full-time employees\"})",
+    "[ 6] observation  {\"query\": \"annual leave entitlement full-time employees\", \"passages\": [{\"policy_id\": \"HR-202\", \"section\": \"2.1\", \"score\": 0.8699, \"text\": \"2.1 Entitlement\\nFull-time employees receive twenty-five days",
+    "[ 7] think        lap 3: asking the model what to do next",
+    "[ 8] answer       model returned a final answer"
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "kind": "think",
+      "detail": "lap 1: asking the model what to do next"
+    },
+    {
+      "step": 2,
+      "kind": "tool_call",
+      "detail": "hris__get_leave_balance({\"employee_id\": \"HR-1002\"})"
+    },
+    {
+      "step": 3,
+      "kind": "observation",
+      "detail": "{\"employee_id\": \"HR-1002\", \"accrued_leave_days\": 7.0, \"leave_year_ends\": \"2026-12-31\"}"
+    },
+    {
+      "step": 4,
+      "kind": "think",
+      "detail": "lap 2: asking the model what to do next"
+    },
+    {
+      "step": 5,
+      "kind": "tool_call",
+      "detail": "policy__search_handbook({\"query\": \"annual leave entitlement full-time employees\"})"
+    },
+    {
+      "step": 6,
+      "kind": "observation",
+      "detail": "{\"query\": \"annual leave entitlement full-time employees\", \"passages\": [{\"policy_id\": \"HR-202\", \"section\": \"2.1\", \"score\": 0.8699, \"text\": \"2.1 Entitlement\\nFull-time employees receive twenty-five days"
+    },
+    {
+      "step": 7,
+      "kind": "think",
+      "detail": "lap 3: asking the model what to do next"
+    },
+    {
+      "step": 8,
+      "kind": "answer",
+      "detail": "model returned a final answer"
+    }
+  ]
+}
