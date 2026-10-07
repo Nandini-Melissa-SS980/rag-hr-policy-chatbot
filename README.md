@@ -89,6 +89,30 @@ manager comment, shows it reaching the model, then turns on the three defences
 in `app/agent/guardrails.py` and re-attacks. The poisoned comment is written in
 at run time and restored afterwards, so the committed fixture stays clean.
 
+## MCP servers
+
+```bash
+python -m evaluation.week9.run_agent_mcp     # discover tools, run one query
+python -m evaluation.week9.capture_wire      # raw JSON-RPC -> week9/wire.json
+python -m evaluation.week9.error_transcript  # recoverable-error before/after
+```
+
+The agent discovers its tools over MCP rather than having them wired in.
+`mcp_servers.json` lists the servers; `app/mcp/client.py` starts each one,
+performs the handshake, asks `tools/list`, and hands the result to the
+unchanged agent loop as schemas plus a dispatcher.
+
+Adding a server is a config edit and nothing else - no Python changes, which
+`evaluation/week9/agent_diff.txt` proves for the HRIS server. Two servers ship
+here: `mcp_servers/policy_server.py` (handbook search) and
+`mcp_servers/hris_server.py` (grade band and leave balance, scoped by
+`HRIS_SCOPES`).
+
+The model runs in the host, inside `run_agent`. No MCP server holds an API key
+or can reach a model, and servers are started with a scrubbed environment so a
+third-party connector never sees `OPENAI_API_KEY`. The write-up is
+`evaluation/week9/mcp.md`.
+
 ## Layout
 
 ```
@@ -104,6 +128,8 @@ app/
     vector_store.py      Chroma wrapper
     retriever.py         Search by strategy
     generator.py         Prompt + OpenAI call
+  mcp/
+    client.py            Tool discovery over MCP, and dispatch
   agent/
     loop.py              The agent loop and its budgets
     tools.py             The three tools, and build_toolset()
@@ -112,7 +138,12 @@ app/
 documents/addenda/       Source PDFs
 vectorstore/             Chroma index (generated)
 scripts/ingest.py        Build the index
+mcp_servers.json         Which MCP servers to discover tools from
+mcp_servers/             MCP servers this repo exposes
+  policy_server.py       Handbook search, over stdio
+  hris_server.py         Grade band and leave balance, scoped
 evaluation/              Golden sets, harnesses, reports
+  week9/                 MCP evidence: wire.json, diffs, risk note
   trajectory_eval.py     Expected tool sequences, both arms, the four numbers
   injection_probe.py     Indirect injection, attacked and defended
   frozen_index.py        The policy index read without the embedding model

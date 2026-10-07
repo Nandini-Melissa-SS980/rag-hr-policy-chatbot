@@ -1,0 +1,288 @@
+{
+  "captured_at": "2026-09-25T12:27:57.200849+00:00",
+  "server": "hris (server two)",
+  "transport": "stdio - newline-delimited JSON-RPC 2.0 over the child process's stdin and stdout",
+  "where_the_model_runs": "In the host process, and only there. The host calls the model, the model chooses a tool, and the host turns that choice into the tools/call frame below; the server holds no API key, imports no model client, and is never told which model - or whether any model - is calling it.",
+  "frame_count": 9,
+  "frames": [
+    {
+      "seq": 1,
+      "direction": "client -> server",
+      "at": "2026-09-25T12:27:56.118539+00:00",
+      "frame": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "initialize",
+        "params": {
+          "protocolVersion": "2025-11-25",
+          "capabilities": {},
+          "clientInfo": {
+            "name": "mcp",
+            "version": "0.1.0"
+          },
+          "_meta": {}
+        }
+      },
+      "what_this_is": "initialize.request",
+      "field_notes": {
+        "jsonrpc": "Always the string 2.0. MCP is JSON-RPC 2.0 and nothing else - this field is what makes the frame legal JSON-RPC rather than an ad-hoc blob.",
+        "id": "Request id, chosen by the client. The server must echo it back so the client can match a reply to a request on a pipe where replies may arrive out of order. Notifications have no id, which is exactly what makes them notifications.",
+        "method": "The RPC being invoked. 'initialize' is the first call of every MCP session and may not be preceded by anything else.",
+        "params": "Arguments to the method. For initialize: the protocol version the client speaks, the capabilities it offers, and who it says it is. No model, no prompt, no API key - the server is never told which AI is calling, or whether there is one."
+      }
+    },
+    {
+      "seq": 2,
+      "direction": "server -> client",
+      "at": "2026-09-25T12:27:57.025333+00:00",
+      "frame": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "capabilities": {
+            "experimental": {},
+            "prompts": {
+              "listChanged": false
+            },
+            "resources": {
+              "listChanged": false,
+              "subscribe": false
+            },
+            "tools": {
+              "listChanged": false
+            }
+          },
+          "instructions": "Read-only view of the HRIS: grade band and accrued leave balance by employee id.",
+          "protocolVersion": "2025-11-25",
+          "serverInfo": {
+            "name": "hris",
+            "version": ""
+          }
+        }
+      },
+      "what_this_is": "initialize.response",
+      "field_notes": {
+        "jsonrpc": "2.0, as above.",
+        "id": "Echoes the request id, so this is the answer to that initialize and not to something else.",
+        "result": "The server's half of the handshake: the protocol version it agrees to, the capabilities it actually has (here 'tools'; a server with nothing to list would say so), its name and version, and optional instructions. This is negotiation, not configuration - the client adapts to what comes back."
+      }
+    },
+    {
+      "seq": 3,
+      "direction": "client -> server",
+      "at": "2026-09-25T12:27:57.025333+00:00",
+      "frame": {
+        "jsonrpc": "2.0",
+        "method": "notifications/initialized"
+      },
+      "what_this_is": "notifications/initialized",
+      "field_notes": {
+        "jsonrpc": "2.0, as above.",
+        "method": "'notifications/initialized'. The client confirming the handshake is complete and it is ready for normal traffic.",
+        "params": "Empty. Nothing needs saying; the message is the signal.",
+        "_no_id": "There is deliberately no 'id' field. This is a notification: fire and forget, no reply expected, and the server must not send one."
+      }
+    },
+    {
+      "seq": 4,
+      "direction": "client -> server",
+      "at": "2026-09-25T12:27:57.025333+00:00",
+      "frame": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "method": "tools/list",
+        "params": {
+          "_meta": {}
+        }
+      },
+      "what_this_is": "tools/list.request",
+      "field_notes": {
+        "jsonrpc": "2.0, as above.",
+        "id": "New request id for this call.",
+        "method": "'tools/list'. Discovery. The client is asking what this server can do rather than being told in advance - this single call is why adding a server needs no agent code.",
+        "params": "Empty here. It can carry a cursor when a server has more tools than fit in one page."
+      }
+    },
+    {
+      "seq": 5,
+      "direction": "server -> client",
+      "at": "2026-09-25T12:27:57.026839+00:00",
+      "frame": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "tools": [
+            {
+              "description": "\n    Read how many days of annual leave one employee\n    has accrued and not yet taken.\n\n    Use this when the question is about what this\n    person has left, rather than what the policy\n    grants everyone. The handbook gives the\n    entitlement; only this gives the balance.\n\n    Args:\n        employee_id: HRIS id, formatted HR-nnnn, for\n            example HR-1001.\n    ",
+              "inputSchema": {
+                "properties": {
+                  "employee_id": {
+                    "title": "Employee Id",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "employee_id"
+                ],
+                "type": "object",
+                "title": "get_leave_balanceArguments"
+              },
+              "name": "get_leave_balance",
+              "outputSchema": {
+                "properties": {
+                  "result": {
+                    "title": "Result",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "result"
+                ],
+                "type": "object",
+                "title": "get_leave_balanceOutput"
+              }
+            },
+            {
+              "description": "\n    Read one employee's grade band.\n\n    Use this only when the question turns on\n    seniority, such as which appraisal track or\n    entitlement tier applies. The band is\n    salary-adjacent, so do not read it to decorate an\n    answer that does not need it.\n\n    Args:\n        employee_id: HRIS id, formatted HR-nnnn, for\n            example HR-1001.\n    ",
+              "inputSchema": {
+                "properties": {
+                  "employee_id": {
+                    "title": "Employee Id",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "employee_id"
+                ],
+                "type": "object",
+                "title": "get_grade_bandArguments"
+              },
+              "name": "get_grade_band",
+              "outputSchema": {
+                "properties": {
+                  "result": {
+                    "title": "Result",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "result"
+                ],
+                "type": "object",
+                "title": "get_grade_bandOutput"
+              }
+            }
+          ]
+        }
+      },
+      "what_this_is": "tools/list.response",
+      "field_notes": {
+        "jsonrpc": "2.0, as above.",
+        "id": "Echoes the tools/list request id.",
+        "result": "The catalogue: a 'tools' array, each entry with a name, a description and an input_schema (JSON Schema). The description is the tool's docstring, and it is the prompt the model will read when it decides whether to call this tool - which is why the docstrings on these servers are written for a reader, not a compiler. The host turns each entry into a function schema for the model."
+      }
+    },
+    {
+      "seq": 6,
+      "direction": "client -> server",
+      "at": "2026-09-25T12:27:57.028571+00:00",
+      "frame": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "method": "tools/call",
+        "params": {
+          "name": "get_leave_balance",
+          "arguments": {
+            "employee_id": "HR-1002"
+          },
+          "_meta": {}
+        }
+      },
+      "what_this_is": "tools/call.request",
+      "field_notes": {
+        "jsonrpc": "2.0, as above.",
+        "id": "New request id for this call.",
+        "method": "'tools/call'. Invocation. This is the only frame in the session caused by a model decision - the model, running in the host, chose this tool, and the host turned that choice into this frame.",
+        "params": "'name' is the tool as listed (server prefixes are the host's own bookkeeping and are stripped before sending), and 'arguments' is an object that must satisfy that tool's input_schema. The arguments were produced by the model; the server validates them regardless, because a server cannot trust its caller."
+      }
+    },
+    {
+      "seq": 7,
+      "direction": "server -> client",
+      "at": "2026-09-25T12:27:57.029610+00:00",
+      "frame": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "result": {
+          "content": [
+            {
+              "text": "{\"employee_id\": \"HR-1002\", \"accrued_leave_days\": 7.0, \"leave_year_ends\": \"2026-12-31\"}",
+              "type": "text"
+            }
+          ],
+          "isError": false,
+          "structuredContent": {
+            "result": "{\"employee_id\": \"HR-1002\", \"accrued_leave_days\": 7.0, \"leave_year_ends\": \"2026-12-31\"}"
+          }
+        }
+      },
+      "what_this_is": "tools/call.response",
+      "field_notes": {
+        "jsonrpc": "2.0, as above.",
+        "id": "Echoes the tools/call request id.",
+        "result": "'content' is a list of blocks - here one text block holding a JSON string, the ordinary way to return structured data. 'isError' false means the CALL succeeded at the protocol level; a business failure such as an unknown employee still arrives as a successful call whose payload describes the problem, which is what lets the model read it and recover instead of seeing a transport fault."
+      }
+    },
+    {
+      "seq": 8,
+      "direction": "client -> server",
+      "at": "2026-09-25T12:27:57.076610+00:00",
+      "frame": {
+        "jsonrpc": "2.0",
+        "id": 4,
+        "method": "tools/call",
+        "params": {
+          "name": "get_leave_balance",
+          "arguments": {
+            "employee_id": "E-1002"
+          },
+          "_meta": {}
+        }
+      },
+      "what_this_is": "tools/call.request",
+      "field_notes": {
+        "jsonrpc": "2.0, as above.",
+        "id": "New request id for this call.",
+        "method": "'tools/call'. Invocation. This is the only frame in the session caused by a model decision - the model, running in the host, chose this tool, and the host turned that choice into this frame.",
+        "params": "'name' is the tool as listed (server prefixes are the host's own bookkeeping and are stripped before sending), and 'arguments' is an object that must satisfy that tool's input_schema. The arguments were produced by the model; the server validates them regardless, because a server cannot trust its caller."
+      }
+    },
+    {
+      "seq": 9,
+      "direction": "server -> client",
+      "at": "2026-09-25T12:27:57.077616+00:00",
+      "frame": {
+        "jsonrpc": "2.0",
+        "id": 4,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\": \"unknown_employee\", \"message\": \"No HRIS record for 'E-1002'. HRIS ids look like HR-1001, not like the policy app's E-1001 ids. If you have an E-number, the HRIS id is the same digits with an HR prefix.\", \"expected_format\": \"HR-nnnn\", \"known_ids\": [\"HR-1001\", \"HR-1002\", \"HR-1003\", \"HR-1004\", \"HR-1005\", \"HR-1006\"], \"recoverable\": true}",
+              "type": "text"
+            }
+          ],
+          "isError": false,
+          "structuredContent": {
+            "result": "{\"error\": \"unknown_employee\", \"message\": \"No HRIS record for 'E-1002'. HRIS ids look like HR-1001, not like the policy app's E-1001 ids. If you have an E-number, the HRIS id is the same digits with an HR prefix.\", \"expected_format\": \"HR-nnnn\", \"known_ids\": [\"HR-1001\", \"HR-1002\", \"HR-1003\", \"HR-1004\", \"HR-1005\", \"HR-1006\"], \"recoverable\": true}"
+          }
+        }
+      },
+      "what_this_is": "tools/call.response",
+      "field_notes": {
+        "jsonrpc": "2.0, as above.",
+        "id": "Echoes the tools/call request id.",
+        "result": "'content' is a list of blocks - here one text block holding a JSON string, the ordinary way to return structured data. 'isError' false means the CALL succeeded at the protocol level; a business failure such as an unknown employee still arrives as a successful call whose payload describes the problem, which is what lets the model read it and recover instead of seeing a transport fault."
+      }
+    }
+  ]
+}

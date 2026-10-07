@@ -1,0 +1,23 @@
+{
+  "stage": "before (server one only)",
+  "server_count": 1,
+  "tool_count": 2,
+  "by_server": {
+    "policy": [
+      "search_handbook",
+      "get_policy_version"
+    ]
+  },
+  "tools": [
+    {
+      "server": "policy",
+      "name": "policy__search_handbook",
+      "description": "Find the passages of the company HR handbook that\n    answer a question about company policy.\n\n    U"
+    },
+    {
+      "server": "policy",
+      "name": "policy__get_policy_version",
+      "description": "Find which edition of the handbook was in force\n    on a given date.\n\n    Use this before quoting a "
+    }
+  ]
+}
