@@ -113,6 +113,42 @@ or can reach a model, and servers are started with a scrubbed environment so a
 third-party connector never sees `OPENAI_API_KEY`. The write-up is
 `evaluation/week9/mcp.md`.
 
+## Multi-agent race
+
+```bash
+python -m evaluation.week10.race_multi          # replayed model
+python -m evaluation.week10.race_multi --live   # real model + Week-6 judge
+```
+
+A manager plus two specialists - a policy retrieval worker and an eligibility
+calculation worker - raced against the single agent on the same ten Week-6
+cases, with the same judge and the same pass rule. Each specialist holds a
+subset of the tools; handing either one the full set would delete the only
+plausible source of a win.
+
+**The squad lost.** Over the nine cases where nothing was broken both arms
+score 7/9, and the squad costs 10% more per question while making 1.5x the
+sequential model calls. The verdict is `evaluation/week10/verdict.md`.
+
+Two things the numbers only show if you print both views. The squad sends
+*fewer* input tokens than the single agent, because a narrow worker carries a
+narrow tool schema (139 tokens against 444) - so the raw re-send multiplier
+comes out at 0.8x, below 1.0, and that is not a win. And a worker that fails
+early is cheap, so the injected 500 on E13 drags the squad's ten-case cost
+average down into a false tie. Both the ten-case and the clean-nine numbers
+are reported for that reason.
+
+Outputs, all generated:
+
+```
+evaluation/week10/
+  race_table.md       four metrics x two arms, the ten cases named
+  handoffs.log        every hand-off with its own token count
+  failure_case.md     the injected 500, and what the manager actually did
+  verdict.md          keep/kill, with the sunk cost named
+  race_results.json   every row behind the tables
+```
+
 ## Layout
 
 ```
@@ -135,6 +171,7 @@ app/
     tools.py             The three tools, and build_toolset()
     workflow.py          The same task as fixed steps
     guardrails.py        Free-text sanitiser, output guardrail
+    orchestrator.py      Manager + two specialists, with hand-off accounting
 documents/addenda/       Source PDFs
 vectorstore/             Chroma index (generated)
 scripts/ingest.py        Build the index
@@ -143,6 +180,7 @@ mcp_servers/             MCP servers this repo exposes
   policy_server.py       Handbook search, over stdio
   hris_server.py         Grade band and leave balance, scoped
 evaluation/              Golden sets, harnesses, reports
+  week10/                The multi-agent race, its log and its verdict
   week9/                 MCP evidence: wire.json, diffs, risk note
   trajectory_eval.py     Expected tool sequences, both arms, the four numbers
   injection_probe.py     Indirect injection, attacked and defended

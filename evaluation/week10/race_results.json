@@ -1,0 +1,1269 @@
+{
+  "config": {
+    "model": "replayed_plans",
+    "handbook": "live_retriever",
+    "judge": "offline_judge",
+    "note": "The OpenAI key behind this project returns 429 insufficient_quota, so the model is replayed from authored plans and the judge is the offline one. The loop, the tools, the index, the token counting, the latency and the cost arithmetic are real and are identical on both arms. `--live` swaps in the real model and the Week-6 judge and scores the same way.",
+    "case_ids": [
+      "E01",
+      "E04",
+      "E07",
+      "E08",
+      "E11",
+      "E13",
+      "E16",
+      "E17",
+      "E20",
+      "E22"
+    ],
+    "failure_case": "E13",
+    "input_cost_per_1m": 0.25,
+    "output_cost_per_1m": 2.0,
+    "budgets": {
+      "max_iterations": 6,
+      "max_tokens": 20000,
+      "max_cost_usd": 0.05,
+      "max_seconds": 60.0
+    }
+  },
+  "summary": {
+    "single": {
+      "cases": 10,
+      "passed": 8,
+      "pass_rate": 0.8,
+      "p50_latency_s": 0.016,
+      "p99_latency_s": 0.031,
+      "model_calls": 20,
+      "input_tokens": 17562,
+      "output_tokens": 777,
+      "p50_model_calls": 2,
+      "p99_model_calls": 2,
+      "total_tokens": 18339,
+      "cost_per_question_usd": 0.000595,
+      "total_cost_usd": 0.005946
+    },
+    "multi": {
+      "cases": 10,
+      "passed": 7,
+      "pass_rate": 0.7,
+      "p50_latency_s": 0.016,
+      "p99_latency_s": 0.016,
+      "model_calls": 30,
+      "input_tokens": 13671,
+      "output_tokens": 1269,
+      "p50_model_calls": 3,
+      "p99_model_calls": 4,
+      "total_tokens": 14940,
+      "cost_per_question_usd": 0.000596,
+      "total_cost_usd": 0.005956
+    }
+  },
+  "summary_excluding_failure_case": {
+    "single": {
+      "cases": 9,
+      "passed": 7,
+      "pass_rate": 0.778,
+      "p50_latency_s": 0.016,
+      "p99_latency_s": 0.031,
+      "model_calls": 18,
+      "input_tokens": 15539,
+      "output_tokens": 683,
+      "p50_model_calls": 2,
+      "p99_model_calls": 2,
+      "total_tokens": 16222,
+      "cost_per_question_usd": 0.000584,
+      "total_cost_usd": 0.005252
+    },
+    "multi": {
+      "cases": 9,
+      "passed": 7,
+      "pass_rate": 0.778,
+      "p50_latency_s": 0.016,
+      "p99_latency_s": 0.016,
+      "model_calls": 28,
+      "input_tokens": 13384,
+      "output_tokens": 1225,
+      "p50_model_calls": 3,
+      "p99_model_calls": 4,
+      "total_tokens": 14609,
+      "cost_per_question_usd": 0.000644,
+      "total_cost_usd": 0.005796
+    }
+  },
+  "multiplier": {
+    "value": 0.8,
+    "attribution": {
+      "handoff": "manager -> policy",
+      "tokens": 10408,
+      "resent_tokens": 182,
+      "share": 0.697,
+      "share_pct": 69.7,
+      "all": [
+        {
+          "handoff": "manager -> policy",
+          "tokens": 10408,
+          "resent_tokens": 182,
+          "share_pct": 69.7
+        },
+        {
+          "handoff": "workers -> manager",
+          "tokens": 3885,
+          "resent_tokens": 994,
+          "share_pct": 26.0
+        },
+        {
+          "handoff": "manager -> eligibility",
+          "tokens": 647,
+          "resent_tokens": 121,
+          "share_pct": 4.3
+        }
+      ]
+    },
+    "line": "Context re-send multiplier: 0.8x (14940 multi / 18339 single tokens). Largest share: \"manager -> policy resend, 69.7% of all multi-arm tokens\" (10408 tokens, of which 182 are context the manager already held)."
+  },
+  "rows": [
+    {
+      "arm": "single",
+      "id": "E01",
+      "mode": "out_of_scope",
+      "question": "How much maternity leave do I get?",
+      "answer": "2.1 Entitlement\nFull-time employees receive twenty-five days of paid annual leave per leave year, in addition to public\nholidays.",
+      "sources": [
+        {
+          "policy_id": "HR-202",
+          "section": "2.1"
+        }
+      ],
+      "seconds": 0.031,
+      "input_tokens": 1579,
+      "output_tokens": 72,
+      "total_tokens": 1651,
+      "model_calls": 2,
+      "resent_tokens": 0,
+      "cost_usd": 0.000539,
+      "handoffs": [],
+      "failures": [],
+      "abstained": false,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": false,
+          "detail": "answered a question the documents do not cover"
+        }
+      },
+      "assertions_passed": false,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "every claim is carried by a section that exists in the index"
+      },
+      "passed": false
+    },
+    {
+      "arm": "multi",
+      "id": "E01",
+      "mode": "out_of_scope",
+      "question": "How much maternity leave do I get?",
+      "answer": "2.1 Entitlement\nFull-time employees receive twenty-five days of paid annual leave per leave year, in addition to public\nholidays.",
+      "sources": [
+        {
+          "policy_id": "HR-202",
+          "section": "2.1"
+        }
+      ],
+      "seconds": 0.016,
+      "input_tokens": 1264,
+      "output_tokens": 126,
+      "total_tokens": 1390,
+      "model_calls": 3,
+      "resent_tokens": 114,
+      "cost_usd": 0.000568,
+      "handoffs": [
+        {
+          "index": 1,
+          "sender": "manager",
+          "receiver": "policy",
+          "brief": "How much maternity leave do I get?",
+          "input_tokens": 933,
+          "output_tokens": 72,
+          "total_tokens": 1005,
+          "resent_tokens": 18,
+          "new_tokens": 987,
+          "model_calls": 2,
+          "seconds": 0.016,
+          "status": "ok",
+          "detail": ""
+        },
+        {
+          "index": 2,
+          "sender": "workers",
+          "receiver": "manager",
+          "brief": "synthesis",
+          "input_tokens": 331,
+          "output_tokens": 54,
+          "total_tokens": 385,
+          "resent_tokens": 96,
+          "new_tokens": 289,
+          "model_calls": 1,
+          "seconds": 0.0,
+          "status": "ok",
+          "detail": ""
+        }
+      ],
+      "failures": [],
+      "abstained": false,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": false,
+          "detail": "answered a question the documents do not cover"
+        }
+      },
+      "assertions_passed": false,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "every claim is carried by a section that exists in the index"
+      },
+      "passed": false
+    },
+    {
+      "arm": "single",
+      "id": "E04",
+      "mode": "out_of_scope",
+      "question": "How do I claim travel expenses?",
+      "answer": "4.3 Equipment and Expenses\nThe company provides a laptop, a monitor, a keyboard, and a mouse for home use.",
+      "sources": [
+        {
+          "policy_id": "HR-207",
+          "section": "4.3"
+        }
+      ],
+      "seconds": 0.016,
+      "input_tokens": 1681,
+      "output_tokens": 68,
+      "total_tokens": 1749,
+      "model_calls": 2,
+      "resent_tokens": 0,
+      "cost_usd": 0.000556,
+      "handoffs": [],
+      "failures": [],
+      "abstained": false,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": false,
+          "detail": "answered a question the documents do not cover"
+        }
+      },
+      "assertions_passed": false,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "every claim is carried by a section that exists in the index"
+      },
+      "passed": false
+    },
+    {
+      "arm": "multi",
+      "id": "E04",
+      "mode": "out_of_scope",
+      "question": "How do I claim travel expenses?",
+      "answer": "4.3 Equipment and Expenses\nThe company provides a laptop, a monitor, a keyboard, and a mouse for home use.",
+      "sources": [
+        {
+          "policy_id": "HR-207",
+          "section": "4.3"
+        }
+      ],
+      "seconds": 0.015,
+      "input_tokens": 1359,
+      "output_tokens": 116,
+      "total_tokens": 1475,
+      "model_calls": 3,
+      "resent_tokens": 105,
+      "cost_usd": 0.000572,
+      "handoffs": [
+        {
+          "index": 1,
+          "sender": "manager",
+          "receiver": "policy",
+          "brief": "How do I claim travel expenses?",
+          "input_tokens": 1035,
+          "output_tokens": 68,
+          "total_tokens": 1103,
+          "resent_tokens": 16,
+          "new_tokens": 1087,
+          "model_calls": 2,
+          "seconds": 0.015,
+          "status": "ok",
+          "detail": ""
+        },
+        {
+          "index": 2,
+          "sender": "workers",
+          "receiver": "manager",
+          "brief": "synthesis",
+          "input_tokens": 324,
+          "output_tokens": 48,
+          "total_tokens": 372,
+          "resent_tokens": 89,
+          "new_tokens": 283,
+          "model_calls": 1,
+          "seconds": 0.0,
+          "status": "ok",
+          "detail": ""
+        }
+      ],
+      "failures": [],
+      "abstained": false,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": false,
+          "detail": "answered a question the documents do not cover"
+        }
+      },
+      "assertions_passed": false,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "every claim is carried by a section that exists in the index"
+      },
+      "passed": false
+    },
+    {
+      "arm": "single",
+      "id": "E07",
+      "mode": "empty_chunk",
+      "question": "How many days of annual leave do I get?",
+      "answer": "2.1 Entitlement\nFull-time employees receive twenty-five days of paid annual leave per leave year, in addition to public\nholidays.",
+      "sources": [
+        {
+          "policy_id": "HR-202",
+          "section": "2.1"
+        }
+      ],
+      "seconds": 0.016,
+      "input_tokens": 1538,
+      "output_tokens": 75,
+      "total_tokens": 1613,
+      "model_calls": 2,
+      "resent_tokens": 0,
+      "cost_usd": 0.000535,
+      "handoffs": [],
+      "failures": [],
+      "abstained": false,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "sources_present": {
+          "passed": true,
+          "detail": "1 source(s)"
+        },
+        "sections_resolve": {
+          "passed": true,
+          "detail": "all sections resolve"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "every claim is carried by a section that exists in the index"
+      },
+      "passed": true
+    },
+    {
+      "arm": "multi",
+      "id": "E07",
+      "mode": "empty_chunk",
+      "question": "How many days of annual leave do I get?",
+      "answer": "2.1 Entitlement\nFull-time employees receive twenty-five days of paid annual leave per leave year, in addition to public\nholidays.",
+      "sources": [
+        {
+          "policy_id": "HR-202",
+          "section": "2.1"
+        }
+      ],
+      "seconds": 0.015,
+      "input_tokens": 1225,
+      "output_tokens": 129,
+      "total_tokens": 1354,
+      "model_calls": 3,
+      "resent_tokens": 117,
+      "cost_usd": 0.000564,
+      "handoffs": [
+        {
+          "index": 1,
+          "sender": "manager",
+          "receiver": "policy",
+          "brief": "How many days of annual leave do I get?",
+          "input_tokens": 892,
+          "output_tokens": 75,
+          "total_tokens": 967,
+          "resent_tokens": 20,
+          "new_tokens": 947,
+          "model_calls": 2,
+          "seconds": 0.015,
+          "status": "ok",
+          "detail": ""
+        },
+        {
+          "index": 2,
+          "sender": "workers",
+          "receiver": "manager",
+          "brief": "synthesis",
+          "input_tokens": 333,
+          "output_tokens": 54,
+          "total_tokens": 387,
+          "resent_tokens": 97,
+          "new_tokens": 290,
+          "model_calls": 1,
+          "seconds": 0.0,
+          "status": "ok",
+          "detail": ""
+        }
+      ],
+      "failures": [],
+      "abstained": false,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "sources_present": {
+          "passed": true,
+          "detail": "1 source(s)"
+        },
+        "sections_resolve": {
+          "passed": true,
+          "detail": "all sections resolve"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "every claim is carried by a section that exists in the index"
+      },
+      "passed": true
+    },
+    {
+      "arm": "single",
+      "id": "E08",
+      "mode": "empty_chunk",
+      "question": "What are my standard working hours?",
+      "answer": "2.1 Standard Working Hours\nThe standard working week is thirty-seven and a half hours, worked Monday to Friday.",
+      "sources": [
+        {
+          "policy_id": "HR-201",
+          "section": "2.1"
+        }
+      ],
+      "seconds": 0.016,
+      "input_tokens": 1948,
+      "output_tokens": 69,
+      "total_tokens": 2017,
+      "model_calls": 2,
+      "resent_tokens": 0,
+      "cost_usd": 0.000625,
+      "handoffs": [],
+      "failures": [],
+      "abstained": false,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "sources_present": {
+          "passed": true,
+          "detail": "1 source(s)"
+        },
+        "sections_resolve": {
+          "passed": true,
+          "detail": "all sections resolve"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "every claim is carried by a section that exists in the index"
+      },
+      "passed": true
+    },
+    {
+      "arm": "multi",
+      "id": "E08",
+      "mode": "empty_chunk",
+      "question": "What are my standard working hours?",
+      "answer": "2.1 Standard Working Hours\nThe standard working week is thirty-seven and a half hours, worked Monday to Friday.",
+      "sources": [
+        {
+          "policy_id": "HR-201",
+          "section": "2.1"
+        }
+      ],
+      "seconds": 0.016,
+      "input_tokens": 1629,
+      "output_tokens": 119,
+      "total_tokens": 1748,
+      "model_calls": 3,
+      "resent_tokens": 110,
+      "cost_usd": 0.000645,
+      "handoffs": [
+        {
+          "index": 1,
+          "sender": "manager",
+          "receiver": "policy",
+          "brief": "What are my standard working hours?",
+          "input_tokens": 1302,
+          "output_tokens": 69,
+          "total_tokens": 1371,
+          "resent_tokens": 18,
+          "new_tokens": 1353,
+          "model_calls": 2,
+          "seconds": 0.016,
+          "status": "ok",
+          "detail": ""
+        },
+        {
+          "index": 2,
+          "sender": "workers",
+          "receiver": "manager",
+          "brief": "synthesis",
+          "input_tokens": 327,
+          "output_tokens": 50,
+          "total_tokens": 377,
+          "resent_tokens": 92,
+          "new_tokens": 285,
+          "model_calls": 1,
+          "seconds": 0.0,
+          "status": "ok",
+          "detail": ""
+        }
+      ],
+      "failures": [],
+      "abstained": false,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "sources_present": {
+          "passed": true,
+          "detail": "1 source(s)"
+        },
+        "sections_resolve": {
+          "passed": true,
+          "detail": "all sections resolve"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "every claim is carried by a section that exists in the index"
+      },
+      "passed": true
+    },
+    {
+      "arm": "single",
+      "id": "E11",
+      "mode": "empty_chunk",
+      "question": "Can I carry unused leave into next year?",
+      "answer": "2.5 Carry Over\nUp to five days of unused annual leave may be carried into the next leave year and must be taken by the\nthirty-first of March.",
+      "sources": [
+        {
+          "policy_id": "HR-202",
+          "section": "2.5"
+        }
+      ],
+      "seconds": 0.015,
+      "input_tokens": 1523,
+      "output_tokens": 79,
+      "total_tokens": 1602,
+      "model_calls": 2,
+      "resent_tokens": 0,
+      "cost_usd": 0.000539,
+      "handoffs": [],
+      "failures": [],
+      "abstained": false,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "sources_present": {
+          "passed": true,
+          "detail": "1 source(s)"
+        },
+        "sections_resolve": {
+          "passed": true,
+          "detail": "all sections resolve"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "every claim is carried by a section that exists in the index"
+      },
+      "passed": true
+    },
+    {
+      "arm": "multi",
+      "id": "E11",
+      "mode": "empty_chunk",
+      "question": "Can I carry unused leave into next year?",
+      "answer": "2.5 Carry Over\nUp to five days of unused annual leave may be carried into the next leave year and must be taken by the\nthirty-first of March.",
+      "sources": [
+        {
+          "policy_id": "HR-202",
+          "section": "2.5"
+        }
+      ],
+      "seconds": 0.016,
+      "input_tokens": 1213,
+      "output_tokens": 136,
+      "total_tokens": 1349,
+      "model_calls": 3,
+      "resent_tokens": 121,
+      "cost_usd": 0.000575,
+      "handoffs": [
+        {
+          "index": 1,
+          "sender": "manager",
+          "receiver": "policy",
+          "brief": "Can I carry unused leave into next year?",
+          "input_tokens": 877,
+          "output_tokens": 79,
+          "total_tokens": 956,
+          "resent_tokens": 20,
+          "new_tokens": 936,
+          "model_calls": 2,
+          "seconds": 0.016,
+          "status": "ok",
+          "detail": ""
+        },
+        {
+          "index": 2,
+          "sender": "workers",
+          "receiver": "manager",
+          "brief": "synthesis",
+          "input_tokens": 336,
+          "output_tokens": 57,
+          "total_tokens": 393,
+          "resent_tokens": 101,
+          "new_tokens": 292,
+          "model_calls": 1,
+          "seconds": 0.0,
+          "status": "ok",
+          "detail": ""
+        }
+      ],
+      "failures": [],
+      "abstained": false,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "sources_present": {
+          "passed": true,
+          "detail": "1 source(s)"
+        },
+        "sections_resolve": {
+          "passed": true,
+          "detail": "all sections resolve"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "every claim is carried by a section that exists in the index"
+      },
+      "passed": true
+    },
+    {
+      "arm": "single",
+      "id": "E13",
+      "mode": "wrong_policy",
+      "question": "How do I book time off?",
+      "answer": "2.4 Requesting and Taking Annual Leave\nAll annual leave must be requested through the human resources system and approved by the\nemployee's manager before any travel or other commitment is booked.",
+      "sources": [
+        {
+          "policy_id": "HR-202",
+          "section": "2.4"
+        }
+      ],
+      "seconds": 0.016,
+      "input_tokens": 2023,
+      "output_tokens": 94,
+      "total_tokens": 2117,
+      "model_calls": 2,
+      "resent_tokens": 0,
+      "cost_usd": 0.000694,
+      "handoffs": [],
+      "failures": [],
+      "abstained": false,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "sources_present": {
+          "passed": true,
+          "detail": "1 source(s)"
+        },
+        "sections_resolve": {
+          "passed": true,
+          "detail": "all sections resolve"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "every claim is carried by a section that exists in the index"
+      },
+      "passed": true
+    },
+    {
+      "arm": "multi",
+      "id": "E13",
+      "mode": "wrong_policy",
+      "question": "How do I book time off?",
+      "answer": "I could not establish this: the policy retrieval specialist failed and no policy text was returned, so there is nothing I can cite.",
+      "sources": [],
+      "seconds": 0.0,
+      "input_tokens": 287,
+      "output_tokens": 44,
+      "total_tokens": 331,
+      "model_calls": 2,
+      "resent_tokens": 61,
+      "cost_usd": 0.00016,
+      "handoffs": [
+        {
+          "index": 1,
+          "sender": "manager",
+          "receiver": "policy",
+          "brief": "How do I book time off?",
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "resent_tokens": 6,
+          "new_tokens": 0,
+          "model_calls": 1,
+          "seconds": 0.0,
+          "status": "FAILED",
+          "detail": "HTTP 500 retrieval backend unavailable"
+        },
+        {
+          "index": 2,
+          "sender": "workers",
+          "receiver": "manager",
+          "brief": "synthesis",
+          "input_tokens": 287,
+          "output_tokens": 44,
+          "total_tokens": 331,
+          "resent_tokens": 55,
+          "new_tokens": 276,
+          "model_calls": 1,
+          "seconds": 0.0,
+          "status": "ok",
+          "detail": ""
+        }
+      ],
+      "failures": [
+        {
+          "worker": "policy",
+          "status": 500,
+          "detail": "policy returned 500. retrieval backend unavailable"
+        }
+      ],
+      "abstained": true,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": false,
+          "detail": "refused a covered question"
+        }
+      },
+      "assertions_passed": false,
+      "judge": null,
+      "passed": false
+    },
+    {
+      "arm": "single",
+      "id": "E16",
+      "mode": "wrong_policy",
+      "question": "Do I get paid extra for staying late?",
+      "answer": "2.3 Overtime\nOvertime must be approved in advance by the employee's manager.",
+      "sources": [
+        {
+          "policy_id": "HR-201",
+          "section": "2.3"
+        }
+      ],
+      "seconds": 0.015,
+      "input_tokens": 1523,
+      "output_tokens": 64,
+      "total_tokens": 1587,
+      "model_calls": 2,
+      "resent_tokens": 0,
+      "cost_usd": 0.000509,
+      "handoffs": [],
+      "failures": [],
+      "abstained": false,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "sources_present": {
+          "passed": true,
+          "detail": "1 source(s)"
+        },
+        "sections_resolve": {
+          "passed": true,
+          "detail": "all sections resolve"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "every claim is carried by a section that exists in the index"
+      },
+      "passed": true
+    },
+    {
+      "arm": "multi",
+      "id": "E16",
+      "mode": "wrong_policy",
+      "question": "Do I get paid extra for staying late?",
+      "answer": "2.3 Overtime\nOvertime must be approved in advance by the employee's manager.",
+      "sources": [
+        {
+          "policy_id": "HR-201",
+          "section": "2.3"
+        }
+      ],
+      "seconds": 0.016,
+      "input_tokens": 1195,
+      "output_tokens": 105,
+      "total_tokens": 1300,
+      "model_calls": 3,
+      "resent_tokens": 103,
+      "cost_usd": 0.000509,
+      "handoffs": [
+        {
+          "index": 1,
+          "sender": "manager",
+          "receiver": "policy",
+          "brief": "Do I get paid extra for staying late?",
+          "input_tokens": 877,
+          "output_tokens": 64,
+          "total_tokens": 941,
+          "resent_tokens": 20,
+          "new_tokens": 921,
+          "model_calls": 2,
+          "seconds": 0.016,
+          "status": "ok",
+          "detail": ""
+        },
+        {
+          "index": 2,
+          "sender": "workers",
+          "receiver": "manager",
+          "brief": "synthesis",
+          "input_tokens": 318,
+          "output_tokens": 41,
+          "total_tokens": 359,
+          "resent_tokens": 83,
+          "new_tokens": 276,
+          "model_calls": 1,
+          "seconds": 0.0,
+          "status": "ok",
+          "detail": ""
+        }
+      ],
+      "failures": [],
+      "abstained": false,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "sources_present": {
+          "passed": true,
+          "detail": "1 source(s)"
+        },
+        "sections_resolve": {
+          "passed": true,
+          "detail": "all sections resolve"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "every claim is carried by a section that exists in the index"
+      },
+      "passed": true
+    },
+    {
+      "arm": "single",
+      "id": "E17",
+      "mode": "wrong_policy",
+      "question": "How long must I work here before I can request flexible working?",
+      "answer": "3 Eligibility\nAny employee with at least twenty-six weeks of continuous service may make a flexible working request.\nAn employee may make up to two requests in any period of twelve months, and no reason for the request\nneeds to be given.",
+      "sources": [
+        {
+          "policy_id": "HR-204",
+          "section": "3"
+        }
+      ],
+      "seconds": 0.015,
+      "input_tokens": 1979,
+      "output_tokens": 108,
+      "total_tokens": 2087,
+      "model_calls": 2,
+      "resent_tokens": 0,
+      "cost_usd": 0.000711,
+      "handoffs": [],
+      "failures": [],
+      "abstained": false,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "sources_present": {
+          "passed": true,
+          "detail": "1 source(s)"
+        },
+        "sections_resolve": {
+          "passed": true,
+          "detail": "all sections resolve"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "every claim is carried by a section that exists in the index"
+      },
+      "passed": true
+    },
+    {
+      "arm": "multi",
+      "id": "E17",
+      "mode": "wrong_policy",
+      "question": "How long must I work here before I can request flexible working?",
+      "answer": "3 Eligibility\nAny employee with at least twenty-six weeks of continuous service may make a flexible working request.\nAn employee may make up to two requests in any period of twelve months, and no reason for the request\nneeds to be given.",
+      "sources": [
+        {
+          "policy_id": "HR-204",
+          "section": "3"
+        }
+      ],
+      "seconds": 0.016,
+      "input_tokens": 2362,
+      "output_tokens": 237,
+      "total_tokens": 2599,
+      "model_calls": 4,
+      "resent_tokens": 343,
+      "cost_usd": 0.001064,
+      "handoffs": [
+        {
+          "index": 1,
+          "sender": "manager",
+          "receiver": "policy",
+          "brief": "How long must I work here before I can request flexible working?",
+          "input_tokens": 1333,
+          "output_tokens": 108,
+          "total_tokens": 1441,
+          "resent_tokens": 32,
+          "new_tokens": 1409,
+          "model_calls": 2,
+          "seconds": 0.016,
+          "status": "ok",
+          "detail": ""
+        },
+        {
+          "index": 2,
+          "sender": "manager",
+          "receiver": "eligibility",
+          "brief": "How long must I work here before I can request flexible working?\n\nWhat the policy specialist reported:\n{\n  \"worker\": \"policy\",\n  \"answer\": \"3 Eligibility\\nAny employee with at least twenty-six weeks of continuous service may make a flexible working request.\\nAn employee may make up to two requests in any period of twelve months, and no reason for the request\\nneeds to be given.\",\n  \"value\": null,\n  \"sources\": [\n    {\n      \"policy_id\": \"HR-204\",\n      \"section\": \"3\"\n    }\n  ]\n}",
+          "input_tokens": 599,
+          "output_tokens": 48,
+          "total_tokens": 647,
+          "resent_tokens": 121,
+          "new_tokens": 526,
+          "model_calls": 1,
+          "seconds": 0.0,
+          "status": "ok",
+          "detail": ""
+        },
+        {
+          "index": 3,
+          "sender": "workers",
+          "receiver": "manager",
+          "brief": "synthesis",
+          "input_tokens": 430,
+          "output_tokens": 81,
+          "total_tokens": 511,
+          "resent_tokens": 190,
+          "new_tokens": 321,
+          "model_calls": 1,
+          "seconds": 0.0,
+          "status": "ok",
+          "detail": ""
+        }
+      ],
+      "failures": [],
+      "abstained": false,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "sources_present": {
+          "passed": true,
+          "detail": "1 source(s)"
+        },
+        "sections_resolve": {
+          "passed": true,
+          "detail": "all sections resolve"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "every claim is carried by a section that exists in the index"
+      },
+      "passed": true
+    },
+    {
+      "arm": "single",
+      "id": "E20",
+      "mode": "unciteable",
+      "question": "When do I have to report an absence?",
+      "answer": "3.1 Attendance Expectations\nEmployees are expected to attend work punctually and to be present for all scheduled hours.",
+      "sources": [
+        {
+          "policy_id": "HR-201",
+          "section": "3.1"
+        }
+      ],
+      "seconds": 0.016,
+      "input_tokens": 2024,
+      "output_tokens": 73,
+      "total_tokens": 2097,
+      "model_calls": 2,
+      "resent_tokens": 0,
+      "cost_usd": 0.000652,
+      "handoffs": [],
+      "failures": [],
+      "abstained": false,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "sources_present": {
+          "passed": true,
+          "detail": "1 source(s)"
+        },
+        "sections_resolve": {
+          "passed": true,
+          "detail": "all sections resolve"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "every claim is carried by a section that exists in the index"
+      },
+      "passed": true
+    },
+    {
+      "arm": "multi",
+      "id": "E20",
+      "mode": "unciteable",
+      "question": "When do I have to report an absence?",
+      "answer": "3.1 Attendance Expectations\nEmployees are expected to attend work punctually and to be present for all scheduled hours.",
+      "sources": [
+        {
+          "policy_id": "HR-201",
+          "section": "3.1"
+        }
+      ],
+      "seconds": 0.015,
+      "input_tokens": 1707,
+      "output_tokens": 125,
+      "total_tokens": 1832,
+      "model_calls": 3,
+      "resent_tokens": 112,
+      "cost_usd": 0.000677,
+      "handoffs": [
+        {
+          "index": 1,
+          "sender": "manager",
+          "receiver": "policy",
+          "brief": "When do I have to report an absence?",
+          "input_tokens": 1378,
+          "output_tokens": 73,
+          "total_tokens": 1451,
+          "resent_tokens": 18,
+          "new_tokens": 1433,
+          "model_calls": 2,
+          "seconds": 0.015,
+          "status": "ok",
+          "detail": ""
+        },
+        {
+          "index": 2,
+          "sender": "workers",
+          "receiver": "manager",
+          "brief": "synthesis",
+          "input_tokens": 329,
+          "output_tokens": 52,
+          "total_tokens": 381,
+          "resent_tokens": 94,
+          "new_tokens": 287,
+          "model_calls": 1,
+          "seconds": 0.0,
+          "status": "ok",
+          "detail": ""
+        }
+      ],
+      "failures": [],
+      "abstained": false,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "sources_present": {
+          "passed": true,
+          "detail": "1 source(s)"
+        },
+        "sections_resolve": {
+          "passed": true,
+          "detail": "all sections resolve"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "every claim is carried by a section that exists in the index"
+      },
+      "passed": true
+    },
+    {
+      "arm": "single",
+      "id": "E22",
+      "mode": "near_miss",
+      "question": "How long is my lunch break?",
+      "answer": "2.2 Rest Breaks\nEmployees are entitled to an uninterrupted rest break of at least twenty minutes when their working day\nexceeds six hours.",
+      "sources": [
+        {
+          "policy_id": "HR-201",
+          "section": "2.2"
+        }
+      ],
+      "seconds": 0.016,
+      "input_tokens": 1744,
+      "output_tokens": 75,
+      "total_tokens": 1819,
+      "model_calls": 2,
+      "resent_tokens": 0,
+      "cost_usd": 0.000586,
+      "handoffs": [],
+      "failures": [],
+      "abstained": false,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "sources_present": {
+          "passed": true,
+          "detail": "1 source(s)"
+        },
+        "sections_resolve": {
+          "passed": true,
+          "detail": "all sections resolve"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "every claim is carried by a section that exists in the index"
+      },
+      "passed": true
+    },
+    {
+      "arm": "multi",
+      "id": "E22",
+      "mode": "near_miss",
+      "question": "How long is my lunch break?",
+      "answer": "2.2 Rest Breaks\nEmployees are entitled to an uninterrupted rest break of at least twenty minutes when their working day\nexceeds six hours.",
+      "sources": [
+        {
+          "policy_id": "HR-201",
+          "section": "2.2"
+        }
+      ],
+      "seconds": 0.016,
+      "input_tokens": 1430,
+      "output_tokens": 132,
+      "total_tokens": 1562,
+      "model_calls": 3,
+      "resent_tokens": 111,
+      "cost_usd": 0.000622,
+      "handoffs": [
+        {
+          "index": 1,
+          "sender": "manager",
+          "receiver": "policy",
+          "brief": "How long is my lunch break?",
+          "input_tokens": 1098,
+          "output_tokens": 75,
+          "total_tokens": 1173,
+          "resent_tokens": 14,
+          "new_tokens": 1159,
+          "model_calls": 2,
+          "seconds": 0.016,
+          "status": "ok",
+          "detail": ""
+        },
+        {
+          "index": 2,
+          "sender": "workers",
+          "receiver": "manager",
+          "brief": "synthesis",
+          "input_tokens": 332,
+          "output_tokens": 57,
+          "total_tokens": 389,
+          "resent_tokens": 97,
+          "new_tokens": 292,
+          "model_calls": 1,
+          "seconds": 0.0,
+          "status": "ok",
+          "detail": ""
+        }
+      ],
+      "failures": [],
+      "abstained": false,
+      "assertions": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "sources_present": {
+          "passed": true,
+          "detail": "1 source(s)"
+        },
+        "sections_resolve": {
+          "passed": true,
+          "detail": "all sections resolve"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "every claim is carried by a section that exists in the index"
+      },
+      "passed": true
+    }
+  ]
+}
