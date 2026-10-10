@@ -1,0 +1,100 @@
+Week 10 - hand-off log
+
+Every hand-off in the multi-agent arm, with its own token count.
+
+  in      tokens the receiver was sent
+  out     tokens the receiver produced
+  resent  the part of `in` that was context the sender already held
+  new     everything else (the receiver's own prompt and tool schemas)
+
+========================================================================
+E01  out_of_scope  How much maternity leave do I get?
+========================================================================
+[ 1] manager      -> policy       in=   933 out=   72 total=  1005 resent=    18 new=  987   0.016s ok
+[ 2] workers      -> manager      in=   331 out=   54 total=   385 resent=    96 new=  289   0.000s ok
+
+case total: 1390 tokens, of which 114 re-sent
+
+========================================================================
+E04  out_of_scope  How do I claim travel expenses?
+========================================================================
+[ 1] manager      -> policy       in=  1035 out=   68 total=  1103 resent=    16 new= 1087   0.015s ok
+[ 2] workers      -> manager      in=   324 out=   48 total=   372 resent=    89 new=  283   0.000s ok
+
+case total: 1475 tokens, of which 105 re-sent
+
+========================================================================
+E07  empty_chunk  How many days of annual leave do I get?
+========================================================================
+[ 1] manager      -> policy       in=   892 out=   75 total=   967 resent=    20 new=  947   0.015s ok
+[ 2] workers      -> manager      in=   333 out=   54 total=   387 resent=    97 new=  290   0.000s ok
+
+case total: 1354 tokens, of which 117 re-sent
+
+========================================================================
+E08  empty_chunk  What are my standard working hours?
+========================================================================
+[ 1] manager      -> policy       in=  1302 out=   69 total=  1371 resent=    18 new= 1353   0.016s ok
+[ 2] workers      -> manager      in=   327 out=   50 total=   377 resent=    92 new=  285   0.000s ok
+
+case total: 1748 tokens, of which 110 re-sent
+
+========================================================================
+E11  empty_chunk  Can I carry unused leave into next year?
+========================================================================
+[ 1] manager      -> policy       in=   877 out=   79 total=   956 resent=    20 new=  936   0.016s ok
+[ 2] workers      -> manager      in=   336 out=   57 total=   393 resent=   101 new=  292   0.000s ok
+
+case total: 1349 tokens, of which 121 re-sent
+
+========================================================================
+E13  wrong_policy  How do I book time off?
+========================================================================
+[ 1] manager      -> policy       in=     0 out=    0 total=     0 resent=     6 new=    0   0.000s FAILED
+     detail: HTTP 500 retrieval backend unavailable
+[ 2] workers      -> manager      in=   287 out=   44 total=   331 resent=    55 new=  276   0.000s ok
+
+case total: 331 tokens, of which 61 re-sent
+
+========================================================================
+E16  wrong_policy  Do I get paid extra for staying late?
+========================================================================
+[ 1] manager      -> policy       in=   877 out=   64 total=   941 resent=    20 new=  921   0.016s ok
+[ 2] workers      -> manager      in=   318 out=   41 total=   359 resent=    83 new=  276   0.000s ok
+
+case total: 1300 tokens, of which 103 re-sent
+
+========================================================================
+E17  wrong_policy  How long must I work here before I can request flexible working?
+========================================================================
+[ 1] manager      -> policy       in=  1333 out=  108 total=  1441 resent=    32 new= 1409   0.016s ok
+[ 2] manager      -> eligibility  in=   599 out=   48 total=   647 resent=   121 new=  526   0.000s ok
+[ 3] workers      -> manager      in=   430 out=   81 total=   511 resent=   190 new=  321   0.000s ok
+
+case total: 2599 tokens, of which 343 re-sent
+
+========================================================================
+E20  unciteable  When do I have to report an absence?
+========================================================================
+[ 1] manager      -> policy       in=  1378 out=   73 total=  1451 resent=    18 new= 1433   0.015s ok
+[ 2] workers      -> manager      in=   329 out=   52 total=   381 resent=    94 new=  287   0.000s ok
+
+case total: 1832 tokens, of which 112 re-sent
+
+========================================================================
+E22  near_miss  How long is my lunch break?
+========================================================================
+[ 1] manager      -> policy       in=  1098 out=   75 total=  1173 resent=    14 new= 1159   0.016s ok
+[ 2] workers      -> manager      in=   332 out=   57 total=   389 resent=    97 new=  292   0.000s ok
+
+case total: 1562 tokens, of which 111 re-sent
+
+========================================================================
+TOTALS
+========================================================================
+
+manager -> policy           10408 tokens       182 re-sent   69.7%
+workers -> manager           3885 tokens       994 re-sent   26.0%
+manager -> eligibility        647 tokens       121 re-sent    4.3%
+
+Context re-send multiplier: 0.8x (14940 multi / 18339 single tokens). Largest share: "manager -> policy resend, 69.7% of all multi-arm tokens" (10408 tokens, of which 182 are context the manager already held).
