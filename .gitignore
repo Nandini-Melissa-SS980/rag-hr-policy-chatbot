@@ -14,3 +14,4 @@ vectorstore/
 .DS_Store
 
 evaluation/retrieval_results.json
+logs/

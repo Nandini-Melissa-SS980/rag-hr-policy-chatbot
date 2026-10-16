@@ -1,0 +1,34 @@
+[
+  {
+    "id": "E28",
+    "mode": "out_of_scope",
+    "question": "What notice period do I need to give if I resign?",
+    "expect_refusal": true,
+    "expected_sections": [],
+    "regression": true,
+    "source_trace": "R-7f3c1a9e4d2b",
+    "why": "The corpus has no notice-period policy. Retrieval returns annual-leave and flexible-working passages at ~0.73, which clears the has_good_match gate, and prompt v1 had nothing telling the model to check the context was on topic. It answered '30 days' from HR-202 2.4, a section about requesting annual leave. Found in the Week-11 support drill."
+  },
+  {
+    "id": "E29",
+    "mode": "out_of_scope",
+    "question": "How much notice do I have to give if I resign?",
+    "expect_refusal": true,
+    "expected_sections": [],
+    "regression": true,
+    "source_trace": "R-376b3a7110f4",
+    "why": "The same failure reached by different wording. Logged separately because the drill's output slice showed nine notice-shaped questions in one week, so this is a class of failure and not a single bad row."
+  },
+  {
+    "id": "E30",
+    "mode": "near_miss",
+    "question": "How do I request annual leave?",
+    "expect_refusal": false,
+    "expected_sections": [
+      { "policy_id": "HR-202", "section": "2.4" }
+    ],
+    "regression": true,
+    "source_trace": "R-7f3c1a9e4d2b",
+    "why": "The paired case. HR-202 2.4 is the section the notice answer was wrongly drawn from, and it IS the right answer to this question. Guards the fix from overshooting: a prompt that refuses notice questions must still answer leave-request questions from the same passage."
+  }
+]

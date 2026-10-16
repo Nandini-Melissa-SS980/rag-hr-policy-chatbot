@@ -5,6 +5,9 @@ from app.models.schemas import (
     ChatResponse,
     SearchResult,
 )
+from app.services.answering import (
+    answer_question,
+)
 from app.services.generator import (
     Generator,
 )
@@ -65,35 +68,50 @@ def search(request: ChatRequest):
 def chat(
     request: ChatRequest,
 ):
+    """
+    Every request is traced. `answer_question` writes
+    one row to logs/requests.jsonl with per-stage
+    latency, tokens, cost, the prompt version and the
+    retrieved context ids - which is what makes a
+    complaint about a past answer findable.
+    """
 
-    results = retriever.retrieve(
-        question=request.question,
+    generated, trace = answer_question(
+        request.question,
+        retriever,
+        generator,
         top_k=5,
         region=request.region,
     )
 
-    if not retriever.has_good_match(
-        results
+    if trace["abstained"] or not generated.get(
+        "answer"
     ):
+
         return ChatResponse(
-            answer=(
-                "I couldn't find information "
-                "about this in the provided "
-                "HR policy documents."
+            answer=generated.get(
+                "answer",
+                (
+                    "I couldn't find information "
+                    "about this in the provided "
+                    "HR policy documents."
+                ),
             ),
             sources=[],
         )
 
-    generated = generator.generate(
-        question=request.question,
-        results=results,
-    )
-
+    # Built from the context the trace recorded, not
+    # from a second retrieval call. Re-running the
+    # search would cost a second embed and could
+    # return something other than what was logged,
+    # which would make the trace a description of a
+    # request that did not happen.
     source_map = {
-        result["metadata"].get(
-            "chunk_id"
-        ): result["metadata"]
-        for result in results
+        item["chunk_id"]: item
+        for item in trace["labels"].get(
+            "context",
+            [],
+        )
     }
 
     sources = []

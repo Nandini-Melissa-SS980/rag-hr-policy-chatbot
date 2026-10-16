@@ -1,0 +1,116 @@
+{
+  "trace_id": "R-7f3c1a9e4d2b",
+  "started_at": "2025-11-04T14:37:00+00:00",
+  "model": "gpt-5-mini",
+  "prompt_version": "v1",
+  "question": "What notice period do I need to give if I resign?",
+  "answer": "You must give 30 days of notice when you resign. Notice must be submitted through the HR system and approved by your manager.",
+  "abstained": false,
+  "sources": [
+    {
+      "chunk_id": "HR-202-2.4-structure_aware-19-27d0d207",
+      "policy_id": "HR-202",
+      "section": "2.4"
+    }
+  ],
+  "context_ids": [
+    "HR-202-2.4-structure_aware-19-27d0d207",
+    "HR-204-3-structure_aware-36-8ee447c5",
+    "HR-202-2.2-structure_aware-17-bd32e550",
+    "HR-204-4.3-structure_aware-40-f84535a3",
+    "HR-204-4.2-structure_aware-39-1266d5f7"
+  ],
+  "duration_ms": 15.08,
+  "input_tokens": 942,
+  "output_tokens": 32,
+  "total_tokens": 974,
+  "cost_usd": 0.0002995,
+  "cost_by_stage": {
+    "retrieval": {
+      "duration_ms": 15.02,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "cost_usd": 0.0
+    },
+    "generation": {
+      "duration_ms": 0.02,
+      "input_tokens": 942,
+      "output_tokens": 32,
+      "cost_usd": 0.0002995
+    }
+  },
+  "spans": [
+    {
+      "name": "retrieve",
+      "stage": "retrieval",
+      "duration_ms": 15.02,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0,
+      "attributes": {
+        "top_k": 5,
+        "region": null,
+        "returned": 5,
+        "top_score": 0.7258
+      },
+      "error": null
+    },
+    {
+      "name": "generate",
+      "stage": "generation",
+      "duration_ms": 0.02,
+      "input_tokens": 942,
+      "output_tokens": 32,
+      "total_tokens": 974,
+      "cost_usd": 0.0002995,
+      "attributes": {
+        "model": "gpt-5-mini",
+        "prompt_version": "v1"
+      },
+      "error": null
+    }
+  ],
+  "labels": {
+    "user": "u_4471",
+    "question_id": "PLANT",
+    "context": [
+      {
+        "rank": 1,
+        "chunk_id": "HR-202-2.4-structure_aware-19-27d0d207",
+        "policy_id": "HR-202",
+        "section": "2.4",
+        "score": 0.7258
+      },
+      {
+        "rank": 2,
+        "chunk_id": "HR-204-3-structure_aware-36-8ee447c5",
+        "policy_id": "HR-204",
+        "section": "3",
+        "score": 0.6927
+      },
+      {
+        "rank": 3,
+        "chunk_id": "HR-202-2.2-structure_aware-17-bd32e550",
+        "policy_id": "HR-202",
+        "section": "2.2",
+        "score": 0.691
+      },
+      {
+        "rank": 4,
+        "chunk_id": "HR-204-4.3-structure_aware-40-f84535a3",
+        "policy_id": "HR-204",
+        "section": "4.3",
+        "score": 0.6889
+      },
+      {
+        "rank": 5,
+        "chunk_id": "HR-204-4.2-structure_aware-39-1266d5f7",
+        "policy_id": "HR-204",
+        "section": "4.2",
+        "score": 0.6878
+      }
+    ]
+  },
+  "error": null
+}

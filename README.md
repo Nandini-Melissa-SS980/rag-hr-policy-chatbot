@@ -149,12 +149,57 @@ evaluation/week10/
   race_results.json   every row behind the tables
 ```
 
+## Observability and the support drill
+
+```bash
+python -m evaluation.week11.seed_logs                      # a week of traffic + one bad answer
+python -m evaluation.week11.logcli --answer "notice"       # the slice that found it
+python -m evaluation.week11.run_suite --prompt-version v1  # RED
+python -m evaluation.week11.run_suite --prompt-version v2  # GREEN
+python -m evaluation.week11.cost_report                    # cost by stage, and 10x
+```
+
+Every request writes one row to `logs/requests.jsonl` with per-stage latency,
+tokens and cost, the prompt version, and the retrieved context ids.
+`app/observability.py` holds the recorder; `app/services/answering.py` is the
+one instrumented path the API and the drill both use, so a trace captured in
+the drill has the same shape as a production trace.
+
+**The drill.** Complaint: *"it quoted the wrong notice period, maybe Tuesday."*
+Found in **00:41** from 197 requests, on the **output** slice — 1 hit, against
+9 for the input slice and 29 for Tuesday. The trace showed `prompt_version: v1`
+and five retrieved passages, none about notice periods: this corpus has no
+notice policy, everything scored ~0.7, `has_good_match` waved it through, and
+the model answered a resignation question out of the annual-leave section.
+Write-up in `evaluation/week11/drill.md`.
+
+**The fix** is a prompt bump, v1 → v2, adding one on-topic rule. Suite went
+18/30 → 22/30 with the three new cases 0/3 → 3/3 and `BROKEN: []`. The full
+suite is what caught the first attempt overshooting into E21, a real question
+the corpus does answer. Canary and rollback in `evaluation/week11/rollback.md`.
+
+Prompts are versioned in `app/services/prompts.py` and old versions are never
+deleted — a trace from last Tuesday has to keep resolving to the text that ran.
+
+```
+evaluation/week11/
+  drill.md              mm:ss, the slice, the missing-field analysis
+  trace.json            the found request, per-span
+  regression_cases.json E28/E29/E30, added to the Week-6 suite
+  suite_red.txt         18/30, drill 0/3
+  suite_green.txt       22/30, drill 3/3
+  cost_by_stage.md      retrieval / generation / tools
+  tenx.md               what binds first, with the number
+  rollback.md           prompt version bump, canary, rollback
+```
+
 ## Layout
 
 ```
 app/
   main.py                FastAPI app
   config.py              Environment settings
+  observability.py       Traces, spans, per-stage cost
   api/chat.py            Routes
   models/schemas.py      Request/response models
   services/
@@ -164,6 +209,8 @@ app/
     vector_store.py      Chroma wrapper
     retriever.py         Search by strategy
     generator.py         Prompt + OpenAI call
+    prompts.py           Versioned prompts, v1 and v2
+    answering.py         The one instrumented answer path
   mcp/
     client.py            Tool discovery over MCP, and dispatch
   agent/
@@ -180,6 +227,7 @@ mcp_servers/             MCP servers this repo exposes
   policy_server.py       Handbook search, over stdio
   hris_server.py         Grade band and leave balance, scoped
 evaluation/              Golden sets, harnesses, reports
+  week11/                The support drill, the failure->test loop, cost
   week10/                The multi-agent race, its log and its verdict
   week9/                 MCP evidence: wire.json, diffs, risk note
   trajectory_eval.py     Expected tool sequences, both arms, the four numbers

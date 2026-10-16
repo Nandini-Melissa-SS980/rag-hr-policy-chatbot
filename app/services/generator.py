@@ -6,44 +6,39 @@ from app.config import (
     OPENAI_API_KEY,
     OPENAI_MODEL,
 )
+from app.services.prompts import (
+    CURRENT_PROMPT_VERSION,
+    get_prompt,
+)
 
 
-SYSTEM_PROMPT = """
-You are an HR policy assistant.
-
-Your job is to answer questions ONLY using the
-provided HR policy context.
-
-Rules:
-
-1. Do not use outside knowledge.
-2. Do not invent HR policies.
-3. If the context does not contain enough information
-   to answer the question, refuse to answer.
-4. Every factual claim must have a source citation.
-5. Citations must use the provided chunk_id,
-   policy_id, and section.
-6. Keep the answer concise.
-7. Return valid JSON only.
-
-Required JSON format:
-
-{
-  "answer": "string",
-  "sources": [
-    {
-      "chunk_id": "string",
-      "policy_id": "string",
-      "section": "string"
-    }
-  ]
-}
-"""
+# Kept so existing importers still resolve. The text
+# now lives in app/services/prompts.py, versioned, so
+# a trace can say which one produced an answer.
+SYSTEM_PROMPT = get_prompt("v1")
 
 
 class Generator:
 
-    def __init__(self):
+    def __init__(
+        self,
+        prompt_version: str = (
+            CURRENT_PROMPT_VERSION
+        ),
+    ):
+        """
+        `prompt_version` is recorded on every trace
+        this generator produces, so an answer can
+        always be traced back to the text that wrote
+        it. The Week-11 drill pins the old version
+        deliberately to reproduce the failure.
+        """
+
+        self.prompt_version = prompt_version
+
+        self.system_prompt = get_prompt(
+            prompt_version
+        )
 
         if not OPENAI_API_KEY:
             raise RuntimeError(
@@ -112,11 +107,39 @@ Return JSON only.
 
         response = self.client.responses.create(
             model=OPENAI_MODEL,
-            instructions=SYSTEM_PROMPT,
+            instructions=self.system_prompt,
             input=user_prompt,
         )
 
         raw_text = response.output_text.strip()
+
+        # Reported so the caller's generation span
+        # carries real token counts rather than an
+        # estimate. Absent usage is recorded as zero,
+        # never guessed.
+        usage = getattr(
+            response,
+            "usage",
+            None,
+        )
+
+        meta = {
+            "prompt_version": (
+                self.prompt_version
+            ),
+            "input_tokens": getattr(
+                usage,
+                "input_tokens",
+                0,
+            )
+            or 0,
+            "output_tokens": getattr(
+                usage,
+                "output_tokens",
+                0,
+            )
+            or 0,
+        }
 
         try:
             data = json.loads(
@@ -131,6 +154,9 @@ Return JSON only.
                     "provided policy documents."
                 ),
                 "sources": [],
+                "_meta": meta,
             }
+
+        data["_meta"] = meta
 
         return data

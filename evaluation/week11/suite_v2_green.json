@@ -1,0 +1,728 @@
+{
+  "prompt_version": "v2",
+  "passed": 22,
+  "total": 30,
+  "drill_passed": 3,
+  "drill_total": 3,
+  "status": "GREEN",
+  "rows": [
+    {
+      "id": "E01",
+      "mode": "out_of_scope",
+      "question": "How much maternity leave do I get?",
+      "regression": true,
+      "abstained": true,
+      "context_ids": [
+        "HR-202-2-structure_aware-15-52efb3a2",
+        "HR-202-2.1-structure_aware-16-56bba0ee",
+        "HR-202-2.5-structure_aware-20-d17f92b6",
+        "HR-202-2.3-structure_aware-18-255cc226",
+        "HR-202-2.2-structure_aware-17-bd32e550"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "refused"
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "E02",
+      "mode": "out_of_scope",
+      "question": "What is the pension contribution?",
+      "regression": false,
+      "abstained": true,
+      "context_ids": [
+        "HR-202-2-structure_aware-15-52efb3a2",
+        "HR-202-2.1-structure_aware-16-56bba0ee",
+        "HR-202-1-structure_aware-14-1187a4d4",
+        "HR-207-4.3-structure_aware-62-54f51065",
+        "HR-202-2.2-structure_aware-17-bd32e550"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "refused"
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "E03",
+      "mode": "out_of_scope",
+      "question": "Do we get private health insurance?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-202-2-structure_aware-15-52efb3a2",
+        "HR-207-3-structure_aware-57-3ecec693",
+        "HR-202-2.1-structure_aware-16-56bba0ee",
+        "HR-202-3-structure_aware-21-597580c0",
+        "HR-207-5-structure_aware-63-1d2f227f"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": false,
+          "detail": "answered a question the documents do not cover"
+        }
+      },
+      "passed": false
+    },
+    {
+      "id": "E04",
+      "mode": "out_of_scope",
+      "question": "How do I claim travel expenses?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-207-4.3-structure_aware-62-54f51065",
+        "HR-202-2-structure_aware-15-52efb3a2",
+        "HR-207-unknown-structure_aware-61-792d661a",
+        "HR-202-2.5-structure_aware-20-d17f92b6",
+        "HR-202-2.4-structure_aware-19-27d0d207"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": false,
+          "detail": "answered a question the documents do not cover"
+        }
+      },
+      "passed": false
+    },
+    {
+      "id": "E05",
+      "mode": "out_of_scope",
+      "question": "Is there a training budget?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-207-4.3-structure_aware-62-54f51065",
+        "HR-207-4-structure_aware-58-437a99d1",
+        "HR-205-3-structure_aware-46-75c8cc45",
+        "HR-202-2-structure_aware-15-52efb3a2",
+        "HR-205-3.2-structure_aware-48-ce9fda06"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": false,
+          "detail": "answered a question the documents do not cover"
+        }
+      },
+      "passed": false
+    },
+    {
+      "id": "E06",
+      "mode": "out_of_scope",
+      "question": "What is the dress code?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-205-2-structure_aware-45-a863cba7",
+        "HR-202-202-structure_aware-13-d6bdad87",
+        "HR-204-4.1-structure_aware-38-e317576c",
+        "HR-205-205-structure_aware-43-f743cf90",
+        "HR-201-3.1-structure_aware-7-c4f6c1c6"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": false,
+          "detail": "answered a question the documents do not cover"
+        }
+      },
+      "passed": false
+    },
+    {
+      "id": "E07",
+      "mode": "empty_chunk",
+      "question": "How many days of annual leave do I get?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-202-2-structure_aware-15-52efb3a2",
+        "HR-202-2.5-structure_aware-20-d17f92b6",
+        "HR-202-2.1-structure_aware-16-56bba0ee",
+        "HR-202-2.3-structure_aware-18-255cc226",
+        "HR-202-2.4-structure_aware-19-27d0d207"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "retrieved_expected_section": {
+          "passed": true,
+          "detail": "expected [('HR-202', '2.1')], retrieved [('HR-202', '2'), ('HR-202', '2.1'), ('HR-202', '2.3'), ('HR-202', '2.4')]"
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "E08",
+      "mode": "empty_chunk",
+      "question": "What are my standard working hours?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-201-2.1-structure_aware-3-31734419",
+        "HR-201-2-structure_aware-2-70dcf926",
+        "HR-201-2.2-structure_aware-4-8be53480",
+        "HR-207-4.2-structure_aware-60-bb5d852e",
+        "HR-202-2.1-structure_aware-16-56bba0ee"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "retrieved_expected_section": {
+          "passed": true,
+          "detail": "expected [('HR-201', '2.1')], retrieved [('HR-201', '2'), ('HR-201', '2.1'), ('HR-201', '2.2'), ('HR-202', '2.1')]"
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "E09",
+      "mode": "empty_chunk",
+      "question": "How do I request annual leave?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-202-2-structure_aware-15-52efb3a2",
+        "HR-202-2.4-structure_aware-19-27d0d207",
+        "HR-202-2.5-structure_aware-20-d17f92b6",
+        "HR-202-1-structure_aware-14-1187a4d4",
+        "HR-202-2.1-structure_aware-16-56bba0ee"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "retrieved_expected_section": {
+          "passed": true,
+          "detail": "expected [('HR-202', '2.4')], retrieved [('HR-202', '1'), ('HR-202', '2'), ('HR-202', '2.1'), ('HR-202', '2.4')]"
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "E10",
+      "mode": "empty_chunk",
+      "question": "How am I rated in my performance review?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-203-5.1-structure_aware-29-acc5c958",
+        "HR-203-5-structure_aware-28-341d4ca0",
+        "HR-203-5.2-structure_aware-30-6f53e7bf",
+        "HR-203-2-structure_aware-25-a97dd9f1",
+        "HR-203-1-structure_aware-24-e98e2d66"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "retrieved_expected_section": {
+          "passed": true,
+          "detail": "expected [('HR-203', '5.2')], retrieved [('HR-203', '1'), ('HR-203', '2'), ('HR-203', '5'), ('HR-203', '5.1')]"
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "E11",
+      "mode": "empty_chunk",
+      "question": "Can I carry unused leave into next year?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-202-2.5-structure_aware-20-d17f92b6",
+        "HR-202-2-structure_aware-15-52efb3a2",
+        "HR-202-2.4-structure_aware-19-27d0d207",
+        "HR-202-2.3-structure_aware-18-255cc226",
+        "HR-202-1-structure_aware-14-1187a4d4"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "retrieved_expected_section": {
+          "passed": true,
+          "detail": "expected [('HR-202', '2.5')], retrieved [('HR-202', '1'), ('HR-202', '2'), ('HR-202', '2.3'), ('HR-202', '2.4')]"
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "E12",
+      "mode": "empty_chunk",
+      "question": "When are promotions considered?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-205-3.1-structure_aware-47-822a4dca",
+        "HR-205-3-structure_aware-46-75c8cc45",
+        "HR-205-3.2-structure_aware-48-ce9fda06",
+        "HR-205-1-structure_aware-44-bbfd8ede",
+        "HR-205-3.4-structure_aware-51-67551851"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "retrieved_expected_section": {
+          "passed": true,
+          "detail": "expected [('HR-205', '3.1')], retrieved [('HR-205', '1'), ('HR-205', '3'), ('HR-205', '3.1'), ('HR-205', '3.2')]"
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "E13",
+      "mode": "wrong_policy",
+      "question": "How do I book time off?",
+      "regression": true,
+      "abstained": false,
+      "context_ids": [
+        "HR-201-2-structure_aware-2-70dcf926",
+        "HR-201-2.2-structure_aware-4-8be53480",
+        "HR-201-2.1-structure_aware-3-31734419",
+        "HR-207-unknown-structure_aware-61-792d661a",
+        "HR-207-4.2-structure_aware-60-bb5d852e"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "retrieved_expected_section": {
+          "passed": false,
+          "detail": "expected [('HR-202', '2.4')], retrieved [('HR-201', '2'), ('HR-201', '2.1'), ('HR-201', '2.2'), ('HR-207', '4.2')]"
+        }
+      },
+      "passed": false
+    },
+    {
+      "id": "E14",
+      "mode": "wrong_policy",
+      "question": "Which days do I have to come into the office?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-201-2.1-structure_aware-3-31734419",
+        "HR-201-3.1-structure_aware-7-c4f6c1c6",
+        "HR-207-4.2-structure_aware-60-bb5d852e",
+        "HR-207-3-structure_aware-57-3ecec693",
+        "HR-202-3-structure_aware-21-597580c0"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "retrieved_expected_section": {
+          "passed": true,
+          "detail": "expected [('HR-207', '4.2')], retrieved [('HR-201', '2.1'), ('HR-201', '3.1'), ('HR-202', '3'), ('HR-207', '3')]"
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "E15",
+      "mode": "wrong_policy",
+      "question": "I need a temporary change to my hours for a couple of weeks, what should I do?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-201-2-structure_aware-2-70dcf926",
+        "HR-201-2.1-structure_aware-3-31734419",
+        "HR-204-2-structure_aware-35-c686c2b9",
+        "HR-201-2.3-structure_aware-5-78bdb044",
+        "HR-207-unknown-structure_aware-61-792d661a"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "retrieved_expected_section": {
+          "passed": false,
+          "detail": "expected [('HR-204', '4.1')], retrieved [('HR-201', '2'), ('HR-201', '2.1'), ('HR-201', '2.3'), ('HR-204', '2')]"
+        }
+      },
+      "passed": false
+    },
+    {
+      "id": "E16",
+      "mode": "wrong_policy",
+      "question": "Do I get paid extra for staying late?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-201-2-structure_aware-2-70dcf926",
+        "HR-201-2.3-structure_aware-5-78bdb044",
+        "HR-201-2.2-structure_aware-4-8be53480",
+        "HR-202-4-structure_aware-22-a317f017",
+        "HR-202-2-structure_aware-15-52efb3a2"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "retrieved_expected_section": {
+          "passed": true,
+          "detail": "expected [('HR-201', '2.3')], retrieved [('HR-201', '2'), ('HR-201', '2.2'), ('HR-201', '2.3'), ('HR-202', '2')]"
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "E17",
+      "mode": "wrong_policy",
+      "question": "How long must I work here before I can request flexible working?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-204-3-structure_aware-36-8ee447c5",
+        "HR-207-unknown-structure_aware-61-792d661a",
+        "HR-204-4.2-structure_aware-39-1266d5f7",
+        "HR-204-2-structure_aware-35-c686c2b9",
+        "HR-207-4.2-structure_aware-60-bb5d852e"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "retrieved_expected_section": {
+          "passed": true,
+          "detail": "expected [('HR-204', '3')], retrieved [('HR-204', '2'), ('HR-204', '3'), ('HR-204', '4.2'), ('HR-207', '4.2')]"
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "E18",
+      "mode": "unciteable",
+      "question": "Can I work from another country for a few weeks?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-207-unknown-structure_aware-61-792d661a",
+        "HR-207-4.2-structure_aware-60-bb5d852e",
+        "HR-207-3-structure_aware-57-3ecec693",
+        "HR-204-3-structure_aware-36-8ee447c5",
+        "HR-202-2.5-structure_aware-20-d17f92b6"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "retrieved_expected_section": {
+          "passed": true,
+          "detail": "expected [('HR-207', '4.2')], retrieved [('HR-202', '2.5'), ('HR-204', '3'), ('HR-207', '3'), ('HR-207', '4.2')]"
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "E19",
+      "mode": "unciteable",
+      "question": "What happens if my promotion nomination is unsuccessful?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-205-3.2-structure_aware-48-ce9fda06",
+        "HR-205-unknown-structure_aware-50-d6996f09",
+        "HR-205-3.1-structure_aware-47-822a4dca",
+        "HR-205-3.3-structure_aware-49-0d5b6819",
+        "HR-205-3-structure_aware-46-75c8cc45"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "retrieved_expected_section": {
+          "passed": true,
+          "detail": "expected [('HR-205', '3.3')], retrieved [('HR-205', '3'), ('HR-205', '3.1'), ('HR-205', '3.2'), ('HR-205', '3.3')]"
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "E20",
+      "mode": "unciteable",
+      "question": "When do I have to report an absence?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-202-2.4-structure_aware-19-27d0d207",
+        "HR-201-3.2-structure_aware-9-b408df82",
+        "HR-201-3.1-structure_aware-7-c4f6c1c6",
+        "HR-201-4-structure_aware-11-7e070a9f",
+        "HR-202-2.5-structure_aware-20-d17f92b6"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "retrieved_expected_section": {
+          "passed": true,
+          "detail": "expected [('HR-201', '3.1')], retrieved [('HR-201', '3.1'), ('HR-201', '3.2'), ('HR-201', '4'), ('HR-202', '2.4')]"
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "E21",
+      "mode": "unciteable",
+      "question": "How much notice is given if a fully remote arrangement is withdrawn?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-207-4.2-structure_aware-60-bb5d852e",
+        "HR-207-unknown-structure_aware-61-792d661a",
+        "HR-204-4.2-structure_aware-39-1266d5f7",
+        "HR-204-3-structure_aware-36-8ee447c5",
+        "HR-204-4.1-structure_aware-38-e317576c"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "retrieved_expected_section": {
+          "passed": true,
+          "detail": "expected [('HR-207', '4.2')], retrieved [('HR-204', '3'), ('HR-204', '4.1'), ('HR-204', '4.2'), ('HR-207', '4.2')]"
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "E22",
+      "mode": "near_miss",
+      "question": "How long is my lunch break?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-201-2.2-structure_aware-4-8be53480",
+        "HR-201-2.1-structure_aware-3-31734419",
+        "HR-201-2-structure_aware-2-70dcf926",
+        "HR-201-2.3-structure_aware-5-78bdb044",
+        "HR-201-3.1-structure_aware-7-c4f6c1c6"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "retrieved_expected_section": {
+          "passed": true,
+          "detail": "expected [('HR-201', '2.1')], retrieved [('HR-201', '2'), ('HR-201', '2.1'), ('HR-201', '2.2'), ('HR-201', '2.3')]"
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "E23",
+      "mode": "near_miss",
+      "question": "How long are flexible working requests kept on file?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-204-3-structure_aware-36-8ee447c5",
+        "HR-204-4.2-structure_aware-39-1266d5f7",
+        "HR-204-4-structure_aware-37-e5179cd0",
+        "HR-203-6-structure_aware-32-e73016d3",
+        "HR-207-4.2-structure_aware-60-bb5d852e"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "retrieved_expected_section": {
+          "passed": false,
+          "detail": "expected [('HR-204', '6')], retrieved [('HR-203', '6'), ('HR-204', '3'), ('HR-204', '4'), ('HR-204', '4.2')]"
+        }
+      },
+      "passed": false
+    },
+    {
+      "id": "E24",
+      "mode": "near_miss",
+      "question": "How long are promotion nominations kept on file?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-205-3.2-structure_aware-48-ce9fda06",
+        "HR-205-3.1-structure_aware-47-822a4dca",
+        "HR-205-unknown-structure_aware-50-d6996f09",
+        "HR-205-3.3-structure_aware-49-0d5b6819",
+        "HR-205-3-structure_aware-46-75c8cc45"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "retrieved_expected_section": {
+          "passed": false,
+          "detail": "expected [('HR-205', '5')], retrieved [('HR-205', '3'), ('HR-205', '3.1'), ('HR-205', '3.2'), ('HR-205', '3.3')]"
+        }
+      },
+      "passed": false
+    },
+    {
+      "id": "E25",
+      "mode": "near_miss",
+      "question": "How long are performance ratings kept on file?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-203-5.1-structure_aware-29-acc5c958",
+        "HR-203-5.3-structure_aware-31-98f037c0",
+        "HR-203-6-structure_aware-32-e73016d3",
+        "HR-203-5.2-structure_aware-30-6f53e7bf",
+        "HR-203-5-structure_aware-28-341d4ca0"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "retrieved_expected_section": {
+          "passed": true,
+          "detail": "expected [('HR-203', '6')], retrieved [('HR-203', '5'), ('HR-203', '5.1'), ('HR-203', '5.2'), ('HR-203', '5.3')]"
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "E26",
+      "mode": "near_miss",
+      "question": "How long a rest break am I entitled to on a long day?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-201-2.2-structure_aware-4-8be53480",
+        "HR-201-2-structure_aware-2-70dcf926",
+        "HR-204-3-structure_aware-36-8ee447c5",
+        "HR-202-2.4-structure_aware-19-27d0d207",
+        "HR-201-3.1-structure_aware-7-c4f6c1c6"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "retrieved_expected_section": {
+          "passed": true,
+          "detail": "expected [('HR-201', '2.2')], retrieved [('HR-201', '2'), ('HR-201', '2.2'), ('HR-201', '3.1'), ('HR-202', '2.4')]"
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "E27",
+      "mode": "near_miss",
+      "question": "Can my flexible working request be declined?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-204-5-structure_aware-41-0c800b39",
+        "HR-204-4.2-structure_aware-39-1266d5f7",
+        "HR-204-3-structure_aware-36-8ee447c5",
+        "HR-204-2-structure_aware-35-c686c2b9",
+        "HR-204-4-structure_aware-37-e5179cd0"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "retrieved_expected_section": {
+          "passed": true,
+          "detail": "expected [('HR-204', '5')], retrieved [('HR-204', '2'), ('HR-204', '3'), ('HR-204', '4'), ('HR-204', '4.2')]"
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "E28",
+      "mode": "out_of_scope",
+      "question": "What notice period do I need to give if I resign?",
+      "regression": true,
+      "abstained": true,
+      "context_ids": [
+        "HR-202-2.4-structure_aware-19-27d0d207",
+        "HR-204-3-structure_aware-36-8ee447c5",
+        "HR-202-2.2-structure_aware-17-bd32e550",
+        "HR-204-4.3-structure_aware-40-f84535a3",
+        "HR-204-4.2-structure_aware-39-1266d5f7"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "refused"
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "E29",
+      "mode": "out_of_scope",
+      "question": "How much notice do I have to give if I resign?",
+      "regression": true,
+      "abstained": true,
+      "context_ids": [
+        "HR-202-2.4-structure_aware-19-27d0d207",
+        "HR-204-3-structure_aware-36-8ee447c5",
+        "HR-202-2-structure_aware-15-52efb3a2",
+        "HR-204-4.2-structure_aware-39-1266d5f7",
+        "HR-202-2.1-structure_aware-16-56bba0ee"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "refused"
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "E30",
+      "mode": "near_miss",
+      "question": "How do I request annual leave?",
+      "regression": true,
+      "abstained": false,
+      "context_ids": [
+        "HR-202-2-structure_aware-15-52efb3a2",
+        "HR-202-2.4-structure_aware-19-27d0d207",
+        "HR-202-2.5-structure_aware-20-d17f92b6",
+        "HR-202-1-structure_aware-14-1187a4d4",
+        "HR-202-2.1-structure_aware-16-56bba0ee"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "retrieved_expected_section": {
+          "passed": true,
+          "detail": "expected [('HR-202', '2.4')], retrieved [('HR-202', '1'), ('HR-202', '2'), ('HR-202', '2.1'), ('HR-202', '2.4')]"
+        }
+      },
+      "passed": true
+    }
+  ]
+}
