@@ -30,7 +30,44 @@ Loads the PDFs and builds two collections, one per chunking strategy:
 `hr_policy_basic` and `hr_policy_structure_aware`. Re-run after changing the
 PDFs or the chunker.
 
-## Run
+## Frontend (HR360 Bot)
+
+A React + TypeScript single-page app in `frontend/`, talking to the FastAPI
+backend. Two terminals:
+
+```bash
+uvicorn app.main:app --reload     # terminal 1, port 8000
+cd frontend && npm install && npm run dev   # terminal 2, port 5173
+```
+
+Open http://localhost:5173. Vite proxies `/api` to port 8000, so the backend
+needs no CORS middleware and the app ships one base path.
+
+| | |
+| --- | --- |
+| Stack | React 19, TypeScript, Vite, Tailwind v4, TanStack Query, React Router |
+| Pages | Chat, and Policies (what the corpus actually covers) |
+| History | `localStorage` — the backend is stateless by design |
+| Tests | `npx vitest run` — 17 passing |
+
+Two things the UI does that a generic chat skin would not:
+
+**Sources under every answer.** Cited `HR-202 §2.1` chips, expandable to the
+retrieved passages with their scores. Heading-only chunks are labelled as such,
+because the index contains a few (`"2 Working Hours"`, 15 characters, no body)
+that can never answer anything.
+
+**A retrieval-only toggle.** Retrieval needs no model, so the app stays fully
+demoable while the OpenAI key is unfunded. `/api/chat` now returns a readable
+`429` in that case rather than an opaque `500`, which is what lets the UI
+explain the failure instead of showing a stack trace.
+
+The quick-prompt chips are real questions this corpus answers (annual leave,
+working hours, remote work, flexible working, performance reviews). They
+retrieve at ~0.8; a vague query like "hey" scores 0.57 and returns the
+heading-only chunks, which is worth seeing once.
+
+## Run the API alone
 
 ```bash
 uvicorn app.main:app --reload

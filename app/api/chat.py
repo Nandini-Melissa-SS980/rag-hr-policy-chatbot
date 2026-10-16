@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException
+from openai import OpenAIError, RateLimitError
 
 from app.models.schemas import (
     ChatRequest,
@@ -76,13 +77,46 @@ def chat(
     complaint about a past answer findable.
     """
 
-    generated, trace = answer_question(
-        request.question,
-        retriever,
-        generator,
-        top_k=5,
-        region=request.region,
-    )
+    try:
+
+        generated, trace = answer_question(
+            request.question,
+            retriever,
+            generator,
+            top_k=5,
+            region=request.region,
+        )
+
+    except RateLimitError as error:
+
+        # Surfaced as 429 with a readable detail rather
+        # than letting it become an opaque 500. A client
+        # cannot tell "the model is unfunded" from "the
+        # server is broken" without this, and the two
+        # need completely different responses: one is a
+        # billing problem, the other is a page.
+        #
+        # The trace is already written - answer_question
+        # records the retrieval span and the error before
+        # re-raising - so a failed request is still
+        # findable in the log.
+        raise HTTPException(
+            status_code=429,
+            detail=(
+                "The language model is unavailable: "
+                f"{error}"
+            ),
+        ) from error
+
+    except OpenAIError as error:
+
+        raise HTTPException(
+            status_code=502,
+            detail=(
+                "The language model could not be "
+                f"reached: {type(error).__name__}"
+            ),
+        ) from error
 
     if trace["abstained"] or not generated.get(
         "answer"

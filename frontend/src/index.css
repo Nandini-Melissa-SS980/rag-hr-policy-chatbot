@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+/* Design tokens.
+
+   The mockup is a white workspace on a light-grey page with
+   a violet accent. Everything is a token so dark mode is a
+   re-declaration rather than a rewrite. */
+@theme {
+  --color-canvas: #eef0f4;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f7f8fa;
+  --color-border-subtle: #e6e8ec;
+  --color-ink: #16181d;
+  --color-ink-muted: #6b7280;
+  --color-ink-faint: #9aa1ac;
+  --color-accent: #6c5ce7;
+  --color-accent-hover: #5b4bd6;
+  --color-accent-soft: #f1effe;
+  --color-danger-border: #fecaca;
+  --color-danger-surface: #fef2f2;
+  --color-danger-ink: #991b1b;
+}
+
+:root {
+  --app-canvas: var(--color-canvas);
+  --app-surface: var(--color-surface);
+  --app-surface-muted: var(--color-surface-muted);
+  --app-border: var(--color-border-subtle);
+  --app-ink: var(--color-ink);
+  --app-ink-muted: var(--color-ink-muted);
+  --app-ink-faint: var(--color-ink-faint);
+  --app-accent: var(--color-accent);
+  --app-accent-hover: var(--color-accent-hover);
+  --app-accent-soft: var(--color-accent-soft);
+  --app-danger-border: var(--color-danger-border);
+  --app-danger-surface: var(--color-danger-surface);
+  --app-danger-ink: var(--color-danger-ink);
+}
+
+:root[data-theme="dark"] {
+  --app-canvas: #0d0f13;
+  --app-surface: #16181d;
+  --app-surface-muted: #1d2026;
+  --app-border: #282c34;
+  --app-ink: #e8eaed;
+  --app-ink-muted: #9aa1ac;
+  --app-ink-faint: #6b7280;
+  --app-accent: #8b7cf6;
+  --app-accent-hover: #9d90f8;
+  --app-accent-soft: #241f3d;
+  --app-danger-border: #5b2526;
+  --app-danger-surface: #2a1718;
+  --app-danger-ink: #fca5a5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --app-canvas: #0d0f13;
+    --app-surface: #16181d;
+    --app-surface-muted: #1d2026;
+    --app-border: #282c34;
+    --app-ink: #e8eaed;
+    --app-ink-muted: #9aa1ac;
+    --app-ink-faint: #6b7280;
+    --app-accent: #8b7cf6;
+    --app-accent-hover: #9d90f8;
+    --app-accent-soft: #241f3d;
+  --app-danger-border: #5b2526;
+  --app-danger-surface: #2a1718;
+  --app-danger-ink: #fca5a5;
+  }
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--app-canvas);
+  color: var(--app-ink);
+  font-family:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Markdown answers. react-markdown emits bare tags, so the
+   rhythm is set here once rather than per component. */
+.answer-prose > * + * {
+  margin-top: 0.75rem;
+}
+
+.answer-prose ul,
+.answer-prose ol {
+  padding-left: 1.25rem;
+  list-style: revert;
+}
+
+.answer-prose li + li {
+  margin-top: 0.25rem;
+}
+
+.answer-prose code {
+  background: var(--app-surface-muted);
+  border: 1px solid var(--app-border);
+  border-radius: 0.3rem;
+  padding: 0.08rem 0.3rem;
+  font-size: 0.85em;
+}
+
+.answer-prose pre {
+  background: var(--app-surface-muted);
+  border: 1px solid var(--app-border);
+  border-radius: 0.6rem;
+  padding: 0.75rem;
+  overflow-x: auto;
+}
+
+.answer-prose pre code {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.answer-prose a {
+  color: var(--app-accent);
+  text-decoration: underline;
+}
+
+@keyframes blink {
+  0%,
+  80%,
+  100% {
+    opacity: 0.25;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+.dot-flashing > span {
+  animation: blink 1.4s infinite both;
+}
+
+.dot-flashing > span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot-flashing > span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot-flashing > span {
+    animation: none;
+    opacity: 0.6;
+  }
+}
