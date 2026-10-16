@@ -1,14 +1,14 @@
 # HR360 Bot — frontend
 
-React single-page app for the HR policy RAG backend in the parent directory.
+React single-page app for the HR policy RAG backend in `../backend/`.
 
 ## Run
 
 Two terminals. The backend must be up first — the frontend proxies to it.
 
 ```bash
-# terminal 1, from the repo root
-uvicorn app.main:app --reload          # port 8000
+# terminal 1, from backend/
+cd ../backend && uvicorn app.main:app --reload   # port 8000
 
 # terminal 2, here
 npm install
@@ -64,5 +64,5 @@ a stack trace.
 
 ## Types
 
-`src/types/api.ts` mirrors `app/models/schemas.py`. Keep the two in step — a
+`src/types/api.ts` mirrors `../backend/app/models/schemas.py`. Keep the two in step — a
 field invented on this side renders as `undefined`, silently.

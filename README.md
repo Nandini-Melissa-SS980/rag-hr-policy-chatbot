@@ -6,23 +6,36 @@ retrieved policy text and carry citations.
 - API: FastAPI
 - Answers: OpenAI (`gpt-5-mini`)
 - Embeddings: `BAAI/bge-small-en-v1.5` (local, via sentence-transformers)
-- Vector store: Chroma, persisted to `vectorstore/`
+- Vector store: Chroma, persisted to `backend/vectorstore/`
+
+## Repo layout
+
+```
+backend/     FastAPI app, the agent, the eval harnesses, the policy PDFs
+frontend/    HR360 Bot - React + TypeScript single-page app
+.venv/       one virtualenv, at the root, shared by everything in backend/
+```
+
+**Every Python command below is run from `backend/`.** The paths in the
+harnesses are relative to it, and `BASE_DIR` is derived from the package
+location, so running them from the repo root will not find the index.
 
 ## Setup
 
 ```bash
 python -m venv .venv
 .venv\Scripts\activate
-pip install -r requirements.txt
+pip install -r backend/requirements.txt
 ```
 
-Set `OPENAI_API_KEY` in `.env`. The app will not start without it.
+Set `OPENAI_API_KEY` in `backend/.env`. The app will not start without it.
 
-Policy PDFs go in `documents/addenda/`.
+Policy PDFs go in `backend/documents/addenda/`.
 
 ## Ingest
 
 ```bash
+cd backend
 python -m scripts.ingest
 ```
 
@@ -36,8 +49,8 @@ A React + TypeScript single-page app in `frontend/`, talking to the FastAPI
 backend. Two terminals:
 
 ```bash
-uvicorn app.main:app --reload     # terminal 1, port 8000
-cd frontend && npm install && npm run dev   # terminal 2, port 5173
+cd backend && uvicorn app.main:app --reload    # terminal 1, port 8000
+cd frontend && npm install && npm run dev      # terminal 2, port 5173
 ```
 
 Open http://localhost:5173. Vite proxies `/api` to port 8000, so the backend
@@ -70,6 +83,7 @@ heading-only chunks, which is worth seeing once.
 ## Run the API alone
 
 ```bash
+cd backend
 uvicorn app.main:app --reload
 ```
 
@@ -233,41 +247,50 @@ evaluation/week11/
 ## Layout
 
 ```
-app/
-  main.py                FastAPI app
-  config.py              Environment settings
-  observability.py       Traces, spans, per-stage cost
-  api/chat.py            Routes
-  models/schemas.py      Request/response models
-  services/
-    document_loader.py   PDF text extraction
-    chunker.py           Both chunking strategies + metadata
-    embeddings.py        Local embedding model
-    vector_store.py      Chroma wrapper
-    retriever.py         Search by strategy
-    generator.py         Prompt + OpenAI call
-    prompts.py           Versioned prompts, v1 and v2
-    answering.py         The one instrumented answer path
-  mcp/
-    client.py            Tool discovery over MCP, and dispatch
-  agent/
-    loop.py              The agent loop and its budgets
-    tools.py             The three tools, and build_toolset()
-    workflow.py          The same task as fixed steps
-    guardrails.py        Free-text sanitiser, output guardrail
-    orchestrator.py      Manager + two specialists, with hand-off accounting
-documents/addenda/       Source PDFs
-vectorstore/             Chroma index (generated)
-scripts/ingest.py        Build the index
-mcp_servers.json         Which MCP servers to discover tools from
-mcp_servers/             MCP servers this repo exposes
-  policy_server.py       Handbook search, over stdio
-  hris_server.py         Grade band and leave balance, scoped
-evaluation/              Golden sets, harnesses, reports
-  week11/                The support drill, the failure->test loop, cost
-  week10/                The multi-agent race, its log and its verdict
-  week9/                 MCP evidence: wire.json, diffs, risk note
-  trajectory_eval.py     Expected tool sequences, both arms, the four numbers
-  injection_probe.py     Indirect injection, attacked and defended
-  frozen_index.py        The policy index read without the embedding model
+backend/
+  app/
+    main.py                FastAPI app
+    config.py              Environment settings
+    observability.py       Traces, spans, per-stage cost
+    api/chat.py            Routes
+    models/schemas.py      Request/response models
+    services/
+      document_loader.py   PDF text extraction
+      chunker.py           Both chunking strategies + metadata
+      embeddings.py        Local embedding model
+      vector_store.py      Chroma wrapper
+      retriever.py         Search by strategy
+      generator.py         Prompt + OpenAI call
+      prompts.py           Versioned prompts, v1 and v2
+      answering.py         The one instrumented answer path
+    mcp/
+      client.py            Tool discovery over MCP, and dispatch
+    agent/
+      loop.py              The agent loop and its budgets
+      tools.py             The three tools, and build_toolset()
+      workflow.py          The same task as fixed steps
+      guardrails.py        Free-text sanitiser, output guardrail
+      orchestrator.py      Manager + two specialists, with hand-off accounting
+  documents/addenda/       Source PDFs
+  vectorstore/             Chroma index (generated)
+  scripts/ingest.py        Build the index
+  mcp_servers.json         Which MCP servers to discover tools from
+  mcp_servers/             MCP servers this repo exposes
+    policy_server.py       Handbook search, over stdio
+    hris_server.py         Grade band and leave balance, scoped
+  evaluation/              Golden sets, harnesses, reports
+    week11/                The support drill, the failure->test loop, cost
+    week10/                The multi-agent race, its log and its verdict
+    week9/                 MCP evidence: wire.json, diffs, risk note
+    trajectory_eval.py     Expected tool sequences, both arms, the four numbers
+    injection_probe.py     Indirect injection, attacked and defended
+    frozen_index.py        The policy index read without the embedding model
+
+frontend/                HR360 Bot - React single-page app
+  src/components/        brand, chat, layout
+  src/pages/             ChatPage, PoliciesPage
+  src/services/api.ts    the one place that talks to FastAPI
+  src/stores/            conversation history, localStorage
+
+.venv/                   shared virtualenv, at the repo root
 ```
