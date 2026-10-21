@@ -48,6 +48,10 @@ from app.desk.resolution import (
     policy_filter,
     resolve_subject,
 )
+from app.desk.scope import (
+    refusal_for,
+    uncovered_topic,
+)
 from app.observability import Recorder
 from app.services.prompts import (
     CURRENT_PROMPT_VERSION,
@@ -60,13 +64,6 @@ TOP_K = 6
 # is applied. Sized so that a corpus holding two editions of
 # every clause still leaves TOP_K in-force results.
 OVERFETCH = 3
-
-# How far below the best match a "discretionary matters"
-# clause may sit and still decide the answer. Tuned on the
-# demo set: A5 sits ~0.20 below a direct entitlement match,
-# and within ~0.05 when the question really is about an
-# extension or a sabbatical.
-DISCRETION_MARGIN = 0.08
 
 # Below this the retriever has not found the subject at all.
 # Deliberately the Week-6 threshold, so the one number that
@@ -155,51 +152,80 @@ def asks_about_someone_else(
     return bool(THIRD_PARTY.search(question))
 
 
+# What a discretionary clause in this corpus governs. Matched
+# against the QUESTION, not the policy text: A5 ranks third
+# for "can I extend my parental leave" because the clauses
+# stating the standard entitlement match the words "parental
+# leave" better, so rank alone misses it and a similarity
+# margin - the gap is 0.015 - catches everything.
+#
+# The question names the act. "Extend", "carry over ten days",
+# "sabbatical" are requests for a departure from the standard
+# entitlement, and a departure is exactly what the annex
+# reserves to a human.
+ASKS_FOR_DISCRETION = re.compile(
+    r"\bextend(?:ed|ing)?\b|\bextension\b"
+    r"|\bsabbatical\b|\bexception\b|\bwaive\b"
+    r"|\bspecial\s+case\b"
+    r"|\bcarry\s+(?:over\s+)?(?:more|ten|\d{2,})"
+    r"|\benhanced\s+redundancy\b",
+    re.IGNORECASE,
+)
+
+
 def is_discretionary(
     results: list[dict],
+    question: str = "",
 ) -> dict | None:
     """
-    The retrieved clause that says a human decides, when it
-    is the clause that actually answers the question.
+    The discretionary clause, when it is the clause that
+    actually answers the question.
 
     Read off the policy text rather than off a keyword list
     over the question, because whether something is
     discretionary is a property of the policy, not of how the
     question was phrased.
 
-    THE MARGIN EXISTS FOR A REASON
-    ------------------------------
+    IT HAS TO WIN, NOT MERELY APPEAR
+    --------------------------------
     Every entity annex ends with a "discretionary matters"
-    section, so that clause is retrieved for almost any
-    question about that annex. Treating its mere presence as
-    decisive sends straightforward entitlement questions to a
-    human: "how much parental leave do I get" matched A3.1 at
-    0.875 and was handed off because A5 sat at 0.675 further
-    down the same list.
+    section, so that clause is retrieved for nearly every
+    question about that annex and lands 0.03-0.08 below the
+    top match whatever was asked. Two weaker rules were tried
+    and both over-triggered: presence anywhere sent 8 of 32
+    eval cases to a human, and a similarity margin sent the
+    same 8, because the margin is smaller than the noise
+    between neighbouring clauses in one short document.
 
-    So it has to beat the field, not merely appear in it. A
-    discretionary clause decides only when nothing else is
-    clearly answering better - which is exactly when the
-    question really is about the discretionary case.
+    So the rule is rank, not distance: the discretionary
+    clause decides only when it is the single best match.
+    That is the case where the question really is about an
+    extension or a sabbatical, and it is the only case where
+    "a human decides" is what the policy says in answer to
+    what was asked.
     """
 
     if not results:
         return None
 
-    best = results[0].get("score", 0.0)
+    top = results[0]
 
-    for result in results:
+    if DISCRETIONARY.search(top.get("text", "")):
+        return citation_of(top)
 
-        if not DISCRETIONARY.search(
-            result.get("text", "")
-        ):
-            continue
+    # The question asks for a departure from the standard
+    # entitlement. Any retrieved discretionary clause then
+    # decides, wherever it ranked: the employee asked whether
+    # an exception is possible, and the policy's answer is
+    # that a human decides.
+    if ASKS_FOR_DISCRETION.search(question):
 
-        if (
-            best - result.get("score", 0.0)
-            <= DISCRETION_MARGIN
-        ):
-            return citation_of(result)
+        for result in results:
+
+            if DISCRETIONARY.search(
+                result.get("text", "")
+            ):
+                return citation_of(result)
 
     return None
 
@@ -325,6 +351,32 @@ def answer_policy_question(
                 trace_id=trace.trace_id,
             )
 
+        # ---- 2b. is the subject covered at all? -------
+        #
+        # Before retrieval, because the retriever will always
+        # return its nearest chunks and on this corpus the
+        # nearest chunk to a pension question is an
+        # annual-leave clause at 0.61. Checking the score
+        # afterwards cannot separate them: see app/desk/scope.py.
+        uncovered = uncovered_topic(question)
+
+        if uncovered:
+
+            trace.answer = refusal_for(uncovered)
+
+            trace.abstained = True
+
+            trace.labels["refusal"] = (
+                f"uncovered:{uncovered}"
+            )
+
+            return DeskAnswer(
+                status="refused",
+                answer=trace.answer,
+                subject=subject.as_dict(),
+                trace_id=trace.trace_id,
+            )
+
         # ---- 3. retrieve, filtered --------------------
         with trace.span(
             "retrieve",
@@ -442,7 +494,10 @@ def answer_policy_question(
         # it ranks: "extensions are discretionary" answers the
         # question even when the clause stating the standard
         # entitlement matches the words better.
-        discretionary = is_discretionary(ranked)
+        discretionary = is_discretionary(
+            ranked,
+            question,
+        )
 
         if discretionary:
 

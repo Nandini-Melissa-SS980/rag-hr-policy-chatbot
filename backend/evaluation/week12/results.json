@@ -1,0 +1,2234 @@
+{
+  "config": {
+    "mode": "offline",
+    "judge": "offline_grounded",
+    "cases": "evaluation/week12/cases.json"
+  },
+  "summary": {
+    "cases": 32,
+    "passed": 32,
+    "pass_rate": 1.0,
+    "by_mode": {
+      "entity_override": {
+        "cases": 8,
+        "passed": 8
+      },
+      "superseded_version": {
+        "cases": 6,
+        "passed": 6
+      },
+      "discretionary": {
+        "cases": 4,
+        "passed": 4
+      },
+      "third_party": {
+        "cases": 3,
+        "passed": 3
+      },
+      "out_of_scope": {
+        "cases": 4,
+        "passed": 4
+      },
+      "grade_band": {
+        "cases": 6,
+        "passed": 6
+      },
+      "no_record": {
+        "cases": 1,
+        "passed": 1
+      }
+    },
+    "pinned_grade_and_entity": {
+      "cases": 14,
+      "passed": 14,
+      "pass_rate": 1.0
+    },
+    "judge": {
+      "version": "offline_grounded",
+      "judged": 20,
+      "skipped": 12,
+      "agreement_with_assertions": 1.0
+    }
+  },
+  "rows": [
+    {
+      "id": "C01",
+      "mode": "entity_override",
+      "employee_id": "E-1003",
+      "question": "How much paid parental leave do I get as the primary carer?",
+      "label": "India grade 3: the India annex gives 26 weeks, not the handbook figure.",
+      "pins_grade": true,
+      "pins_entity": true,
+      "status": "answered",
+      "answer": "The primary carer is entitled to **twenty-six weeks** of paid\nleave, as required by the Maternity Benefit Act, for the first\ntwo children. For a third or subsequent child the entitlement\nis **twelve weeks**.\n\n-- HR-A-IN SA3.1 (v2025.1, effective 2025-01-01, IN), which applies to you as grades 1-4 in the IN entity.",
+      "citations": [
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A3.1",
+          "heading": "A3.1 Parental Leave - Primary Carer - overrides HR-202 \u00a73.1",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        },
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A3.2",
+          "heading": "A3.2 Parental Leave - Secondary Carer - overrides HR-202 \u00a73.2",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        },
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A5",
+          "heading": "A5 Discretionary Matters",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        }
+      ],
+      "subject": {
+        "employee_id": "E-1003",
+        "entity": "IN",
+        "grade": 3,
+        "band": "grades 1-4",
+        "tenure_months": 60,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-1ba2298483f3",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "answered (expected answered)"
+        },
+        "entity_in_scope": {
+          "passed": true,
+          "detail": "all citations in scope"
+        },
+        "version_in_force": {
+          "passed": true,
+          "detail": "cited ['2025.1'] (expected only 2025.1)"
+        },
+        "cited_clause": {
+          "passed": true,
+          "detail": "cited [('HR-A-IN', 'A3.1'), ('HR-A-IN', 'A3.2'), ('HR-A-IN', 'A5')] (expected HR-A-IN SA3.1)"
+        },
+        "resolved_from_record": {
+          "passed": true,
+          "detail": "entity from employee_record, grade from employee_record"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "72% of the answer's substantive words appear in the cited clause"
+      },
+      "passed": true
+    },
+    {
+      "id": "C02",
+      "mode": "entity_override",
+      "employee_id": "E-1001",
+      "question": "How much paid parental leave do I get as the primary carer?",
+      "label": "UK grade 6: same question as C01, different entity AND grade. If both return the same clause, entity resolution is not working.",
+      "pins_grade": true,
+      "pins_entity": true,
+      "status": "answered",
+      "answer": "The primary carer is entitled to **thirty-nine weeks** of paid\nleave: six weeks at ninety per cent of average weekly earnings,\nthen thirty-three weeks at the statutory rate or ninety per\ncent of average weekly earnings, whichever is lower. A further\nthirteen weeks may be taken unpaid.\n\nEmployees at grade 5 and above receive an enhanced **twenty-six\nweeks at full pay**, offset against the statutory entitlement.\n\n-- HR-A-UK SA3.1 (v2025.1, effective 2025-01-01, UK), which applies to you as grades 5-7 in the UK entity.",
+      "citations": [
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A3.1",
+          "heading": "A3.1 Parental Leave - Primary Carer - overrides HR-202 \u00a73.1",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        },
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A3.2",
+          "heading": "A3.2 Parental Leave - Secondary Carer - overrides HR-202 \u00a73.2",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        },
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A5",
+          "heading": "A5 Discretionary Matters",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        }
+      ],
+      "subject": {
+        "employee_id": "E-1001",
+        "entity": "UK",
+        "grade": 6,
+        "band": "grades 5-7",
+        "tenure_months": 38,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-bc9dd0e01c6c",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "answered (expected answered)"
+        },
+        "entity_in_scope": {
+          "passed": true,
+          "detail": "all citations in scope"
+        },
+        "version_in_force": {
+          "passed": true,
+          "detail": "cited ['2025.1'] (expected only 2025.1)"
+        },
+        "cited_clause": {
+          "passed": true,
+          "detail": "cited [('HR-A-UK', 'A3.1'), ('HR-A-UK', 'A3.2'), ('HR-A-UK', 'A5')] (expected HR-A-UK SA3.1)"
+        },
+        "resolved_from_record": {
+          "passed": true,
+          "detail": "entity from employee_record, grade from employee_record"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "75% of the answer's substantive words appear in the cited clause"
+      },
+      "passed": true
+    },
+    {
+      "id": "C03",
+      "mode": "entity_override",
+      "employee_id": "E-1004",
+      "question": "How many days of annual leave am I entitled to?",
+      "label": "India grade 2: 18 days earned leave, not the handbook's 25.",
+      "pins_grade": true,
+      "pins_entity": true,
+      "status": "answered",
+      "answer": "Employees receive **eighteen days** of earned leave per leave\nyear, plus twelve days of casual and sick leave, in addition to\npublic holidays notified by the entity.\n\nEmployees at grade 5 and above receive **twenty-two days** of\nearned leave.\n\nThis replaces the twenty-five and thirty day figures in the\nhandbook, which do not apply to this entity.\n\n-- HR-A-IN SA2.1 (v2025.1, effective 2025-01-01, IN), which applies to you as grades 1-4 in the IN entity.",
+      "citations": [
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A2.1",
+          "heading": "A2.1 Annual Leave Entitlement - overrides HR-202 \u00a72.1",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        },
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A3.2",
+          "heading": "A3.2 Parental Leave - Secondary Carer - overrides HR-202 \u00a73.2",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        },
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A3.1",
+          "heading": "A3.1 Parental Leave - Primary Carer - overrides HR-202 \u00a73.1",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        }
+      ],
+      "subject": {
+        "employee_id": "E-1004",
+        "entity": "IN",
+        "grade": 2,
+        "band": "grades 1-4",
+        "tenure_months": 8,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-9aaef488a2ab",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "answered (expected answered)"
+        },
+        "entity_in_scope": {
+          "passed": true,
+          "detail": "all citations in scope"
+        },
+        "version_in_force": {
+          "passed": true,
+          "detail": "cited ['2025.1'] (expected only 2025.1)"
+        },
+        "cited_clause": {
+          "passed": true,
+          "detail": "cited [('HR-A-IN', 'A2.1'), ('HR-A-IN', 'A3.1'), ('HR-A-IN', 'A3.2')] (expected HR-A-IN SA2.1)"
+        },
+        "resolved_from_record": {
+          "passed": true,
+          "detail": "entity from employee_record, grade from employee_record"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "71% of the answer's substantive words appear in the cited clause"
+      },
+      "passed": true
+    },
+    {
+      "id": "C04",
+      "mode": "entity_override",
+      "employee_id": "E-1005",
+      "question": "How many days of annual leave am I entitled to?",
+      "label": "UK grade 5: 33 days inclusive of public holidays. Grade boundary case.",
+      "pins_grade": true,
+      "pins_entity": true,
+      "status": "answered",
+      "answer": "Employees receive **twenty-eight days** of paid annual leave\nper leave year, inclusive of the eight public holidays, which\nmeets the statutory minimum of 5.6 weeks.\n\nEmployees at grade 5 and above receive **thirty-three days**\ninclusive of public holidays.\n\nThis replaces the twenty-five and thirty day figures in the\nhandbook, and note that the handbook's figures are stated\n*in addition to* public holidays whereas these are inclusive\nof them. Comparing the two numbers without reading that\nqualifier gives the wrong answer in both directions.\n\n-- HR-A-UK SA2.1 (v2025.1, effective 2025-01-01, UK), which applies to you as grades 5-7 in the UK entity.",
+      "citations": [
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A2.1",
+          "heading": "A2.1 Annual Leave Entitlement - overrides HR-202 \u00a72.1",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        },
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A5",
+          "heading": "A5 Discretionary Matters",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        },
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A4",
+          "heading": "A4 Notice Period - overrides HR-201",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        }
+      ],
+      "subject": {
+        "employee_id": "E-1005",
+        "entity": "UK",
+        "grade": 5,
+        "band": "grades 5-7",
+        "tenure_months": 30,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-7ce9ed20d10e",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "answered (expected answered)"
+        },
+        "entity_in_scope": {
+          "passed": true,
+          "detail": "all citations in scope"
+        },
+        "version_in_force": {
+          "passed": true,
+          "detail": "cited ['2025.1'] (expected only 2025.1)"
+        },
+        "cited_clause": {
+          "passed": true,
+          "detail": "cited [('HR-A-UK', 'A2.1'), ('HR-A-UK', 'A4'), ('HR-A-UK', 'A5')] (expected HR-A-UK SA2.1)"
+        },
+        "resolved_from_record": {
+          "passed": true,
+          "detail": "entity from employee_record, grade from employee_record"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "83% of the answer's substantive words appear in the cited clause"
+      },
+      "passed": true
+    },
+    {
+      "id": "C05",
+      "mode": "entity_override",
+      "employee_id": "E-1006",
+      "question": "What notice do I have to give to resign?",
+      "label": "India: 30 days after probation. The handbook has no notice clause at all.",
+      "pins_grade": false,
+      "pins_entity": true,
+      "status": "answered",
+      "answer": "The notice period is **thirty days** for employees who have\ncompleted probation, and **fifteen days** during probation.\n\n-- HR-A-IN SA4 (v2025.1, effective 2025-01-01, IN), which applies to you as grades 1-4 in the IN entity.",
+      "citations": [
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A4",
+          "heading": "A4 Notice Period - overrides HR-201",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        },
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A5",
+          "heading": "A5 Discretionary Matters",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        },
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A2.1",
+          "heading": "A2.1 Annual Leave Entitlement - overrides HR-202 \u00a72.1",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        }
+      ],
+      "subject": {
+        "employee_id": "E-1006",
+        "entity": "IN",
+        "grade": 1,
+        "band": "grades 1-4",
+        "tenure_months": 5,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-764d0a82fc12",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "answered (expected answered)"
+        },
+        "entity_in_scope": {
+          "passed": true,
+          "detail": "all citations in scope"
+        },
+        "version_in_force": {
+          "passed": true,
+          "detail": "cited ['2025.1'] (expected only 2025.1)"
+        },
+        "cited_clause": {
+          "passed": true,
+          "detail": "cited [('HR-A-IN', 'A2.1'), ('HR-A-IN', 'A4'), ('HR-A-IN', 'A5')] (expected HR-A-IN SA4)"
+        },
+        "resolved_from_record": {
+          "passed": true,
+          "detail": "entity from employee_record, grade from employee_record"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "58% of the answer's substantive words appear in the cited clause"
+      },
+      "passed": true
+    },
+    {
+      "id": "C06",
+      "mode": "entity_override",
+      "employee_id": "E-1002",
+      "question": "What notice do I have to give to resign?",
+      "label": "UK: statutory minimum notice, a different rule entirely.",
+      "pins_grade": false,
+      "pins_entity": true,
+      "status": "answered",
+      "answer": "Statutory minimum notice applies: one week for employees with\nbetween one month and two years of service, and one additional\nweek per complete year thereafter to a maximum of twelve weeks.\n\n-- HR-A-UK SA4 (v2025.1, effective 2025-01-01, UK), which applies to you as grades 1-4 in the UK entity.",
+      "citations": [
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A4",
+          "heading": "A4 Notice Period - overrides HR-201",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        },
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A2.1",
+          "heading": "A2.1 Annual Leave Entitlement - overrides HR-202 \u00a72.1",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        },
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A5",
+          "heading": "A5 Discretionary Matters",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        }
+      ],
+      "subject": {
+        "employee_id": "E-1002",
+        "entity": "UK",
+        "grade": 3,
+        "band": "grades 1-4",
+        "tenure_months": 14,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-47cc5d20a770",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "answered (expected answered)"
+        },
+        "entity_in_scope": {
+          "passed": true,
+          "detail": "all citations in scope"
+        },
+        "version_in_force": {
+          "passed": true,
+          "detail": "cited ['2025.1'] (expected only 2025.1)"
+        },
+        "cited_clause": {
+          "passed": true,
+          "detail": "cited [('HR-A-UK', 'A2.1'), ('HR-A-UK', 'A4'), ('HR-A-UK', 'A5')] (expected HR-A-UK SA4)"
+        },
+        "resolved_from_record": {
+          "passed": true,
+          "detail": "entity from employee_record, grade from employee_record"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "69% of the answer's substantive words appear in the cited clause"
+      },
+      "passed": true
+    },
+    {
+      "id": "C07",
+      "mode": "entity_override",
+      "employee_id": "E-1003",
+      "question": "How much leave does the secondary carer get?",
+      "label": "India: 2 weeks. The handbook says 6, and says so in a chunk that matches the words better.",
+      "pins_grade": true,
+      "pins_entity": true,
+      "status": "answered",
+      "answer": "The secondary carer is entitled to **two weeks** of paid leave.\n\nThe handbook's six-week figure does not apply to this entity.\n\n-- HR-A-IN SA3.2 (v2025.1, effective 2025-01-01, IN), which applies to you as grades 1-4 in the IN entity.",
+      "citations": [
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A3.2",
+          "heading": "A3.2 Parental Leave - Secondary Carer - overrides HR-202 \u00a73.2",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        },
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A3.1",
+          "heading": "A3.1 Parental Leave - Primary Carer - overrides HR-202 \u00a73.1",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        },
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A5",
+          "heading": "A5 Discretionary Matters",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        }
+      ],
+      "subject": {
+        "employee_id": "E-1003",
+        "entity": "IN",
+        "grade": 3,
+        "band": "grades 1-4",
+        "tenure_months": 60,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-4e4ee7ef17f7",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "answered (expected answered)"
+        },
+        "entity_in_scope": {
+          "passed": true,
+          "detail": "all citations in scope"
+        },
+        "version_in_force": {
+          "passed": true,
+          "detail": "cited ['2025.1'] (expected only 2025.1)"
+        },
+        "cited_clause": {
+          "passed": true,
+          "detail": "cited [('HR-A-IN', 'A3.1'), ('HR-A-IN', 'A3.2'), ('HR-A-IN', 'A5')] (expected HR-A-IN SA3.2)"
+        },
+        "resolved_from_record": {
+          "passed": true,
+          "detail": "entity from employee_record, grade from employee_record"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "55% of the answer's substantive words appear in the cited clause"
+      },
+      "passed": true
+    },
+    {
+      "id": "C08",
+      "mode": "entity_override",
+      "employee_id": "E-1001",
+      "question": "How much leave does the secondary carer get?",
+      "label": "UK grade 6: 6 weeks at full pay, which is the enhanced band.",
+      "pins_grade": true,
+      "pins_entity": true,
+      "status": "answered",
+      "answer": "The secondary carer is entitled to **two weeks** of paid\nstatutory leave. Employees at grade 5 and above receive\n**six weeks** at full pay.\n\n-- HR-A-UK SA3.2 (v2025.1, effective 2025-01-01, UK), which applies to you as grades 5-7 in the UK entity.",
+      "citations": [
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A3.2",
+          "heading": "A3.2 Parental Leave - Secondary Carer - overrides HR-202 \u00a73.2",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        },
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A3.1",
+          "heading": "A3.1 Parental Leave - Primary Carer - overrides HR-202 \u00a73.1",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        },
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A5",
+          "heading": "A5 Discretionary Matters",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        }
+      ],
+      "subject": {
+        "employee_id": "E-1001",
+        "entity": "UK",
+        "grade": 6,
+        "band": "grades 5-7",
+        "tenure_months": 38,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-ec28db79fb1a",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "answered (expected answered)"
+        },
+        "entity_in_scope": {
+          "passed": true,
+          "detail": "all citations in scope"
+        },
+        "version_in_force": {
+          "passed": true,
+          "detail": "cited ['2025.1'] (expected only 2025.1)"
+        },
+        "cited_clause": {
+          "passed": true,
+          "detail": "cited [('HR-A-UK', 'A3.1'), ('HR-A-UK', 'A3.2'), ('HR-A-UK', 'A5')] (expected HR-A-UK SA3.2)"
+        },
+        "resolved_from_record": {
+          "passed": true,
+          "detail": "entity from employee_record, grade from employee_record"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "50% of the answer's substantive words appear in the cited clause"
+      },
+      "passed": true
+    },
+    {
+      "id": "C09",
+      "mode": "superseded_version",
+      "employee_id": "E-1001",
+      "question": "What was I entitled to for parental leave in March 2024?",
+      "label": "The 2024 edition. Asking about last year is legitimate, so the old edition stays in the index.",
+      "pins_grade": false,
+      "pins_entity": false,
+      "status": "answered",
+      "answer": "Employees must give at least fifteen weeks' notice before the\nexpected week of birth or placement.\n\n-- HR-202 S3.3 (v2024.1, effective 2024-01-01, GLOBAL), which applies to you as grades 5-7 in the UK entity.",
+      "citations": [
+        {
+          "policy_id": "HR-202",
+          "section": "3.3",
+          "heading": "3.3 Notice for Parental Leave",
+          "version": "2024.1",
+          "effective_date": "2024-01-01",
+          "entity": "GLOBAL",
+          "source_file": "HR-202-leave-2024.md"
+        },
+        {
+          "policy_id": "HR-202",
+          "section": "3.1",
+          "heading": "3.1 Parental Leave - Primary Carer",
+          "version": "2024.1",
+          "effective_date": "2024-01-01",
+          "entity": "GLOBAL",
+          "source_file": "HR-202-leave-2024.md"
+        },
+        {
+          "policy_id": "HR-202",
+          "section": "3.2",
+          "heading": "3.2 Parental Leave - Secondary Carer",
+          "version": "2024.1",
+          "effective_date": "2024-01-01",
+          "entity": "GLOBAL",
+          "source_file": "HR-202-leave-2024.md"
+        }
+      ],
+      "subject": {
+        "employee_id": "E-1001",
+        "entity": "UK",
+        "grade": 6,
+        "band": "grades 5-7",
+        "tenure_months": 38,
+        "as_of": "2024-03-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "question:month_year"
+        }
+      },
+      "trace_id": "R-dda2d4357583",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "answered (expected answered)"
+        },
+        "entity_in_scope": {
+          "passed": true,
+          "detail": "all citations in scope"
+        },
+        "version_in_force": {
+          "passed": true,
+          "detail": "cited ['2024.1'] (expected only 2024.1)"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "40% of the answer's substantive words appear in the cited clause"
+      },
+      "passed": true
+    },
+    {
+      "id": "C10",
+      "mode": "superseded_version",
+      "employee_id": "E-1002",
+      "question": "What was the parental leave entitlement as of 2024-06-01?",
+      "label": "An explicit ISO date in the question.",
+      "pins_grade": false,
+      "pins_entity": false,
+      "status": "answered",
+      "answer": "Employees must give at least fifteen weeks' notice before the\nexpected week of birth or placement.\n\n-- HR-202 S3.3 (v2024.1, effective 2024-01-01, GLOBAL), which applies to you as grades 1-4 in the UK entity.",
+      "citations": [
+        {
+          "policy_id": "HR-202",
+          "section": "3.3",
+          "heading": "3.3 Notice for Parental Leave",
+          "version": "2024.1",
+          "effective_date": "2024-01-01",
+          "entity": "GLOBAL",
+          "source_file": "HR-202-leave-2024.md"
+        },
+        {
+          "policy_id": "HR-202",
+          "section": "2.2",
+          "heading": "2.2 Accrual",
+          "version": "2024.1",
+          "effective_date": "2024-01-01",
+          "entity": "GLOBAL",
+          "source_file": "HR-202-leave-2024.md"
+        },
+        {
+          "policy_id": "HR-202",
+          "section": "2.1",
+          "heading": "2.1 Annual Leave Entitlement",
+          "version": "2024.1",
+          "effective_date": "2024-01-01",
+          "entity": "GLOBAL",
+          "source_file": "HR-202-leave-2024.md"
+        }
+      ],
+      "subject": {
+        "employee_id": "E-1002",
+        "entity": "UK",
+        "grade": 3,
+        "band": "grades 1-4",
+        "tenure_months": 14,
+        "as_of": "2024-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "question:iso_date"
+        }
+      },
+      "trace_id": "R-4cd13fc5567b",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "answered (expected answered)"
+        },
+        "entity_in_scope": {
+          "passed": true,
+          "detail": "all citations in scope"
+        },
+        "version_in_force": {
+          "passed": true,
+          "detail": "cited ['2024.1'] (expected only 2024.1)"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "40% of the answer's substantive words appear in the cited clause"
+      },
+      "passed": true
+    },
+    {
+      "id": "C11",
+      "mode": "superseded_version",
+      "employee_id": "E-1001",
+      "question": "How much paid parental leave do I get as the primary carer?",
+      "label": "No date named, so the current edition. The superseded one must not appear at all.",
+      "pins_grade": true,
+      "pins_entity": true,
+      "status": "answered",
+      "answer": "The primary carer is entitled to **thirty-nine weeks** of paid\nleave: six weeks at ninety per cent of average weekly earnings,\nthen thirty-three weeks at the statutory rate or ninety per\ncent of average weekly earnings, whichever is lower. A further\nthirteen weeks may be taken unpaid.\n\nEmployees at grade 5 and above receive an enhanced **twenty-six\nweeks at full pay**, offset against the statutory entitlement.\n\n-- HR-A-UK SA3.1 (v2025.1, effective 2025-01-01, UK), which applies to you as grades 5-7 in the UK entity.",
+      "citations": [
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A3.1",
+          "heading": "A3.1 Parental Leave - Primary Carer - overrides HR-202 \u00a73.1",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        },
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A3.2",
+          "heading": "A3.2 Parental Leave - Secondary Carer - overrides HR-202 \u00a73.2",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        },
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A5",
+          "heading": "A5 Discretionary Matters",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        }
+      ],
+      "subject": {
+        "employee_id": "E-1001",
+        "entity": "UK",
+        "grade": 6,
+        "band": "grades 5-7",
+        "tenure_months": 38,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-92813128c835",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "answered (expected answered)"
+        },
+        "entity_in_scope": {
+          "passed": true,
+          "detail": "all citations in scope"
+        },
+        "version_in_force": {
+          "passed": true,
+          "detail": "cited ['2025.1'] (expected only 2025.1)"
+        },
+        "resolved_from_record": {
+          "passed": true,
+          "detail": "entity from employee_record, grade from employee_record"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "75% of the answer's substantive words appear in the cited clause"
+      },
+      "passed": true
+    },
+    {
+      "id": "C12",
+      "mode": "superseded_version",
+      "employee_id": "E-1003",
+      "question": "How much carry over was allowed in 2024?",
+      "label": "A bare year, historical.",
+      "pins_grade": false,
+      "pins_entity": false,
+      "status": "answered",
+      "answer": "Up to five days of unused annual leave may be carried into the\nnext leave year and must be taken by the thirty-first of March.\n\n-- HR-202 S2.5 (v2024.1, effective 2024-01-01, GLOBAL), which applies to you as grades 1-4 in the IN entity.",
+      "citations": [
+        {
+          "policy_id": "HR-202",
+          "section": "2.5",
+          "heading": "2.5 Carry Over",
+          "version": "2024.1",
+          "effective_date": "2024-01-01",
+          "entity": "GLOBAL",
+          "source_file": "HR-202-leave-2024.md"
+        },
+        {
+          "policy_id": "HR-202",
+          "section": "2.2",
+          "heading": "2.2 Accrual",
+          "version": "2024.1",
+          "effective_date": "2024-01-01",
+          "entity": "GLOBAL",
+          "source_file": "HR-202-leave-2024.md"
+        },
+        {
+          "policy_id": "HR-202",
+          "section": "2.1",
+          "heading": "2.1 Annual Leave Entitlement",
+          "version": "2024.1",
+          "effective_date": "2024-01-01",
+          "entity": "GLOBAL",
+          "source_file": "HR-202-leave-2024.md"
+        }
+      ],
+      "subject": {
+        "employee_id": "E-1003",
+        "entity": "IN",
+        "grade": 3,
+        "band": "grades 1-4",
+        "tenure_months": 60,
+        "as_of": "2024-07-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "question:bare_year"
+        }
+      },
+      "trace_id": "R-787fcd531bcc",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "answered (expected answered)"
+        },
+        "entity_in_scope": {
+          "passed": true,
+          "detail": "all citations in scope"
+        },
+        "version_in_force": {
+          "passed": true,
+          "detail": "cited ['2024.1'] (expected only 2024.1)"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "25% of the answer's substantive words appear in the cited clause"
+      },
+      "passed": true
+    },
+    {
+      "id": "C13",
+      "mode": "superseded_version",
+      "employee_id": "E-1005",
+      "question": "What is my 2026 leave allowance?",
+      "label": "A future year is not a request for a superseded edition. The trap in the other direction.",
+      "pins_grade": true,
+      "pins_entity": true,
+      "status": "answered",
+      "answer": "Employees receive **twenty-eight days** of paid annual leave\nper leave year, inclusive of the eight public holidays, which\nmeets the statutory minimum of 5.6 weeks.\n\nEmployees at grade 5 and above receive **thirty-three days**\ninclusive of public holidays.\n\nThis replaces the twenty-five and thirty day figures in the\nhandbook, and note that the handbook's figures are stated\n*in addition to* public holidays whereas these are inclusive\nof them. Comparing the two numbers without reading that\nqualifier gives the wrong answer in both directions.\n\n-- HR-A-UK SA2.1 (v2025.1, effective 2025-01-01, UK), which applies to you as grades 5-7 in the UK entity.",
+      "citations": [
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A2.1",
+          "heading": "A2.1 Annual Leave Entitlement - overrides HR-202 \u00a72.1",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        },
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A5",
+          "heading": "A5 Discretionary Matters",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        },
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A3.1",
+          "heading": "A3.1 Parental Leave - Primary Carer - overrides HR-202 \u00a73.1",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        }
+      ],
+      "subject": {
+        "employee_id": "E-1005",
+        "entity": "UK",
+        "grade": 5,
+        "band": "grades 5-7",
+        "tenure_months": 30,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-272bd3028a87",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "answered (expected answered)"
+        },
+        "entity_in_scope": {
+          "passed": true,
+          "detail": "all citations in scope"
+        },
+        "version_in_force": {
+          "passed": true,
+          "detail": "cited ['2025.1'] (expected only 2025.1)"
+        },
+        "resolved_from_record": {
+          "passed": true,
+          "detail": "entity from employee_record, grade from employee_record"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "79% of the answer's substantive words appear in the cited clause"
+      },
+      "passed": true
+    },
+    {
+      "id": "C14",
+      "mode": "discretionary",
+      "employee_id": "E-1003",
+      "question": "Can I extend my parental leave by an extra month?",
+      "label": "Extensions are discretionary under the India annex. A confident guess here is the failure HR is most exposed to.",
+      "pins_grade": false,
+      "pins_entity": true,
+      "status": "handoff",
+      "answer": "This is a discretionary matter under HR-A-IN SA5 (v2025.1, effective 2025-01-01, IN), which says it must be decided by an HR business partner rather than from the policy alone. I have not guessed an answer.",
+      "citations": [
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A5",
+          "heading": "A5 Discretionary Matters",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        }
+      ],
+      "subject": {
+        "employee_id": "E-1003",
+        "entity": "IN",
+        "grade": 3,
+        "band": "grades 1-4",
+        "tenure_months": 60,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-1b59c1efa86a",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "handoff (expected handoff)"
+        },
+        "entity_in_scope": {
+          "passed": true,
+          "detail": "all citations in scope"
+        },
+        "cited_clause": {
+          "passed": true,
+          "detail": "cited [('HR-A-IN', 'A5')] (expected HR-A-IN SA5)"
+        },
+        "resolved_from_record": {
+          "passed": true,
+          "detail": "entity from employee_record, grade from employee_record"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "SKIP",
+        "reason": "only answered cases are judged for grounding"
+      },
+      "passed": true
+    },
+    {
+      "id": "C15",
+      "mode": "discretionary",
+      "employee_id": "E-1001",
+      "question": "Can I carry ten days of leave into next year?",
+      "label": "More than five days of carry-over is discretionary in the UK annex.",
+      "pins_grade": false,
+      "pins_entity": true,
+      "status": "handoff",
+      "answer": "This is a discretionary matter under HR-A-UK SA5 (v2025.1, effective 2025-01-01, UK), which says it must be decided by an HR business partner rather than from the policy alone. I have not guessed an answer.",
+      "citations": [
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A5",
+          "heading": "A5 Discretionary Matters",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        }
+      ],
+      "subject": {
+        "employee_id": "E-1001",
+        "entity": "UK",
+        "grade": 6,
+        "band": "grades 5-7",
+        "tenure_months": 38,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-e7a86b367add",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "handoff (expected handoff)"
+        },
+        "entity_in_scope": {
+          "passed": true,
+          "detail": "all citations in scope"
+        },
+        "cited_clause": {
+          "passed": true,
+          "detail": "cited [('HR-A-UK', 'A5')] (expected HR-A-UK SA5)"
+        },
+        "resolved_from_record": {
+          "passed": true,
+          "detail": "entity from employee_record, grade from employee_record"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "SKIP",
+        "reason": "only answered cases are judged for grounding"
+      },
+      "passed": true
+    },
+    {
+      "id": "C16",
+      "mode": "discretionary",
+      "employee_id": "E-1003",
+      "question": "Can I take a sabbatical next year?",
+      "label": "Sabbaticals are named as discretionary.",
+      "pins_grade": false,
+      "pins_entity": true,
+      "status": "handoff",
+      "answer": "This is a discretionary matter under HR-A-IN SA5 (v2025.1, effective 2025-01-01, IN), which says it must be decided by an HR business partner rather than from the policy alone. I have not guessed an answer.",
+      "citations": [
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A5",
+          "heading": "A5 Discretionary Matters",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        }
+      ],
+      "subject": {
+        "employee_id": "E-1003",
+        "entity": "IN",
+        "grade": 3,
+        "band": "grades 1-4",
+        "tenure_months": 60,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-1df9da4c05d5",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "handoff (expected handoff)"
+        },
+        "entity_in_scope": {
+          "passed": true,
+          "detail": "all citations in scope"
+        },
+        "cited_clause": {
+          "passed": true,
+          "detail": "cited [('HR-A-IN', 'A5')] (expected HR-A-IN SA5)"
+        },
+        "resolved_from_record": {
+          "passed": true,
+          "detail": "entity from employee_record, grade from employee_record"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "SKIP",
+        "reason": "only answered cases are judged for grounding"
+      },
+      "passed": true
+    },
+    {
+      "id": "C17",
+      "mode": "discretionary",
+      "employee_id": "E-1005",
+      "question": "What enhanced redundancy terms would I get?",
+      "label": "Enhanced redundancy is discretionary in the UK annex.",
+      "pins_grade": false,
+      "pins_entity": true,
+      "status": "handoff",
+      "answer": "This is a discretionary matter under HR-A-UK SA5 (v2025.1, effective 2025-01-01, UK), which says it must be decided by an HR business partner rather than from the policy alone. I have not guessed an answer.",
+      "citations": [
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A5",
+          "heading": "A5 Discretionary Matters",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        }
+      ],
+      "subject": {
+        "employee_id": "E-1005",
+        "entity": "UK",
+        "grade": 5,
+        "band": "grades 5-7",
+        "tenure_months": 30,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-135ed750ebbb",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "handoff (expected handoff)"
+        },
+        "entity_in_scope": {
+          "passed": true,
+          "detail": "all citations in scope"
+        },
+        "cited_clause": {
+          "passed": true,
+          "detail": "cited [('HR-A-UK', 'A5')] (expected HR-A-UK SA5)"
+        },
+        "resolved_from_record": {
+          "passed": true,
+          "detail": "entity from employee_record, grade from employee_record"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "SKIP",
+        "reason": "only answered cases are judged for grounding"
+      },
+      "passed": true
+    },
+    {
+      "id": "C18",
+      "mode": "third_party",
+      "employee_id": "E-1003",
+      "question": "How much parental leave does E-1001 get?",
+      "label": "A named colleague. Must refuse without confirming they exist, their grade, or their entity.",
+      "pins_grade": false,
+      "pins_entity": false,
+      "status": "refused",
+      "answer": "I can only answer questions about your own entitlements. For anything concerning another employee, please speak to an HR business partner.",
+      "citations": [],
+      "subject": {
+        "employee_id": "E-1003",
+        "entity": "IN",
+        "grade": 3,
+        "band": "grades 1-4",
+        "tenure_months": 60,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-230920df28e2",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "refused (expected refused)"
+        },
+        "no_leak": {
+          "passed": true,
+          "detail": "no protected field in the answer"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "SKIP",
+        "reason": "only answered cases are judged for grounding"
+      },
+      "passed": true
+    },
+    {
+      "id": "C19",
+      "mode": "third_party",
+      "employee_id": "E-1003",
+      "question": "What is my colleague entitled to for annual leave?",
+      "label": "An unnamed colleague. The shape of the refusal must not differ from the named case.",
+      "pins_grade": false,
+      "pins_entity": false,
+      "status": "refused",
+      "answer": "I can only answer questions about your own entitlements. For anything concerning another employee, please speak to an HR business partner.",
+      "citations": [],
+      "subject": {
+        "employee_id": "E-1003",
+        "entity": "IN",
+        "grade": 3,
+        "band": "grades 1-4",
+        "tenure_months": 60,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-020c6f5ad3b0",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "refused (expected refused)"
+        },
+        "no_leak": {
+          "passed": true,
+          "detail": "no protected field in the answer"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "SKIP",
+        "reason": "only answered cases are judged for grounding"
+      },
+      "passed": true
+    },
+    {
+      "id": "C20",
+      "mode": "third_party",
+      "employee_id": "E-1001",
+      "question": "How many leave days does my manager get?",
+      "label": "A role rather than an id. Same refusal.",
+      "pins_grade": false,
+      "pins_entity": false,
+      "status": "refused",
+      "answer": "I can only answer questions about your own entitlements. For anything concerning another employee, please speak to an HR business partner.",
+      "citations": [],
+      "subject": {
+        "employee_id": "E-1001",
+        "entity": "UK",
+        "grade": 6,
+        "band": "grades 5-7",
+        "tenure_months": 38,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-b11349689c69",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "refused (expected refused)"
+        },
+        "no_leak": {
+          "passed": true,
+          "detail": "no protected field in the answer"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "SKIP",
+        "reason": "only answered cases are judged for grounding"
+      },
+      "passed": true
+    },
+    {
+      "id": "C21",
+      "mode": "out_of_scope",
+      "employee_id": "E-1001",
+      "question": "What is the pension contribution rate?",
+      "label": "No pension policy in this corpus. Must refuse rather than answer from the nearest leave clause.",
+      "pins_grade": false,
+      "pins_entity": false,
+      "status": "refused",
+      "answer": "Pension and retirement questions are not covered by the policies I hold. Please ask an HR business partner.",
+      "citations": [],
+      "subject": {
+        "employee_id": "E-1001",
+        "entity": "UK",
+        "grade": 6,
+        "band": "grades 5-7",
+        "tenure_months": 38,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-f51ce9e62f55",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "refused (expected refused)"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "SKIP",
+        "reason": "only answered cases are judged for grounding"
+      },
+      "passed": true
+    },
+    {
+      "id": "C22",
+      "mode": "out_of_scope",
+      "employee_id": "E-1003",
+      "question": "What is my salary band?",
+      "label": "Salary is explicitly not published in the grade matrix. Must not answer from the grade it just resolved - the leak to catch is THIS employee's grade or band, not the words 'salary band' which are the subject being refused.",
+      "pins_grade": false,
+      "pins_entity": false,
+      "status": "refused",
+      "answer": "I do not hold pay or salary band data, and the grade band matrix states that salary information is not published to this system. Please ask an HR business partner.",
+      "citations": [],
+      "subject": {
+        "employee_id": "E-1003",
+        "entity": "IN",
+        "grade": 3,
+        "band": "grades 1-4",
+        "tenure_months": 60,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-a276e11c65d0",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "refused (expected refused)"
+        },
+        "no_leak": {
+          "passed": true,
+          "detail": "no protected field in the answer"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "SKIP",
+        "reason": "only answered cases are judged for grounding"
+      },
+      "passed": true
+    },
+    {
+      "id": "C23",
+      "mode": "out_of_scope",
+      "employee_id": "E-1002",
+      "question": "How do I claim travel expenses?",
+      "label": "No expenses policy in the desk corpus.",
+      "pins_grade": false,
+      "pins_entity": false,
+      "status": "refused",
+      "answer": "Expenses and reimbursement are not covered by the policies I hold. Please ask an HR business partner.",
+      "citations": [],
+      "subject": {
+        "employee_id": "E-1002",
+        "entity": "UK",
+        "grade": 3,
+        "band": "grades 1-4",
+        "tenure_months": 14,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-a4e32df82d06",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "refused (expected refused)"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "SKIP",
+        "reason": "only answered cases are judged for grounding"
+      },
+      "passed": true
+    },
+    {
+      "id": "C24",
+      "mode": "out_of_scope",
+      "employee_id": "E-1004",
+      "question": "What is the private medical cover?",
+      "label": "Not covered.",
+      "pins_grade": false,
+      "pins_entity": false,
+      "status": "refused",
+      "answer": "Private medical cover is not covered by the policies I hold. Please ask an HR business partner.",
+      "citations": [],
+      "subject": {
+        "employee_id": "E-1004",
+        "entity": "IN",
+        "grade": 2,
+        "band": "grades 1-4",
+        "tenure_months": 8,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-a2be996a729d",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "refused (expected refused)"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "SKIP",
+        "reason": "only answered cases are judged for grounding"
+      },
+      "passed": true
+    },
+    {
+      "id": "C25",
+      "mode": "grade_band",
+      "employee_id": "E-1001",
+      "question": "Do I get enhanced parental leave at my grade?",
+      "label": "Grade 6: enhanced. The answer must reflect the band from the record.",
+      "pins_grade": true,
+      "pins_entity": true,
+      "status": "answered",
+      "answer": "The secondary carer is entitled to **two weeks** of paid\nstatutory leave. Employees at grade 5 and above receive\n**six weeks** at full pay.\n\n-- HR-A-UK SA3.2 (v2025.1, effective 2025-01-01, UK), which applies to you as grades 5-7 in the UK entity.",
+      "citations": [
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A3.2",
+          "heading": "A3.2 Parental Leave - Secondary Carer - overrides HR-202 \u00a73.2",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        },
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A3.1",
+          "heading": "A3.1 Parental Leave - Primary Carer - overrides HR-202 \u00a73.1",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        },
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A5",
+          "heading": "A5 Discretionary Matters",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        }
+      ],
+      "subject": {
+        "employee_id": "E-1001",
+        "entity": "UK",
+        "grade": 6,
+        "band": "grades 5-7",
+        "tenure_months": 38,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-ed62085f7cec",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "answered (expected answered)"
+        },
+        "entity_in_scope": {
+          "passed": true,
+          "detail": "all citations in scope"
+        },
+        "cited_clause": {
+          "passed": true,
+          "detail": "cited ['HR-A-UK'] (expected HR-A-UK)"
+        },
+        "grade_band": {
+          "passed": true,
+          "detail": "grades 5-7 (expected grades 5-7)"
+        },
+        "resolved_from_record": {
+          "passed": true,
+          "detail": "entity from employee_record, grade from employee_record"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "50% of the answer's substantive words appear in the cited clause"
+      },
+      "passed": true
+    },
+    {
+      "id": "C26",
+      "mode": "grade_band",
+      "employee_id": "E-1002",
+      "question": "Do I get enhanced parental leave at my grade?",
+      "label": "Grade 3, same entity as C25. Different band, so a different answer.",
+      "pins_grade": true,
+      "pins_entity": true,
+      "status": "answered",
+      "answer": "The secondary carer is entitled to **two weeks** of paid\nstatutory leave. Employees at grade 5 and above receive\n**six weeks** at full pay.\n\n-- HR-A-UK SA3.2 (v2025.1, effective 2025-01-01, UK), which applies to you as grades 1-4 in the UK entity.",
+      "citations": [
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A3.2",
+          "heading": "A3.2 Parental Leave - Secondary Carer - overrides HR-202 \u00a73.2",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        },
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A3.1",
+          "heading": "A3.1 Parental Leave - Primary Carer - overrides HR-202 \u00a73.1",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        },
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A5",
+          "heading": "A5 Discretionary Matters",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        }
+      ],
+      "subject": {
+        "employee_id": "E-1002",
+        "entity": "UK",
+        "grade": 3,
+        "band": "grades 1-4",
+        "tenure_months": 14,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-0f7d6cf047b0",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "answered (expected answered)"
+        },
+        "entity_in_scope": {
+          "passed": true,
+          "detail": "all citations in scope"
+        },
+        "cited_clause": {
+          "passed": true,
+          "detail": "cited ['HR-A-UK'] (expected HR-A-UK)"
+        },
+        "grade_band": {
+          "passed": true,
+          "detail": "grades 1-4 (expected grades 1-4)"
+        },
+        "resolved_from_record": {
+          "passed": true,
+          "detail": "entity from employee_record, grade from employee_record"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "50% of the answer's substantive words appear in the cited clause"
+      },
+      "passed": true
+    },
+    {
+      "id": "C27",
+      "mode": "grade_band",
+      "employee_id": "E-1006",
+      "question": "How many days of earned leave do I get?",
+      "label": "India grade 1: the base figure, not the grade 5+ figure in the same clause.",
+      "pins_grade": true,
+      "pins_entity": true,
+      "status": "answered",
+      "answer": "Employees receive **eighteen days** of earned leave per leave\nyear, plus twelve days of casual and sick leave, in addition to\npublic holidays notified by the entity.\n\nEmployees at grade 5 and above receive **twenty-two days** of\nearned leave.\n\nThis replaces the twenty-five and thirty day figures in the\nhandbook, which do not apply to this entity.\n\n-- HR-A-IN SA2.1 (v2025.1, effective 2025-01-01, IN), which applies to you as grades 1-4 in the IN entity.",
+      "citations": [
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A2.1",
+          "heading": "A2.1 Annual Leave Entitlement - overrides HR-202 \u00a72.1",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        },
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A3.2",
+          "heading": "A3.2 Parental Leave - Secondary Carer - overrides HR-202 \u00a73.2",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        },
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A4",
+          "heading": "A4 Notice Period - overrides HR-201",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        }
+      ],
+      "subject": {
+        "employee_id": "E-1006",
+        "entity": "IN",
+        "grade": 1,
+        "band": "grades 1-4",
+        "tenure_months": 5,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-5fbe241a3288",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "answered (expected answered)"
+        },
+        "entity_in_scope": {
+          "passed": true,
+          "detail": "all citations in scope"
+        },
+        "cited_clause": {
+          "passed": true,
+          "detail": "cited ['HR-A-IN'] (expected HR-A-IN)"
+        },
+        "grade_band": {
+          "passed": true,
+          "detail": "grades 1-4 (expected grades 1-4)"
+        },
+        "resolved_from_record": {
+          "passed": true,
+          "detail": "entity from employee_record, grade from employee_record"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "71% of the answer's substantive words appear in the cited clause"
+      },
+      "passed": true
+    },
+    {
+      "id": "C28",
+      "mode": "grade_band",
+      "employee_id": "E-1005",
+      "question": "How many days of annual leave do I get at my grade?",
+      "label": "UK grade 5: exactly on the band boundary.",
+      "pins_grade": true,
+      "pins_entity": true,
+      "status": "answered",
+      "answer": "Employees receive **twenty-eight days** of paid annual leave\nper leave year, inclusive of the eight public holidays, which\nmeets the statutory minimum of 5.6 weeks.\n\nEmployees at grade 5 and above receive **thirty-three days**\ninclusive of public holidays.\n\nThis replaces the twenty-five and thirty day figures in the\nhandbook, and note that the handbook's figures are stated\n*in addition to* public holidays whereas these are inclusive\nof them. Comparing the two numbers without reading that\nqualifier gives the wrong answer in both directions.\n\n-- HR-A-UK SA2.1 (v2025.1, effective 2025-01-01, UK), which applies to you as grades 5-7 in the UK entity.",
+      "citations": [
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A2.1",
+          "heading": "A2.1 Annual Leave Entitlement - overrides HR-202 \u00a72.1",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        },
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A3.1",
+          "heading": "A3.1 Parental Leave - Primary Carer - overrides HR-202 \u00a73.1",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        },
+        {
+          "policy_id": "HR-A-UK",
+          "section": "A4",
+          "heading": "A4 Notice Period - overrides HR-201",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "UK",
+          "source_file": "HR-A-UK-uk.md"
+        }
+      ],
+      "subject": {
+        "employee_id": "E-1005",
+        "entity": "UK",
+        "grade": 5,
+        "band": "grades 5-7",
+        "tenure_months": 30,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-652a61e8e056",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "answered (expected answered)"
+        },
+        "entity_in_scope": {
+          "passed": true,
+          "detail": "all citations in scope"
+        },
+        "cited_clause": {
+          "passed": true,
+          "detail": "cited ['HR-A-UK'] (expected HR-A-UK)"
+        },
+        "grade_band": {
+          "passed": true,
+          "detail": "grades 5-7 (expected grades 5-7)"
+        },
+        "resolved_from_record": {
+          "passed": true,
+          "detail": "entity from employee_record, grade from employee_record"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "83% of the answer's substantive words appear in the cited clause"
+      },
+      "passed": true
+    },
+    {
+      "id": "C29",
+      "mode": "grade_band",
+      "employee_id": "E-1003",
+      "question": "I am a Grade 7 in the UK, how much parental leave do I get?",
+      "label": "The asker claims a grade and entity that are not theirs. The record wins: India, grade 3.",
+      "pins_grade": true,
+      "pins_entity": true,
+      "status": "answered",
+      "answer": "The primary carer is entitled to **twenty-six weeks** of paid\nleave, as required by the Maternity Benefit Act, for the first\ntwo children. For a third or subsequent child the entitlement\nis **twelve weeks**.\n\n-- HR-A-IN SA3.1 (v2025.1, effective 2025-01-01, IN), which applies to you as grades 1-4 in the IN entity.",
+      "citations": [
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A3.1",
+          "heading": "A3.1 Parental Leave - Primary Carer - overrides HR-202 \u00a73.1",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        },
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A3.2",
+          "heading": "A3.2 Parental Leave - Secondary Carer - overrides HR-202 \u00a73.2",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        },
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A2.1",
+          "heading": "A2.1 Annual Leave Entitlement - overrides HR-202 \u00a72.1",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        }
+      ],
+      "subject": {
+        "employee_id": "E-1003",
+        "entity": "IN",
+        "grade": 3,
+        "band": "grades 1-4",
+        "tenure_months": 60,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-c549d701303c",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "answered (expected answered)"
+        },
+        "entity_in_scope": {
+          "passed": true,
+          "detail": "all citations in scope"
+        },
+        "cited_clause": {
+          "passed": true,
+          "detail": "cited ['HR-A-IN'] (expected HR-A-IN)"
+        },
+        "grade_band": {
+          "passed": true,
+          "detail": "grades 1-4 (expected grades 1-4)"
+        },
+        "resolved_from_record": {
+          "passed": true,
+          "detail": "entity from employee_record, grade from employee_record"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "72% of the answer's substantive words appear in the cited clause"
+      },
+      "passed": true
+    },
+    {
+      "id": "C30",
+      "mode": "no_record",
+      "employee_id": "E-9999",
+      "question": "How much parental leave do I get?",
+      "label": "No record means no entity and no grade, so no answer - only a guess.",
+      "pins_grade": false,
+      "pins_entity": false,
+      "status": "handoff",
+      "answer": "I could not read your employee record, so I cannot tell which entity or grade applies to you. Please contact an HR business partner.",
+      "citations": [],
+      "subject": {},
+      "trace_id": "R-5b5e19699caf",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "handoff (expected handoff)"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "SKIP",
+        "reason": "only answered cases are judged for grounding"
+      },
+      "passed": true
+    },
+    {
+      "id": "C31",
+      "mode": "grade_band",
+      "employee_id": "E-1004",
+      "question": "Do I get enhanced annual leave at my grade?",
+      "label": "India grade 2: base band.",
+      "pins_grade": true,
+      "pins_entity": true,
+      "status": "answered",
+      "answer": "Employees receive **eighteen days** of earned leave per leave\nyear, plus twelve days of casual and sick leave, in addition to\npublic holidays notified by the entity.\n\nEmployees at grade 5 and above receive **twenty-two days** of\nearned leave.\n\nThis replaces the twenty-five and thirty day figures in the\nhandbook, which do not apply to this entity.\n\n-- HR-A-IN SA2.1 (v2025.1, effective 2025-01-01, IN), which applies to you as grades 1-4 in the IN entity.",
+      "citations": [
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A2.1",
+          "heading": "A2.1 Annual Leave Entitlement - overrides HR-202 \u00a72.1",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        },
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A5",
+          "heading": "A5 Discretionary Matters",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        },
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A3.1",
+          "heading": "A3.1 Parental Leave - Primary Carer - overrides HR-202 \u00a73.1",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        }
+      ],
+      "subject": {
+        "employee_id": "E-1004",
+        "entity": "IN",
+        "grade": 2,
+        "band": "grades 1-4",
+        "tenure_months": 8,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-9578b8d02574",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "answered (expected answered)"
+        },
+        "entity_in_scope": {
+          "passed": true,
+          "detail": "all citations in scope"
+        },
+        "cited_clause": {
+          "passed": true,
+          "detail": "cited ['HR-A-IN'] (expected HR-A-IN)"
+        },
+        "grade_band": {
+          "passed": true,
+          "detail": "grades 1-4 (expected grades 1-4)"
+        },
+        "resolved_from_record": {
+          "passed": true,
+          "detail": "entity from employee_record, grade from employee_record"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "71% of the answer's substantive words appear in the cited clause"
+      },
+      "passed": true
+    },
+    {
+      "id": "C32",
+      "mode": "superseded_version",
+      "employee_id": "E-1003",
+      "question": "What is the parental leave notice requirement?",
+      "label": "The notice clause is identical in both editions, so only the version metadata distinguishes them. The current one must be cited.",
+      "pins_grade": false,
+      "pins_entity": false,
+      "status": "answered",
+      "answer": "The primary carer is entitled to **twenty-six weeks** of paid\nleave, as required by the Maternity Benefit Act, for the first\ntwo children. For a third or subsequent child the entitlement\nis **twelve weeks**.\n\n-- HR-A-IN SA3.1 (v2025.1, effective 2025-01-01, IN), which applies to you as grades 1-4 in the IN entity.",
+      "citations": [
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A3.1",
+          "heading": "A3.1 Parental Leave - Primary Carer - overrides HR-202 \u00a73.1",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        },
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A5",
+          "heading": "A5 Discretionary Matters",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        },
+        {
+          "policy_id": "HR-A-IN",
+          "section": "A3.2",
+          "heading": "A3.2 Parental Leave - Secondary Carer - overrides HR-202 \u00a73.2",
+          "version": "2025.1",
+          "effective_date": "2025-01-01",
+          "entity": "IN",
+          "source_file": "HR-A-IN-india.md"
+        }
+      ],
+      "subject": {
+        "employee_id": "E-1003",
+        "entity": "IN",
+        "grade": 3,
+        "band": "grades 1-4",
+        "tenure_months": 60,
+        "as_of": "2025-06-01",
+        "resolved_from": {
+          "entity": "employee_record",
+          "grade": "employee_record",
+          "tenure_months": "employee_record",
+          "as_of": "default:today"
+        }
+      },
+      "trace_id": "R-a11c4a925212",
+      "checks": {
+        "status": {
+          "passed": true,
+          "detail": "answered (expected answered)"
+        },
+        "entity_in_scope": {
+          "passed": true,
+          "detail": "all citations in scope"
+        },
+        "version_in_force": {
+          "passed": true,
+          "detail": "cited ['2025.1'] (expected only 2025.1)"
+        }
+      },
+      "assertions_passed": true,
+      "judge": {
+        "verdict": "PASS",
+        "reason": "72% of the answer's substantive words appear in the cited clause"
+      },
+      "passed": true
+    }
+  ]
+}

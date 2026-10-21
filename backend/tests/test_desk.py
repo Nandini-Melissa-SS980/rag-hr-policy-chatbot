@@ -17,7 +17,6 @@ from datetime import date
 import pytest
 
 from app.desk.answer import (
-    DISCRETION_MARGIN,
     answer_policy_question,
     asks_about_someone_else,
     is_discretionary,
@@ -291,16 +290,14 @@ def test_a_discretionary_clause_that_answers_wins():
     assert is_discretionary(results) is not None
 
 
-def test_a_distant_discretionary_clause_does_not_hijack():
+def entitlement_then_discretion() -> list[dict]:
     """
-    Every annex ends with a discretionary section, so it is
-    retrieved for almost any question about that annex.
-    Treating its presence as decisive sent "how much parental
-    leave do I get" - a direct entitlement question matching
-    at 0.875 - to a human because A5 sat at 0.675.
+    The shape that broke two earlier rules: a clause stating
+    the standard entitlement on top, the annex's discretionary
+    section just below it.
     """
 
-    results = [
+    return [
         chunk(
             "HR-A-UK",
             "A3.1",
@@ -325,14 +322,40 @@ def test_a_distant_discretionary_clause_does_not_hijack():
         ),
     ]
 
-    assert is_discretionary(results) is None
 
-    # And it does fire once the gap closes.
-    results[1]["score"] = (
-        0.875 - DISCRETION_MARGIN / 2
+def test_a_lower_ranked_discretionary_clause_does_not_hijack():
+    """
+    Every annex ends with a discretionary section, so it is
+    retrieved for nearly any question about that annex.
+    Treating its presence as decisive sent 8 of 32 eval cases
+    to a human, including "how much parental leave do I get".
+    """
+
+    assert (
+        is_discretionary(
+            entitlement_then_discretion(),
+            "How much parental leave do I get?",
+        )
+        is None
     )
 
-    assert is_discretionary(results) is not None
+
+def test_a_question_asking_for_an_exception_finds_it():
+    """
+    The counterpart. "Can I extend" is a request for a
+    departure from the standard entitlement, and a departure
+    is what the annex reserves to a human - even though the
+    clauses stating the entitlement match the words better
+    and A5 ranks third.
+    """
+
+    citation = is_discretionary(
+        entitlement_then_discretion(),
+        "Can I extend my parental leave by a month?",
+    )
+
+    assert citation is not None
+    assert citation["section"] == "A5"
 
 
 # ---------------- the third-party guardrail --------
@@ -572,3 +595,106 @@ def test_nothing_relevant_is_refused_not_guessed(
     )
 
     assert result.status == "refused"
+
+
+# ---------------- the scope gate -------------------
+
+
+@pytest.mark.parametrize(
+    "question,topic",
+    [
+        (
+            "What is the pension contribution rate?",
+            "pension",
+        ),
+        ("What is my salary band?", "salary"),
+        (
+            "How do I claim travel expenses?",
+            "expenses",
+        ),
+        (
+            "What is the private medical cover?",
+            "medical_cover",
+        ),
+    ],
+)
+def test_uncovered_subjects_are_named(
+    question,
+    topic,
+):
+    """
+    A threshold cannot do this job. Measured on the desk
+    index, an in-scope question tops out at 0.718-0.885 and an
+    out-of-scope one at 0.552-0.773 - the ranges overlap, and
+    "what is my salary band" scores 0.773 against an
+    annual-leave clause.
+    """
+
+    from app.desk.scope import uncovered_topic
+
+    assert uncovered_topic(question) == topic
+
+
+@pytest.mark.parametrize(
+    "question",
+    [
+        "How much parental leave do I get?",
+        "How many days of annual leave am I entitled to?",
+        "What notice do I have to give to resign?",
+        "Can I carry leave into next year?",
+    ],
+)
+def test_covered_subjects_fall_through(question):
+    """
+    The gate has no opinion on an in-scope question; the
+    retrieval score decides, as it did in Week 6.
+    """
+
+    from app.desk.scope import uncovered_topic
+
+    assert uncovered_topic(question) is None
+
+
+def test_a_refusal_says_where_to_go_instead(
+    tmp_path,
+):
+
+    result = answer_policy_question(
+        "What is the pension contribution rate?",
+        "E-1001",
+        StubRetriever([]),
+        records_for("UK", 6),
+        today=date(2025, 6, 1),
+        log_path=str(tmp_path / "r.jsonl"),
+    )
+
+    assert result.status == "refused"
+
+    assert (
+        "HR business partner" in result.answer
+    )
+
+
+def test_salary_is_refused_without_echoing_the_grade(
+    tmp_path,
+):
+    """
+    The grade was just resolved from the record. Answering a
+    salary question from it would be a leak, not a lookup.
+    """
+
+    result = answer_policy_question(
+        "What is my salary band?",
+        "E-1003",
+        StubRetriever([]),
+        records_for("IN", 3),
+        today=date(2025, 6, 1),
+        log_path=str(tmp_path / "r.jsonl"),
+    )
+
+    assert result.status == "refused"
+
+    answer = result.answer.lower()
+
+    for leak in ("grade 3", "grades 1-4", "in entity"):
+        assert leak not in answer
