@@ -48,6 +48,7 @@ from app.desk.resolution import (
     policy_filter,
     resolve_subject,
 )
+from app.desk.redaction import redact_answer
 from app.desk.scope import (
     refusal_for,
     uncovered_topic,
@@ -590,7 +591,11 @@ def answer_policy_question(
 
                 span.attributes["mode"] = "model"
 
-        trace.answer = answer
+        # The employee receives `answer`; the log receives it
+        # without the grade band. The extractive phrasing ends
+        # "...which applies to you as grades 1-4 in the IN
+        # entity", and that line is read by the whole squad.
+        trace.answer = redact_answer(answer)
 
         trace.sources = citations
 

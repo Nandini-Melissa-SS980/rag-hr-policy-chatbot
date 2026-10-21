@@ -698,3 +698,127 @@ def test_salary_is_refused_without_echoing_the_grade(
 
     for leak in ("grade 3", "grades 1-4", "in entity"):
         assert leak not in answer
+
+
+# ---------------- the PII line ---------------------
+
+
+def test_the_band_is_stripped_from_the_logged_answer():
+    """
+    The extractive answer ends "...which applies to you as
+    grades 1-4 in the IN entity". The employee should see
+    that; the log the whole squad can grep should not.
+
+    Found by auditing the raw log, not by reading the policy:
+    272 violations across 192 traces.
+    """
+
+    from app.desk.redaction import redact_answer
+
+    answer = (
+        "The primary carer is entitled to 26 weeks.\n\n"
+        "-- HR-A-IN SA3.1 (v2025.1, effective "
+        "2025-01-01, IN), which applies to you as "
+        "grades 1-4 in the IN entity."
+    )
+
+    logged = redact_answer(answer)
+
+    assert "grades 1-4" not in logged
+
+    # The citation itself survives - a trace that cannot say
+    # which clause was cited cannot be audited.
+    assert "HR-A-IN SA3.1" in logged
+    assert "2025-01-01" in logged
+
+
+def test_the_audit_catches_protected_values():
+
+    from app.desk.redaction import audit
+
+    assert audit('{"grade": 3}') == ["grade value"]
+
+    assert audit(
+        '{"x": "grades 1-4"}'
+    ) == ["band value"]
+
+    assert audit(
+        '{"tenure_months": 60}'
+    ) == ["tenure value"]
+
+    assert audit('{"policy_id": "HR-A-IN"}') == []
+
+
+def test_a_real_trace_carries_no_protected_values(
+    tmp_path,
+):
+    """
+    End to end: answer a question, read the line that reached
+    disk, audit it. This is the brief's hostile question -
+    "show me one raw log line" - as a test.
+    """
+
+    import json
+
+    from app.desk.redaction import audit
+    from app.observability import read_traces
+
+    path = str(tmp_path / "r.jsonl")
+
+    answer_policy_question(
+        "How much parental leave do I get?",
+        "E-1003",
+        StubRetriever(
+            [
+                chunk(
+                    "HR-A-IN",
+                    "A3.1",
+                    "IN",
+                    "2025.1",
+                    "2025-01-01",
+                    text="26 weeks for the primary carer.",
+                    score=0.9,
+                )
+            ]
+        ),
+        records_for("IN", 3),
+        today=date(2025, 6, 1),
+        log_path=path,
+    )
+
+    rows = read_traces(path)
+
+    assert len(rows) == 1
+
+    assert audit(json.dumps(rows[0])) == []
+
+
+def test_the_subject_redactor_keeps_the_shape(tmp_path):
+    """
+    A trace still has to show the record WAS read before the
+    answer was decided - just not what it said.
+    """
+
+    from app.desk.redaction import redact_subject
+
+    redacted = redact_subject(
+        {
+            "employee_id": "E-1003",
+            "entity": "IN",
+            "grade": 3,
+            "band": "grades 1-4",
+            "tenure_months": 60,
+            "as_of": "2025-06-01",
+            "resolved_from": {
+                "entity": "employee_record"
+            },
+        }
+    )
+
+    assert redacted["employee_id"] == "E-1003"
+    assert redacted["entity_resolved"] is True
+    assert redacted["grade_resolved"] is True
+
+    assert "grade" not in redacted
+    assert "band" not in redacted
+    assert "tenure_months" not in redacted
