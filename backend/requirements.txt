@@ -10,3 +10,13 @@ pytest
 httpx
 streamlit
 mcp>=2.0
+
+# Observability. `langsmith` is all the exporter needs - it
+# posts run trees over HTTP and does not require LangChain.
+langsmith
+
+# LangChain itself. Not used by the request path, which is
+# hand-built: see the note in app/langsmith_export.py.
+langchain
+langchain-openai
+langchain-chroma

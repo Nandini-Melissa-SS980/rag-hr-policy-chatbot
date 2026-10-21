@@ -200,6 +200,47 @@ evaluation/week10/
   race_results.json   every row behind the tables
 ```
 
+## LangSmith
+
+The JSONL log is the source of truth. LangSmith is the dashboard on top — a
+run tree per request, retrieval inspection, token and cost columns, and
+datasets built from real traffic.
+
+```bash
+cd backend
+
+# key from https://smith.langchain.com, into backend/.env
+# LANGSMITH_API_KEY=ls__...
+
+# backfill the traces already on disk
+python -m evaluation.week11.to_langsmith
+
+# and/or send new ones as they happen
+LANGSMITH_ENABLED=1 uvicorn app.main:app --reload
+```
+
+Off unless `LANGSMITH_ENABLED=1`. The exporter swallows its own failures and
+the JSONL row is written first, so a dashboard being down can never cost a
+request or a log line — there is a test for each of those.
+
+Each request becomes one run tree:
+
+| our stage | LangSmith run type | what the UI shows |
+| --- | --- | --- |
+| the request | `chain` | question, answer, prompt version, cost |
+| `retrieval` | `retriever` | each chunk with its text, score and section |
+| `generation` | `llm` | prompt/completion token counts |
+
+**LangSmith, yes. LangChain, not in the request path.** The usual route is
+`@traceable` or LangChain's auto-instrumentation, both of which assume
+LangChain owns retrieval and generation. Here it does not: the retriever, the
+generator and the agent loop are hand built, and rewriting them as LCEL chains
+would delete the structures the Week-7, 8 and 10 evals measure — the budget
+termination log, the hand-off token accounting, the trajectory eval. So
+`app/langsmith_export.py` posts run trees directly with the `langsmith`
+client, which needs no LangChain. The dashboard is the same; the
+instrumentation stays explicit.
+
 ## Observability and the support drill
 
 ```bash
@@ -239,6 +280,7 @@ evaluation/week11/
   regression_cases.json E28/E29/E30, added to the Week-6 suite
   suite_red.txt         18/30, drill 0/3
   suite_green.txt       22/30, drill 3/3
+  to_langsmith.py       backfill the log into LangSmith
   cost_by_stage.md      retrieval / generation / tools
   tenx.md               what binds first, with the number
   rollback.md           prompt version bump, canary, rollback
@@ -252,6 +294,7 @@ backend/
     main.py                FastAPI app
     config.py              Environment settings
     observability.py       Traces, spans, per-stage cost
+    langsmith_export.py    The same traces, as LangSmith run trees
     api/chat.py            Routes
     models/schemas.py      Request/response models
     services/

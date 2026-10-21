@@ -66,6 +66,17 @@ def describe_context(
                     result.get("score", 0.0),
                     4,
                 ),
+                # The passage itself, truncated. Without it a
+                # trace says WHICH chunk was served but not
+                # what it said, so telling "retrieval served
+                # the wrong passage" from "the model ignored
+                # the right one" needs a second lookup. The
+                # LangSmith retriever view is built on this.
+                # Truncated because a trace is a record, not
+                # a copy of the index.
+                "text": (result.get("text") or "")[
+                    :600
+                ],
                 # Carried so the API can build its
                 # response from the logged context
                 # rather than retrieving a second

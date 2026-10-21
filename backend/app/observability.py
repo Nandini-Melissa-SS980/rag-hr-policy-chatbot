@@ -421,6 +421,15 @@ def write_trace(
     trace: Trace,
     path: str = REQUESTS_LOG,
 ):
+    """
+    Append one trace to the log, then mirror it to LangSmith.
+
+    The file is written first and unconditionally. It is the
+    source of truth - the support drill greps it, it needs no
+    service running, and it works with an unfunded key.
+    LangSmith is a view on top, so an export failure must
+    never cost us the row.
+    """
 
     directory = os.path.dirname(path)
 
@@ -430,16 +439,30 @@ def write_trace(
             exist_ok=True,
         )
 
+    payload = trace.as_dict()
+
     with open(
         path,
         "a",
         encoding="utf-8",
     ) as file:
 
-        file.write(
-            json.dumps(trace.as_dict())
-            + "\n"
+        file.write(json.dumps(payload) + "\n")
+
+    # Off unless LANGSMITH_ENABLED=1, and it swallows its own
+    # failures, so this is a no-op in the default setup.
+    try:
+
+        from app.langsmith_export import (
+            export_trace,
         )
+
+        export_trace(payload)
+
+    except Exception:
+        # Importing the exporter must not break logging even
+        # if the LangSmith packages are not installed.
+        pass
 
 
 def read_traces(
