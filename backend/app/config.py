@@ -66,3 +66,34 @@ ADDENDA_DIR = os.path.join(
     DOCUMENTS_DIR,
     "addenda",
 )
+
+# Week 12. The versioned corpus: the same policy in more than
+# one edition, the entity annexes that override the handbook,
+# and the grade-band matrix. Markdown with front matter rather
+# than PDF, because version, effective_date and entity have to
+# be declared fields the retriever can filter on - a date
+# mentioned inside a paragraph is a string that might rank
+# well, not a constraint.
+VERSIONED_DIR = os.path.join(
+    DOCUMENTS_DIR,
+    "versioned",
+)
+
+ANNEXES_DIR = os.path.join(
+    DOCUMENTS_DIR,
+    "annexes",
+)
+
+MATRICES_DIR = os.path.join(
+    DOCUMENTS_DIR,
+    "matrices",
+)
+
+# The collection the Week-12 desk reads. Kept separate from
+# the Week-4 collections so the retrieval numbers in
+# results.md stay reproducible against the index they were
+# measured on.
+DESK_COLLECTION = os.getenv(
+    "DESK_COLLECTION",
+    "hr_policy_desk",
+)

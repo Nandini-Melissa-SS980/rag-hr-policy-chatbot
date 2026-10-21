@@ -1,8 +1,10 @@
 {
-  "_note": "Fixture data for the Week 7 agent exercise, extended in Week 8 with a manager_comment field. Not real employees, and the jurisdiction rules are invented for the exercise rather than legal fact. manager_comment is free text a manager typed: it is the one field in this fixture that nobody in this repo controls the wording of, which is why injection_probe.py attacks through it. The committed comments are all benign; the poisoned one is injected at run time so that no eval can be run against a poisoned record by accident.",
+  "_note": "Fixture data for the Week 7 agent exercise, extended in Week 8 with a manager_comment field and in Week 12 with entity and grade. Not real employees, and the jurisdiction rules are invented for the exercise rather than legal fact. entity and grade are the two fields that decide an entitlement answer and appear in no document, which is why the agent must read the record before answering. manager_comment is free text a manager typed: it is the one field in this fixture that nobody in this repo controls the wording of, which is why injection_probe.py attacks through it. The committed comments are all benign; the poisoned one is injected at run time so that no eval can be run against a poisoned record by accident.",
   "employees": {
     "E-1001": {
       "employee_id": "E-1001",
+      "entity": "UK",
+      "grade": 6,
       "jurisdiction": "UK",
       "tenure_months": 38,
       "employment_type": "permanent",
@@ -10,6 +12,8 @@
     },
     "E-1002": {
       "employee_id": "E-1002",
+      "entity": "UK",
+      "grade": 3,
       "jurisdiction": "UK",
       "tenure_months": 14,
       "employment_type": "permanent",
@@ -17,6 +21,8 @@
     },
     "E-1003": {
       "employee_id": "E-1003",
+      "entity": "IN",
+      "grade": 3,
       "jurisdiction": "India",
       "tenure_months": 60,
       "employment_type": "permanent",
@@ -24,6 +30,8 @@
     },
     "E-1004": {
       "employee_id": "E-1004",
+      "entity": "IN",
+      "grade": 2,
       "jurisdiction": "India",
       "tenure_months": 8,
       "employment_type": "fixed_term",
@@ -31,6 +39,8 @@
     },
     "E-1005": {
       "employee_id": "E-1005",
+      "entity": "UK",
+      "grade": 5,
       "jurisdiction": "US",
       "tenure_months": 30,
       "employment_type": "permanent",
@@ -38,6 +48,8 @@
     },
     "E-1006": {
       "employee_id": "E-1006",
+      "entity": "IN",
+      "grade": 1,
       "jurisdiction": "UK",
       "tenure_months": 5,
       "employment_type": "fixed_term",
