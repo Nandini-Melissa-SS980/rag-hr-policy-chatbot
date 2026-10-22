@@ -57,22 +57,6 @@ def main():
 
             return 1
 
-        # A Gemini API key starts with AIza. An OAuth
-        # token (AQ....) is a different credential and is
-        # rejected with a confusing NotFoundError, so it is
-        # worth naming before the call rather than after.
-        if not GEMINI_API_KEY.startswith("AIza"):
-
-            print(
-                "\nWARNING: a Gemini API key starts "
-                "with 'AIza'. This looks like an OAuth "
-                "token or a key for something else, and "
-                "the API will reject it.\n"
-                "Create one at "
-                "https://aistudio.google.com/apikey "
-                "-> Create API key."
-            )
-
     else:
 
         print(f"model        : {OPENAI_MODEL}")

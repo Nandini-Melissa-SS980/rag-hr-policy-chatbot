@@ -8,7 +8,6 @@ python-dotenv
 pydantic
 pytest
 httpx
-streamlit
 mcp>=2.0
 
 # Observability. `langsmith` is all the exporter needs - it
