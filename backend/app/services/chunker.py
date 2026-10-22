@@ -148,10 +148,59 @@ def structure_aware_chunk_text(
 
         section_text = text[start:end].strip()
 
-        if section_text:
-            chunks.append(section_text)
+        if not section_text:
+            continue
+
+        # A parent heading followed immediately by its first
+        # subsection produces a chunk holding only the
+        # heading - "2 Working Hours", 15 characters, no
+        # body. Eight of sixty-five chunks were these.
+        #
+        # They are worse than useless: they carry the
+        # section's own words so they rank highly, then
+        # answer nothing. One topped the results for "how
+        # many days of annual leave do I get" at 0.833.
+        #
+        # Dropped rather than merged into the next section:
+        # the subsection that follows already repeats the
+        # parent's topic in its own heading, so nothing is
+        # lost, and merging would blur the boundary a
+        # citation points at.
+        if is_heading_only(section_text):
+            continue
+
+        chunks.append(section_text)
 
     return chunks
+
+
+# A section whose body is shorter than this is a heading, not
+# a clause.
+#
+# Measured, not guessed. Across the six policies every bare
+# heading has a body of exactly 0 characters, and the
+# shortest real clause has 100. There is no overlap at all,
+# so this sits just above zero rather than in the middle of
+# a gap that does not exist - a higher threshold would start
+# discarding short but genuine clauses, which is a silent
+# loss of policy.
+MIN_SECTION_BODY = 16
+
+
+def is_heading_only(section_text: str) -> bool:
+    """
+    Whether this chunk is a bare heading with no body.
+
+    Measured on the text after the heading line, because the
+    heading itself can be long enough to pass a naive length
+    check while saying nothing.
+    """
+
+    lines = section_text.strip().split("\n", 1)
+
+    body = lines[1].strip() if len(lines) > 1 else ""
+
+    return len(body) < MIN_SECTION_BODY
 
 
 def structure_aware_chunk_documents(
@@ -163,10 +212,23 @@ def structure_aware_chunk_documents(
 
     chunks = []
 
-    for page in pages:
+    # Joined per document before chunking, not per page.
+    #
+    # Chunking page by page cuts any clause that spans a page
+    # break. HR-201 section 3 produced a chunk reading only
+    # "the first day back at work." - the tail of a sentence
+    # whose head was on the previous page, indexed as though
+    # it were a clause.
+    #
+    # A section is a unit of the document, not of the page it
+    # happens to land on, so the document is reassembled
+    # first and the section pattern decides the boundaries.
+    for source_file, document in group_by_document(
+        pages
+    ).items():
 
         text_chunks = structure_aware_chunk_text(
-            page["text"]
+            document["text"]
         )
 
         for index, text in enumerate(text_chunks):
@@ -174,8 +236,16 @@ def structure_aware_chunk_documents(
             chunks.append(
                 {
                     "text": text,
-                    "source_file": page["source_file"],
-                    "page_number": page["page_number"],
+                    "source_file": source_file,
+                    # The page the section STARTS on, found
+                    # by locating its offset in the joined
+                    # text. A section spanning two pages is
+                    # cited by where it begins, which is how
+                    # someone reading the PDF would cite it.
+                    "page_number": page_of_offset(
+                        document,
+                        document["text"].find(text),
+                    ),
                     "chunk_index": index,
                     "chunking_strategy": "structure_aware",
                 }
@@ -184,13 +254,72 @@ def structure_aware_chunk_documents(
     return chunks
 
 
+def group_by_document(
+    pages: list[dict],
+) -> dict:
+    """
+    Pages joined back into whole documents.
+
+    Keeps each page's start offset so a chunk can still be
+    attributed to the page it begins on.
+    """
+
+    documents: dict = {}
+
+    for page in pages:
+
+        document = documents.setdefault(
+            page["source_file"],
+            {"text": "", "offsets": []},
+        )
+
+        document["offsets"].append(
+            (
+                len(document["text"]),
+                page["page_number"],
+            )
+        )
+
+        # A newline, so a heading at the top of a page is
+        # still recognised as starting a line.
+        if document["text"]:
+            document["text"] += "\n"
+
+        document["text"] += page["text"]
+
+    return documents
+
+
+def page_of_offset(
+    document: dict,
+    offset: int,
+) -> int:
+    """
+    Which page a character offset falls on.
+    """
+
+    if offset < 0:
+        return document["offsets"][0][1]
+
+    page_number = document["offsets"][0][1]
+
+    for start, number in document["offsets"]:
+
+        if start > offset:
+            break
+
+        page_number = number
+
+    return page_number
+
+
 def extract_policy_id(
     source_file: str,
 ) -> str:
     """
     Example:
 
-    HR-207.pdf -> HR-207
+    HR-206.pdf -> HR-206
     """
 
     filename = source_file.rsplit(

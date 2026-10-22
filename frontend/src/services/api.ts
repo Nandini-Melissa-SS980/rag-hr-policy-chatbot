@@ -12,6 +12,7 @@ import type {
   ChatResponse,
   SearchResult,
   StatsResponse,
+  PolicyText,
   SystemInfo,
 } from "@/types/api";
 
@@ -77,6 +78,12 @@ export const api = {
 
   /** What the running system is made of. */
   system: () => request<SystemInfo>("/system"),
+
+  /** One policy's full text, read from the PDF. */
+  policyText: (policyId: string) =>
+    request<PolicyText>(
+      `/system/policies/${encodeURIComponent(policyId)}`,
+    ),
 
   /** Retrieval only. Needs no model, so it works at 429. */
   search: (body: ChatRequest) =>

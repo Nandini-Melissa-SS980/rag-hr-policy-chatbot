@@ -6,13 +6,13 @@ Measured over **197 logged requests** in `logs/requests.jsonl`, model `gpt-5-min
 
 | stage | cost/query | share | tokens in | tokens out | mean ms |
 |---|---|---|---|---|---|
-| generation | $0.000280 | 100.0% | 172892 | 5920 | 0.0 |
-| retrieval | $0.000000 | 0.0% | 0 | 0 | 44.3 |
+| generation | $0.000300 | 100.0% | 180739 | 6986 | 0.0 |
+| retrieval | $0.000000 | 0.0% | 0 | 0 | 69.9 |
 | tools | $0.000000 | 0.0% | 0 | 0 | 0.0 |
 
-**Total cost per query: $0.000280** (197 requests, $0.0551 total, 178812 tokens).
+**Total cost per query: $0.000300** (197 requests, $0.0592 total, 187725 tokens).
 
-0 of 197 requests abstained and cost nothing to generate - they pay retrieval latency only. Cost per *answered* query is $0.000280.
+0 of 197 requests abstained and cost nothing to generate - they pay retrieval latency only. Cost per *answered* query is $0.000300.
 
 ## The request from the drill
 

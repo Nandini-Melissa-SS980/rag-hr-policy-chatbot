@@ -4,7 +4,7 @@ Retrieval metrics.
 A record is one evaluated question:
 
     {
-        "matched_ranks": {"HR-207|4.2": 2},
+        "matched_ranks": {"HR-206|4.2": 2},
         "expected_total": 1,
     }
 

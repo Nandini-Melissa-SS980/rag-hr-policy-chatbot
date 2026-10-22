@@ -106,6 +106,6 @@ The eight remaining failures are pre-existing Week-4 retrieval-ranking issues re
 
 ### One thing the suite caught that I would have shipped
 
-My first version of the topic gate keyed on the word "notice", and it broke **E21** - *"How much notice is given if a fully remote arrangement is withdrawn?"* - a real question this corpus answers in HR-207 4.2. The gate refused it.
+My first version of the topic gate keyed on the word "notice", and it broke **E21** - *"How much notice is given if a fully remote arrangement is withdrawn?"* - a real question this corpus answers in HR-206 4.2. The gate refused it.
 
 That is exactly the regression the rubric warns about: fix the reported case, break a neighbour, ship both. It only surfaced because the whole suite reran rather than just the new cases. The gate now keys on resignation vocabulary rather than the bare word.

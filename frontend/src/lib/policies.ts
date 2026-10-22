@@ -59,7 +59,7 @@ export const POLICIES: Policy[] = [
     icon: TrendingUp,
   },
   {
-    id: "HR-207",
+    id: "HR-206",
     title: "Remote & Hybrid Working",
     summary:
       "Working from home, hybrid arrangements, equipment and expenses, and working abroad.",

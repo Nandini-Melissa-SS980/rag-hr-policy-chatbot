@@ -14,6 +14,7 @@ import { Menu, Plus } from "lucide-react";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { ChatPage } from "@/pages/ChatPage";
 import { PoliciesPage } from "@/pages/PoliciesPage";
+import { FlowPage } from "@/pages/FlowPage";
 import { SystemPage } from "@/pages/SystemPage";
 import { useConversations } from "@/stores/conversations";
 import { api } from "@/services/api";
@@ -129,6 +130,10 @@ function Shell() {
             <Route
               path="/policies"
               element={<PoliciesPage />}
+            />
+            <Route
+              path="/flow"
+              element={<FlowPage />}
             />
             <Route
               path="/system"

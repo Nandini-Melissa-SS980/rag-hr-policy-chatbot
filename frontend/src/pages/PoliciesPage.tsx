@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { POLICIES } from "@/lib/policies";
+import { POLICIES, type Policy } from "@/lib/policies";
+import { PolicyModal } from "@/components/policies/PolicyModal";
 import { api } from "@/services/api";
 
 /**
@@ -11,6 +13,10 @@ import { api } from "@/services/api";
  * is a product feature rather than documentation.
  */
 export function PoliciesPage() {
+  const [open, setOpen] = useState<Policy | null>(
+    null,
+  );
+
   const stats = useQuery({
     queryKey: ["stats"],
     queryFn: api.stats,
@@ -38,9 +44,10 @@ export function PoliciesPage() {
 
         <div className="mt-6 grid gap-3 sm:grid-cols-2">
           {POLICIES.map((policy) => (
-            <article
+            <button
               key={policy.id}
-              className="rounded-xl border p-4"
+              onClick={() => setOpen(policy)}
+              className="cursor-pointer rounded-xl border p-4 text-left transition-shadow hover:shadow-md"
               style={{
                 borderColor: "var(--app-border)",
                 background: "var(--app-surface)",
@@ -75,7 +82,7 @@ export function PoliciesPage() {
               >
                 {policy.summary}
               </p>
-            </article>
+            </button>
           ))}
         </div>
 
@@ -97,6 +104,13 @@ export function PoliciesPage() {
           confidently, that is a bug worth reporting.
         </div>
       </div>
+
+      {open && (
+        <PolicyModal
+          policy={open}
+          onClose={() => setOpen(null)}
+        />
+      )}
     </div>
   );
 }

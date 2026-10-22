@@ -3,6 +3,7 @@ import {
   MessageSquare,
   FileText,
   Cpu,
+  Workflow,
   History,
   Plus,
   Trash2,
@@ -26,6 +27,7 @@ interface SidebarProps {
 const NAV = [
   { to: "/", label: "Chat", icon: MessageSquare, end: true },
   { to: "/policies", label: "Policies", icon: FileText },
+  { to: "/flow", label: "How it works", icon: Workflow },
   { to: "/system", label: "System", icon: Cpu },
 ];
 

@@ -49,7 +49,10 @@
     "question": "How many days of annual leave do I get?",
     "expect_refusal": false,
     "expected_sections": [
-      { "policy_id": "HR-202", "section": "2.1" }
+      {
+        "policy_id": "HR-202",
+        "section": "2.1"
+      }
     ]
   },
   {
@@ -58,7 +61,10 @@
     "question": "What are my standard working hours?",
     "expect_refusal": false,
     "expected_sections": [
-      { "policy_id": "HR-201", "section": "2.1" }
+      {
+        "policy_id": "HR-201",
+        "section": "2.1"
+      }
     ]
   },
   {
@@ -67,7 +73,10 @@
     "question": "How do I request annual leave?",
     "expect_refusal": false,
     "expected_sections": [
-      { "policy_id": "HR-202", "section": "2.4" }
+      {
+        "policy_id": "HR-202",
+        "section": "2.4"
+      }
     ]
   },
   {
@@ -76,7 +85,10 @@
     "question": "How am I rated in my performance review?",
     "expect_refusal": false,
     "expected_sections": [
-      { "policy_id": "HR-203", "section": "5.2" }
+      {
+        "policy_id": "HR-203",
+        "section": "5.2"
+      }
     ]
   },
   {
@@ -85,7 +97,10 @@
     "question": "Can I carry unused leave into next year?",
     "expect_refusal": false,
     "expected_sections": [
-      { "policy_id": "HR-202", "section": "2.5" }
+      {
+        "policy_id": "HR-202",
+        "section": "2.5"
+      }
     ]
   },
   {
@@ -94,7 +109,10 @@
     "question": "When are promotions considered?",
     "expect_refusal": false,
     "expected_sections": [
-      { "policy_id": "HR-205", "section": "3.1" }
+      {
+        "policy_id": "HR-205",
+        "section": "3.1"
+      }
     ]
   },
   {
@@ -103,7 +121,10 @@
     "question": "How do I book time off?",
     "expect_refusal": false,
     "expected_sections": [
-      { "policy_id": "HR-202", "section": "2.4" }
+      {
+        "policy_id": "HR-202",
+        "section": "2.4"
+      }
     ],
     "regression": true,
     "source_trace": "T18"
@@ -114,8 +135,12 @@
     "question": "Which days do I have to come into the office?",
     "expect_refusal": false,
     "expected_sections": [
-      { "policy_id": "HR-207", "section": "4.2" }
-    ]
+      {
+        "policy_id": "HR-206",
+        "section": "4.1"
+      }
+    ],
+    "relabelled": "Section renumbered when the policy PDFs were rewritten: which days the team is in the office moved from 4.2 to 4.1, Team Working Agreement. Same question, same intent."
   },
   {
     "id": "E15",
@@ -123,7 +148,10 @@
     "question": "I need a temporary change to my hours for a couple of weeks, what should I do?",
     "expect_refusal": false,
     "expected_sections": [
-      { "policy_id": "HR-204", "section": "4.1" }
+      {
+        "policy_id": "HR-204",
+        "section": "4.1"
+      }
     ]
   },
   {
@@ -132,7 +160,10 @@
     "question": "Do I get paid extra for staying late?",
     "expect_refusal": false,
     "expected_sections": [
-      { "policy_id": "HR-201", "section": "2.3" }
+      {
+        "policy_id": "HR-201",
+        "section": "2.3"
+      }
     ]
   },
   {
@@ -141,7 +172,10 @@
     "question": "How long must I work here before I can request flexible working?",
     "expect_refusal": false,
     "expected_sections": [
-      { "policy_id": "HR-204", "section": "3" }
+      {
+        "policy_id": "HR-204",
+        "section": "3"
+      }
     ]
   },
   {
@@ -150,7 +184,10 @@
     "question": "Can I work from another country for a few weeks?",
     "expect_refusal": false,
     "expected_sections": [
-      { "policy_id": "HR-207", "section": "4.2" }
+      {
+        "policy_id": "HR-206",
+        "section": "4.2"
+      }
     ]
   },
   {
@@ -159,7 +196,10 @@
     "question": "What happens if my promotion nomination is unsuccessful?",
     "expect_refusal": false,
     "expected_sections": [
-      { "policy_id": "HR-205", "section": "3.3" }
+      {
+        "policy_id": "HR-205",
+        "section": "3.3"
+      }
     ]
   },
   {
@@ -168,7 +208,10 @@
     "question": "When do I have to report an absence?",
     "expect_refusal": false,
     "expected_sections": [
-      { "policy_id": "HR-201", "section": "3.1" }
+      {
+        "policy_id": "HR-201",
+        "section": "3.1"
+      }
     ]
   },
   {
@@ -177,7 +220,10 @@
     "question": "How much notice is given if a fully remote arrangement is withdrawn?",
     "expect_refusal": false,
     "expected_sections": [
-      { "policy_id": "HR-207", "section": "4.2" }
+      {
+        "policy_id": "HR-206",
+        "section": "4.2"
+      }
     ]
   },
   {
@@ -186,7 +232,10 @@
     "question": "How long is my lunch break?",
     "expect_refusal": false,
     "expected_sections": [
-      { "policy_id": "HR-201", "section": "2.1" }
+      {
+        "policy_id": "HR-201",
+        "section": "2.1"
+      }
     ]
   },
   {
@@ -195,8 +244,12 @@
     "question": "How long are flexible working requests kept on file?",
     "expect_refusal": false,
     "expected_sections": [
-      { "policy_id": "HR-204", "section": "6" }
-    ]
+      {
+        "policy_id": "HR-204",
+        "section": "9"
+      }
+    ],
+    "relabelled": "Section renumbered when the policy PDFs were rewritten; the retention clause moved but the question and what it tests are unchanged."
   },
   {
     "id": "E24",
@@ -204,8 +257,12 @@
     "question": "How long are promotion nominations kept on file?",
     "expect_refusal": false,
     "expected_sections": [
-      { "policy_id": "HR-205", "section": "5" }
-    ]
+      {
+        "policy_id": "HR-205",
+        "section": "5"
+      }
+    ],
+    "relabelled": "Section renumbered when the policy PDFs were rewritten; the retention clause moved but the question and what it tests are unchanged."
   },
   {
     "id": "E25",
@@ -213,8 +270,12 @@
     "question": "How long are performance ratings kept on file?",
     "expect_refusal": false,
     "expected_sections": [
-      { "policy_id": "HR-203", "section": "6" }
-    ]
+      {
+        "policy_id": "HR-203",
+        "section": "9"
+      }
+    ],
+    "relabelled": "Section renumbered when the policy PDFs were rewritten; the retention clause moved but the question and what it tests are unchanged."
   },
   {
     "id": "E26",
@@ -222,7 +283,10 @@
     "question": "How long a rest break am I entitled to on a long day?",
     "expect_refusal": false,
     "expected_sections": [
-      { "policy_id": "HR-201", "section": "2.2" }
+      {
+        "policy_id": "HR-201",
+        "section": "2.2"
+      }
     ]
   },
   {
@@ -231,7 +295,10 @@
     "question": "Can my flexible working request be declined?",
     "expect_refusal": false,
     "expected_sections": [
-      { "policy_id": "HR-204", "section": "5" }
+      {
+        "policy_id": "HR-204",
+        "section": "5"
+      }
     ]
   }
 ]

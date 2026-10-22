@@ -4,7 +4,7 @@
     "category": "paraphrase",
     "question": "What is the company's policy regarding working from home and remote work arrangements?",
     "expected": {
-      "policy_id": "HR-207",
+      "policy_id": "HR-206",
       "section": "4.2"
     }
   },
@@ -58,7 +58,7 @@
     "category": "paraphrase",
     "question": "Under what circumstances can an employee work remotely?",
     "expected": {
-      "policy_id": "HR-207",
+      "policy_id": "HR-206",
       "section": "4.2"
     }
   },
@@ -76,7 +76,7 @@
     "category": "lookup",
     "question": "What version number is the remote and hybrid working policy?",
     "expected": {
-      "policy_id": "HR-207",
+      "policy_id": "HR-206",
       "section": "207"
     }
   },
@@ -130,7 +130,7 @@
     "category": "eligibility",
     "question": "Who is allowed to work in a hybrid way?",
     "expected": {
-      "policy_id": "HR-207",
+      "policy_id": "HR-206",
       "section": "3"
     }
   },
@@ -184,7 +184,7 @@
     "category": "cross_policy",
     "question": "How many days each week must I be in the office?",
     "expected": {
-      "policy_id": "HR-207",
+      "policy_id": "HR-206",
       "section": "4.2"
     }
   },

@@ -165,3 +165,11 @@ export interface SystemInfo {
     note: string;
   };
 }
+
+/** Served by /api/system/policies/{id}. */
+export interface PolicyText {
+  policy_id: string;
+  header: Record<string, string>;
+  text: string;
+  pages: number;
+}

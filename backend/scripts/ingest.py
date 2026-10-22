@@ -70,6 +70,26 @@ def main():
         f"Loaded {len(pages)} pages."
     )
 
+    # Rebuilt, not appended. Without this a second run
+    # leaves both the old chunks and the new ones in the
+    # collection: every clause indexed twice, every
+    # retrieval returning near-duplicate pairs, and a
+    # top_k of 5 holding two or three real results.
+    # Re-ingesting after a chunker change is exactly when
+    # that happens.
+    for name in (
+        "hr_policy_basic",
+        "hr_policy_structure_aware",
+    ):
+        try:
+            VectorStore(name).client.delete_collection(
+                name
+            )
+
+        except Exception:
+            # Nothing to drop on a first run.
+            pass
+
     # -----------------------------
     # BASIC
     # -----------------------------

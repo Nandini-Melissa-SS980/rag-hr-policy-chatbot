@@ -1,6 +1,6 @@
 {
   "prompt_version": "v1",
-  "passed": 18,
+  "passed": 20,
   "total": 30,
   "drill_passed": 1,
   "drill_total": 3,
@@ -13,11 +13,11 @@
       "regression": true,
       "abstained": false,
       "context_ids": [
-        "HR-202-2-structure_aware-15-52efb3a2",
-        "HR-202-2.1-structure_aware-16-56bba0ee",
-        "HR-202-2.5-structure_aware-20-d17f92b6",
-        "HR-202-2.3-structure_aware-18-255cc226",
-        "HR-202-2.2-structure_aware-17-bd32e550"
+        "HR-202-2.1-structure_aware-16-dad014bc",
+        "HR-202-4-structure_aware-23-df08e9d8",
+        "HR-202-2.5-structure_aware-20-0bce572c",
+        "HR-202-2.3-structure_aware-18-0238abe3",
+        "HR-204-3-structure_aware-42-d1e5c42b"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -34,11 +34,11 @@
       "regression": false,
       "abstained": false,
       "context_ids": [
-        "HR-202-2-structure_aware-15-52efb3a2",
-        "HR-202-2.1-structure_aware-16-56bba0ee",
-        "HR-202-1-structure_aware-14-1187a4d4",
-        "HR-207-4.3-structure_aware-62-54f51065",
-        "HR-202-2.2-structure_aware-17-bd32e550"
+        "HR-202-2.1-structure_aware-16-dad014bc",
+        "HR-202-1-structure_aware-15-37ea7325",
+        "HR-206-5-structure_aware-69-78190761",
+        "HR-202-2.3-structure_aware-18-0238abe3",
+        "HR-202-2.5-structure_aware-20-0bce572c"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -55,11 +55,11 @@
       "regression": false,
       "abstained": false,
       "context_ids": [
-        "HR-202-2-structure_aware-15-52efb3a2",
-        "HR-207-3-structure_aware-57-3ecec693",
-        "HR-202-2.1-structure_aware-16-56bba0ee",
-        "HR-202-3-structure_aware-21-597580c0",
-        "HR-207-5-structure_aware-63-1d2f227f"
+        "HR-204-8-structure_aware-48-45b196af",
+        "HR-201-4-structure_aware-10-a6921f89",
+        "HR-202-4-structure_aware-23-df08e9d8",
+        "HR-203-8-structure_aware-36-9db9538c",
+        "HR-206-3-structure_aware-65-695e77e5"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -76,11 +76,11 @@
       "regression": false,
       "abstained": false,
       "context_ids": [
-        "HR-207-4.3-structure_aware-62-54f51065",
-        "HR-202-2-structure_aware-15-52efb3a2",
-        "HR-207-unknown-structure_aware-61-792d661a",
-        "HR-202-2.5-structure_aware-20-d17f92b6",
-        "HR-202-2.4-structure_aware-19-27d0d207"
+        "HR-206-5-structure_aware-69-78190761",
+        "HR-206-4.3-structure_aware-68-2f1d5b81",
+        "HR-202-2.5-structure_aware-20-0bce572c",
+        "HR-202-2.4-structure_aware-19-02ab1dd8",
+        "HR-206-3-structure_aware-65-695e77e5"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -97,11 +97,11 @@
       "regression": false,
       "abstained": false,
       "context_ids": [
-        "HR-207-4.3-structure_aware-62-54f51065",
-        "HR-207-4-structure_aware-58-437a99d1",
-        "HR-205-3-structure_aware-46-75c8cc45",
-        "HR-202-2-structure_aware-15-52efb3a2",
-        "HR-205-3.2-structure_aware-48-ce9fda06"
+        "HR-206-5-structure_aware-69-78190761",
+        "HR-205-3.2-structure_aware-55-ddb5c508",
+        "HR-204-4.1-structure_aware-43-aae6b180",
+        "HR-204-3-structure_aware-42-d1e5c42b",
+        "HR-202-2.4-structure_aware-19-02ab1dd8"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -118,11 +118,11 @@
       "regression": false,
       "abstained": false,
       "context_ids": [
-        "HR-205-2-structure_aware-45-a863cba7",
-        "HR-202-202-structure_aware-13-d6bdad87",
-        "HR-204-4.1-structure_aware-38-e317576c",
-        "HR-205-205-structure_aware-43-f743cf90",
-        "HR-201-3.1-structure_aware-7-c4f6c1c6"
+        "HR-205-2-structure_aware-53-3e30ee35",
+        "HR-202-202-structure_aware-14-c79417e5",
+        "HR-206-7-structure_aware-71-0b10ebdf",
+        "HR-201-1-structure_aware-1-86d82280",
+        "HR-201-201-structure_aware-0-78c90fd5"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -139,11 +139,11 @@
       "regression": false,
       "abstained": false,
       "context_ids": [
-        "HR-202-2-structure_aware-15-52efb3a2",
-        "HR-202-2.5-structure_aware-20-d17f92b6",
-        "HR-202-2.1-structure_aware-16-56bba0ee",
-        "HR-202-2.3-structure_aware-18-255cc226",
-        "HR-202-2.4-structure_aware-19-27d0d207"
+        "HR-202-2.1-structure_aware-16-dad014bc",
+        "HR-202-2.5-structure_aware-20-0bce572c",
+        "HR-202-2.3-structure_aware-18-0238abe3",
+        "HR-202-2.4-structure_aware-19-02ab1dd8",
+        "HR-202-2.2-structure_aware-17-177413c4"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -152,7 +152,7 @@
         },
         "retrieved_expected_section": {
           "passed": true,
-          "detail": "expected [('HR-202', '2.1')], retrieved [('HR-202', '2'), ('HR-202', '2.1'), ('HR-202', '2.3'), ('HR-202', '2.4')]"
+          "detail": "expected [('HR-202', '2.1')], retrieved [('HR-202', '2.1'), ('HR-202', '2.2'), ('HR-202', '2.3'), ('HR-202', '2.4')]"
         }
       },
       "passed": true
@@ -164,11 +164,11 @@
       "regression": false,
       "abstained": false,
       "context_ids": [
-        "HR-201-2.1-structure_aware-3-31734419",
-        "HR-201-2-structure_aware-2-70dcf926",
-        "HR-201-2.2-structure_aware-4-8be53480",
-        "HR-207-4.2-structure_aware-60-bb5d852e",
-        "HR-202-2.1-structure_aware-16-56bba0ee"
+        "HR-201-2.1-structure_aware-2-caa68de2",
+        "HR-201-2.2-structure_aware-3-e92b6950",
+        "HR-201-2.3-structure_aware-4-009b0fbb",
+        "HR-204-2-structure_aware-41-2f266a49",
+        "HR-201-2.4-structure_aware-5-e6b398cb"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -177,7 +177,7 @@
         },
         "retrieved_expected_section": {
           "passed": true,
-          "detail": "expected [('HR-201', '2.1')], retrieved [('HR-201', '2'), ('HR-201', '2.1'), ('HR-201', '2.2'), ('HR-202', '2.1')]"
+          "detail": "expected [('HR-201', '2.1')], retrieved [('HR-201', '2.1'), ('HR-201', '2.2'), ('HR-201', '2.3'), ('HR-201', '2.4')]"
         }
       },
       "passed": true
@@ -189,11 +189,11 @@
       "regression": false,
       "abstained": false,
       "context_ids": [
-        "HR-202-2-structure_aware-15-52efb3a2",
-        "HR-202-2.4-structure_aware-19-27d0d207",
-        "HR-202-2.5-structure_aware-20-d17f92b6",
-        "HR-202-1-structure_aware-14-1187a4d4",
-        "HR-202-2.1-structure_aware-16-56bba0ee"
+        "HR-202-2.4-structure_aware-19-02ab1dd8",
+        "HR-202-2.5-structure_aware-20-0bce572c",
+        "HR-202-2.1-structure_aware-16-dad014bc",
+        "HR-202-1-structure_aware-15-37ea7325",
+        "HR-202-2.3-structure_aware-18-0238abe3"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -202,7 +202,7 @@
         },
         "retrieved_expected_section": {
           "passed": true,
-          "detail": "expected [('HR-202', '2.4')], retrieved [('HR-202', '1'), ('HR-202', '2'), ('HR-202', '2.1'), ('HR-202', '2.4')]"
+          "detail": "expected [('HR-202', '2.4')], retrieved [('HR-202', '1'), ('HR-202', '2.1'), ('HR-202', '2.3'), ('HR-202', '2.4')]"
         }
       },
       "passed": true
@@ -214,11 +214,11 @@
       "regression": false,
       "abstained": false,
       "context_ids": [
-        "HR-203-5.1-structure_aware-29-acc5c958",
-        "HR-203-5-structure_aware-28-341d4ca0",
-        "HR-203-5.2-structure_aware-30-6f53e7bf",
-        "HR-203-2-structure_aware-25-a97dd9f1",
-        "HR-203-1-structure_aware-24-e98e2d66"
+        "HR-203-5.1-structure_aware-31-100a47cc",
+        "HR-203-2-structure_aware-28-10ae4543",
+        "HR-205-3.3-structure_aware-56-542ace5a",
+        "HR-203-1-structure_aware-27-971d2875",
+        "HR-203-5.2-structure_aware-32-195f351b"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -227,7 +227,7 @@
         },
         "retrieved_expected_section": {
           "passed": true,
-          "detail": "expected [('HR-203', '5.2')], retrieved [('HR-203', '1'), ('HR-203', '2'), ('HR-203', '5'), ('HR-203', '5.1')]"
+          "detail": "expected [('HR-203', '5.2')], retrieved [('HR-203', '1'), ('HR-203', '2'), ('HR-203', '5.1'), ('HR-203', '5.2')]"
         }
       },
       "passed": true
@@ -239,11 +239,11 @@
       "regression": false,
       "abstained": false,
       "context_ids": [
-        "HR-202-2.5-structure_aware-20-d17f92b6",
-        "HR-202-2-structure_aware-15-52efb3a2",
-        "HR-202-2.4-structure_aware-19-27d0d207",
-        "HR-202-2.3-structure_aware-18-255cc226",
-        "HR-202-1-structure_aware-14-1187a4d4"
+        "HR-202-2.5-structure_aware-20-0bce572c",
+        "HR-202-2.4-structure_aware-19-02ab1dd8",
+        "HR-201-6-structure_aware-12-47a5d044",
+        "HR-202-3-structure_aware-22-d04191a9",
+        "HR-202-2.3-structure_aware-18-0238abe3"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -252,7 +252,7 @@
         },
         "retrieved_expected_section": {
           "passed": true,
-          "detail": "expected [('HR-202', '2.5')], retrieved [('HR-202', '1'), ('HR-202', '2'), ('HR-202', '2.3'), ('HR-202', '2.4')]"
+          "detail": "expected [('HR-202', '2.5')], retrieved [('HR-201', '6'), ('HR-202', '2.3'), ('HR-202', '2.4'), ('HR-202', '2.5')]"
         }
       },
       "passed": true
@@ -264,11 +264,11 @@
       "regression": false,
       "abstained": false,
       "context_ids": [
-        "HR-205-3.1-structure_aware-47-822a4dca",
-        "HR-205-3-structure_aware-46-75c8cc45",
-        "HR-205-3.2-structure_aware-48-ce9fda06",
-        "HR-205-1-structure_aware-44-bbfd8ede",
-        "HR-205-3.4-structure_aware-51-67551851"
+        "HR-205-3.1-structure_aware-54-f5f5c509",
+        "HR-205-3.2-structure_aware-55-ddb5c508",
+        "HR-205-1-structure_aware-52-bcc7de07",
+        "HR-203-8-structure_aware-36-9db9538c",
+        "HR-205-4-structure_aware-58-739d3c4c"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -277,7 +277,7 @@
         },
         "retrieved_expected_section": {
           "passed": true,
-          "detail": "expected [('HR-205', '3.1')], retrieved [('HR-205', '1'), ('HR-205', '3'), ('HR-205', '3.1'), ('HR-205', '3.2')]"
+          "detail": "expected [('HR-205', '3.1')], retrieved [('HR-203', '8'), ('HR-205', '1'), ('HR-205', '3.1'), ('HR-205', '3.2')]"
         }
       },
       "passed": true
@@ -289,11 +289,11 @@
       "regression": true,
       "abstained": false,
       "context_ids": [
-        "HR-201-2-structure_aware-2-70dcf926",
-        "HR-201-2.2-structure_aware-4-8be53480",
-        "HR-201-2.1-structure_aware-3-31734419",
-        "HR-207-unknown-structure_aware-61-792d661a",
-        "HR-207-4.2-structure_aware-60-bb5d852e"
+        "HR-201-2.1-structure_aware-2-caa68de2",
+        "HR-201-2.2-structure_aware-3-e92b6950",
+        "HR-201-3.1-structure_aware-6-a0e90c6a",
+        "HR-206-1-structure_aware-63-a12a7a89",
+        "HR-202-2.4-structure_aware-19-02ab1dd8"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -301,11 +301,11 @@
           "detail": "answered"
         },
         "retrieved_expected_section": {
-          "passed": false,
-          "detail": "expected [('HR-202', '2.4')], retrieved [('HR-201', '2'), ('HR-201', '2.1'), ('HR-201', '2.2'), ('HR-207', '4.2')]"
+          "passed": true,
+          "detail": "expected [('HR-202', '2.4')], retrieved [('HR-201', '2.1'), ('HR-201', '2.2'), ('HR-201', '3.1'), ('HR-202', '2.4')]"
         }
       },
-      "passed": false
+      "passed": true
     },
     {
       "id": "E14",
@@ -314,36 +314,11 @@
       "regression": false,
       "abstained": false,
       "context_ids": [
-        "HR-201-2.1-structure_aware-3-31734419",
-        "HR-201-3.1-structure_aware-7-c4f6c1c6",
-        "HR-207-4.2-structure_aware-60-bb5d852e",
-        "HR-207-3-structure_aware-57-3ecec693",
-        "HR-202-3-structure_aware-21-597580c0"
-      ],
-      "checks": {
-        "refusal_is_correct": {
-          "passed": true,
-          "detail": "answered"
-        },
-        "retrieved_expected_section": {
-          "passed": true,
-          "detail": "expected [('HR-207', '4.2')], retrieved [('HR-201', '2.1'), ('HR-201', '3.1'), ('HR-202', '3'), ('HR-207', '3')]"
-        }
-      },
-      "passed": true
-    },
-    {
-      "id": "E15",
-      "mode": "wrong_policy",
-      "question": "I need a temporary change to my hours for a couple of weeks, what should I do?",
-      "regression": false,
-      "abstained": false,
-      "context_ids": [
-        "HR-201-2-structure_aware-2-70dcf926",
-        "HR-201-2.1-structure_aware-3-31734419",
-        "HR-204-2-structure_aware-35-c686c2b9",
-        "HR-201-2.3-structure_aware-5-78bdb044",
-        "HR-207-unknown-structure_aware-61-792d661a"
+        "HR-206-3-structure_aware-65-695e77e5",
+        "HR-201-2.1-structure_aware-2-caa68de2",
+        "HR-201-3.1-structure_aware-6-a0e90c6a",
+        "HR-205-3.2-structure_aware-55-ddb5c508",
+        "HR-202-2.4-structure_aware-19-02ab1dd8"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -352,23 +327,23 @@
         },
         "retrieved_expected_section": {
           "passed": false,
-          "detail": "expected [('HR-204', '4.1')], retrieved [('HR-201', '2'), ('HR-201', '2.1'), ('HR-201', '2.3'), ('HR-204', '2')]"
+          "detail": "expected [('HR-206', '4.1')], retrieved [('HR-201', '2.1'), ('HR-201', '3.1'), ('HR-202', '2.4'), ('HR-205', '3.2')]"
         }
       },
       "passed": false
     },
     {
-      "id": "E16",
+      "id": "E15",
       "mode": "wrong_policy",
-      "question": "Do I get paid extra for staying late?",
+      "question": "I need a temporary change to my hours for a couple of weeks, what should I do?",
       "regression": false,
       "abstained": false,
       "context_ids": [
-        "HR-201-2-structure_aware-2-70dcf926",
-        "HR-201-2.3-structure_aware-5-78bdb044",
-        "HR-201-2.2-structure_aware-4-8be53480",
-        "HR-202-4-structure_aware-22-a317f017",
-        "HR-202-2-structure_aware-15-52efb3a2"
+        "HR-204-4.1-structure_aware-43-aae6b180",
+        "HR-201-2.1-structure_aware-2-caa68de2",
+        "HR-202-2.4-structure_aware-19-02ab1dd8",
+        "HR-206-4.2-structure_aware-67-50b0a37a",
+        "HR-206-7-structure_aware-71-0b10ebdf"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -377,7 +352,32 @@
         },
         "retrieved_expected_section": {
           "passed": true,
-          "detail": "expected [('HR-201', '2.3')], retrieved [('HR-201', '2'), ('HR-201', '2.2'), ('HR-201', '2.3'), ('HR-202', '2')]"
+          "detail": "expected [('HR-204', '4.1')], retrieved [('HR-201', '2.1'), ('HR-202', '2.4'), ('HR-204', '4.1'), ('HR-206', '4.2')]"
+        }
+      },
+      "passed": true
+    },
+    {
+      "id": "E16",
+      "mode": "wrong_policy",
+      "question": "Do I get paid extra for staying late?",
+      "regression": false,
+      "abstained": false,
+      "context_ids": [
+        "HR-201-2.3-structure_aware-4-009b0fbb",
+        "HR-202-3-structure_aware-22-d04191a9",
+        "HR-201-2.2-structure_aware-3-e92b6950",
+        "HR-201-2.1-structure_aware-2-caa68de2",
+        "HR-201-3.3-structure_aware-8-c6c663c2"
+      ],
+      "checks": {
+        "refusal_is_correct": {
+          "passed": true,
+          "detail": "answered"
+        },
+        "retrieved_expected_section": {
+          "passed": true,
+          "detail": "expected [('HR-201', '2.3')], retrieved [('HR-201', '2.1'), ('HR-201', '2.2'), ('HR-201', '2.3'), ('HR-201', '3.3')]"
         }
       },
       "passed": true
@@ -389,11 +389,11 @@
       "regression": false,
       "abstained": false,
       "context_ids": [
-        "HR-204-3-structure_aware-36-8ee447c5",
-        "HR-207-unknown-structure_aware-61-792d661a",
-        "HR-204-4.2-structure_aware-39-1266d5f7",
-        "HR-204-2-structure_aware-35-c686c2b9",
-        "HR-207-4.2-structure_aware-60-bb5d852e"
+        "HR-204-3-structure_aware-42-d1e5c42b",
+        "HR-204-4.2-structure_aware-44-f86ffdd8",
+        "HR-204-1-structure_aware-40-f108c2e5",
+        "HR-204-2-structure_aware-41-2f266a49",
+        "HR-206-4.2-structure_aware-67-50b0a37a"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -402,7 +402,7 @@
         },
         "retrieved_expected_section": {
           "passed": true,
-          "detail": "expected [('HR-204', '3')], retrieved [('HR-204', '2'), ('HR-204', '3'), ('HR-204', '4.2'), ('HR-207', '4.2')]"
+          "detail": "expected [('HR-204', '3')], retrieved [('HR-204', '1'), ('HR-204', '2'), ('HR-204', '3'), ('HR-204', '4.2')]"
         }
       },
       "passed": true
@@ -414,11 +414,11 @@
       "regression": false,
       "abstained": false,
       "context_ids": [
-        "HR-207-unknown-structure_aware-61-792d661a",
-        "HR-207-4.2-structure_aware-60-bb5d852e",
-        "HR-207-3-structure_aware-57-3ecec693",
-        "HR-204-3-structure_aware-36-8ee447c5",
-        "HR-202-2.5-structure_aware-20-d17f92b6"
+        "HR-206-4.3-structure_aware-68-2f1d5b81",
+        "HR-206-4.2-structure_aware-67-50b0a37a",
+        "HR-202-2.5-structure_aware-20-0bce572c",
+        "HR-206-3-structure_aware-65-695e77e5",
+        "HR-204-3-structure_aware-42-d1e5c42b"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -427,7 +427,7 @@
         },
         "retrieved_expected_section": {
           "passed": true,
-          "detail": "expected [('HR-207', '4.2')], retrieved [('HR-202', '2.5'), ('HR-204', '3'), ('HR-207', '3'), ('HR-207', '4.2')]"
+          "detail": "expected [('HR-206', '4.2')], retrieved [('HR-202', '2.5'), ('HR-204', '3'), ('HR-206', '3'), ('HR-206', '4.2')]"
         }
       },
       "passed": true
@@ -439,11 +439,11 @@
       "regression": false,
       "abstained": false,
       "context_ids": [
-        "HR-205-3.2-structure_aware-48-ce9fda06",
-        "HR-205-unknown-structure_aware-50-d6996f09",
-        "HR-205-3.1-structure_aware-47-822a4dca",
-        "HR-205-3.3-structure_aware-49-0d5b6819",
-        "HR-205-3-structure_aware-46-75c8cc45"
+        "HR-205-3.4-structure_aware-57-84d7c687",
+        "HR-205-3.2-structure_aware-55-ddb5c508",
+        "HR-205-1-structure_aware-52-bcc7de07",
+        "HR-205-3.1-structure_aware-54-f5f5c509",
+        "HR-205-3.3-structure_aware-56-542ace5a"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -452,7 +452,7 @@
         },
         "retrieved_expected_section": {
           "passed": true,
-          "detail": "expected [('HR-205', '3.3')], retrieved [('HR-205', '3'), ('HR-205', '3.1'), ('HR-205', '3.2'), ('HR-205', '3.3')]"
+          "detail": "expected [('HR-205', '3.3')], retrieved [('HR-205', '1'), ('HR-205', '3.1'), ('HR-205', '3.2'), ('HR-205', '3.3')]"
         }
       },
       "passed": true
@@ -464,11 +464,11 @@
       "regression": false,
       "abstained": false,
       "context_ids": [
-        "HR-202-2.4-structure_aware-19-27d0d207",
-        "HR-201-3.2-structure_aware-9-b408df82",
-        "HR-201-3.1-structure_aware-7-c4f6c1c6",
-        "HR-201-4-structure_aware-11-7e070a9f",
-        "HR-202-2.5-structure_aware-20-d17f92b6"
+        "HR-202-2.4-structure_aware-19-02ab1dd8",
+        "HR-201-3.2-structure_aware-7-09a0be64",
+        "HR-201-3.1-structure_aware-6-a0e90c6a",
+        "HR-201-3.4-structure_aware-9-1a669907",
+        "HR-201-2.4-structure_aware-5-e6b398cb"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -477,7 +477,7 @@
         },
         "retrieved_expected_section": {
           "passed": true,
-          "detail": "expected [('HR-201', '3.1')], retrieved [('HR-201', '3.1'), ('HR-201', '3.2'), ('HR-201', '4'), ('HR-202', '2.4')]"
+          "detail": "expected [('HR-201', '3.1')], retrieved [('HR-201', '2.4'), ('HR-201', '3.1'), ('HR-201', '3.2'), ('HR-201', '3.4')]"
         }
       },
       "passed": true
@@ -489,11 +489,11 @@
       "regression": false,
       "abstained": false,
       "context_ids": [
-        "HR-207-4.2-structure_aware-60-bb5d852e",
-        "HR-207-unknown-structure_aware-61-792d661a",
-        "HR-204-4.2-structure_aware-39-1266d5f7",
-        "HR-204-3-structure_aware-36-8ee447c5",
-        "HR-204-4.1-structure_aware-38-e317576c"
+        "HR-206-4.2-structure_aware-67-50b0a37a",
+        "HR-204-4.1-structure_aware-43-aae6b180",
+        "HR-206-1-structure_aware-63-a12a7a89",
+        "HR-206-6-structure_aware-70-bdcee771",
+        "HR-204-3-structure_aware-42-d1e5c42b"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -502,7 +502,7 @@
         },
         "retrieved_expected_section": {
           "passed": true,
-          "detail": "expected [('HR-207', '4.2')], retrieved [('HR-204', '3'), ('HR-204', '4.1'), ('HR-204', '4.2'), ('HR-207', '4.2')]"
+          "detail": "expected [('HR-206', '4.2')], retrieved [('HR-204', '3'), ('HR-204', '4.1'), ('HR-206', '1'), ('HR-206', '4.2')]"
         }
       },
       "passed": true
@@ -514,11 +514,11 @@
       "regression": false,
       "abstained": false,
       "context_ids": [
-        "HR-201-2.2-structure_aware-4-8be53480",
-        "HR-201-2.1-structure_aware-3-31734419",
-        "HR-201-2-structure_aware-2-70dcf926",
-        "HR-201-2.3-structure_aware-5-78bdb044",
-        "HR-201-3.1-structure_aware-7-c4f6c1c6"
+        "HR-201-2.1-structure_aware-2-caa68de2",
+        "HR-201-2.2-structure_aware-3-e92b6950",
+        "HR-201-3.3-structure_aware-8-c6c663c2",
+        "HR-204-4.2-structure_aware-44-f86ffdd8",
+        "HR-203-7-structure_aware-35-978a6b58"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -527,7 +527,7 @@
         },
         "retrieved_expected_section": {
           "passed": true,
-          "detail": "expected [('HR-201', '2.1')], retrieved [('HR-201', '2'), ('HR-201', '2.1'), ('HR-201', '2.2'), ('HR-201', '2.3')]"
+          "detail": "expected [('HR-201', '2.1')], retrieved [('HR-201', '2.1'), ('HR-201', '2.2'), ('HR-201', '3.3'), ('HR-203', '7')]"
         }
       },
       "passed": true
@@ -539,11 +539,11 @@
       "regression": false,
       "abstained": false,
       "context_ids": [
-        "HR-204-3-structure_aware-36-8ee447c5",
-        "HR-204-4.2-structure_aware-39-1266d5f7",
-        "HR-204-4-structure_aware-37-e5179cd0",
-        "HR-203-6-structure_aware-32-e73016d3",
-        "HR-207-4.2-structure_aware-60-bb5d852e"
+        "HR-204-4.2-structure_aware-44-f86ffdd8",
+        "HR-204-3-structure_aware-42-d1e5c42b",
+        "HR-204-2-structure_aware-41-2f266a49",
+        "HR-204-9-structure_aware-49-97ecf8cc",
+        "HR-204-1-structure_aware-40-f108c2e5"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -551,11 +551,11 @@
           "detail": "answered"
         },
         "retrieved_expected_section": {
-          "passed": false,
-          "detail": "expected [('HR-204', '6')], retrieved [('HR-203', '6'), ('HR-204', '3'), ('HR-204', '4'), ('HR-204', '4.2')]"
+          "passed": true,
+          "detail": "expected [('HR-204', '9')], retrieved [('HR-204', '1'), ('HR-204', '2'), ('HR-204', '3'), ('HR-204', '4.2')]"
         }
       },
-      "passed": false
+      "passed": true
     },
     {
       "id": "E24",
@@ -564,11 +564,11 @@
       "regression": false,
       "abstained": false,
       "context_ids": [
-        "HR-205-3.2-structure_aware-48-ce9fda06",
-        "HR-205-3.1-structure_aware-47-822a4dca",
-        "HR-205-unknown-structure_aware-50-d6996f09",
-        "HR-205-3.3-structure_aware-49-0d5b6819",
-        "HR-205-3-structure_aware-46-75c8cc45"
+        "HR-205-3.4-structure_aware-57-84d7c687",
+        "HR-205-3.1-structure_aware-54-f5f5c509",
+        "HR-205-3.2-structure_aware-55-ddb5c508",
+        "HR-205-3.3-structure_aware-56-542ace5a",
+        "HR-205-4-structure_aware-58-739d3c4c"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -577,7 +577,7 @@
         },
         "retrieved_expected_section": {
           "passed": false,
-          "detail": "expected [('HR-205', '5')], retrieved [('HR-205', '3'), ('HR-205', '3.1'), ('HR-205', '3.2'), ('HR-205', '3.3')]"
+          "detail": "expected [('HR-205', '5')], retrieved [('HR-205', '3.1'), ('HR-205', '3.2'), ('HR-205', '3.3'), ('HR-205', '3.4')]"
         }
       },
       "passed": false
@@ -589,11 +589,11 @@
       "regression": false,
       "abstained": false,
       "context_ids": [
-        "HR-203-5.1-structure_aware-29-acc5c958",
-        "HR-203-5.3-structure_aware-31-98f037c0",
-        "HR-203-6-structure_aware-32-e73016d3",
-        "HR-203-5.2-structure_aware-30-6f53e7bf",
-        "HR-203-5-structure_aware-28-341d4ca0"
+        "HR-203-9-structure_aware-37-bbb3c367",
+        "HR-203-1-structure_aware-27-971d2875",
+        "HR-203-5.1-structure_aware-31-100a47cc",
+        "HR-201-7-structure_aware-13-2bbe5d60",
+        "HR-203-2-structure_aware-28-10ae4543"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -602,7 +602,7 @@
         },
         "retrieved_expected_section": {
           "passed": true,
-          "detail": "expected [('HR-203', '6')], retrieved [('HR-203', '5'), ('HR-203', '5.1'), ('HR-203', '5.2'), ('HR-203', '5.3')]"
+          "detail": "expected [('HR-203', '9')], retrieved [('HR-201', '7'), ('HR-203', '1'), ('HR-203', '2'), ('HR-203', '5.1')]"
         }
       },
       "passed": true
@@ -614,11 +614,11 @@
       "regression": false,
       "abstained": false,
       "context_ids": [
-        "HR-201-2.2-structure_aware-4-8be53480",
-        "HR-201-2-structure_aware-2-70dcf926",
-        "HR-204-3-structure_aware-36-8ee447c5",
-        "HR-202-2.4-structure_aware-19-27d0d207",
-        "HR-201-3.1-structure_aware-7-c4f6c1c6"
+        "HR-201-2.2-structure_aware-3-e92b6950",
+        "HR-202-2.4-structure_aware-19-02ab1dd8",
+        "HR-202-3-structure_aware-22-d04191a9",
+        "HR-202-2.5-structure_aware-20-0bce572c",
+        "HR-202-2.6-structure_aware-21-e7efd150"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -627,7 +627,7 @@
         },
         "retrieved_expected_section": {
           "passed": true,
-          "detail": "expected [('HR-201', '2.2')], retrieved [('HR-201', '2'), ('HR-201', '2.2'), ('HR-201', '3.1'), ('HR-202', '2.4')]"
+          "detail": "expected [('HR-201', '2.2')], retrieved [('HR-201', '2.2'), ('HR-202', '2.4'), ('HR-202', '2.5'), ('HR-202', '2.6')]"
         }
       },
       "passed": true
@@ -639,11 +639,11 @@
       "regression": false,
       "abstained": false,
       "context_ids": [
-        "HR-204-5-structure_aware-41-0c800b39",
-        "HR-204-4.2-structure_aware-39-1266d5f7",
-        "HR-204-3-structure_aware-36-8ee447c5",
-        "HR-204-2-structure_aware-35-c686c2b9",
-        "HR-204-4-structure_aware-37-e5179cd0"
+        "HR-204-5-structure_aware-45-ce15b763",
+        "HR-204-1-structure_aware-40-f108c2e5",
+        "HR-204-3-structure_aware-42-d1e5c42b",
+        "HR-204-2-structure_aware-41-2f266a49",
+        "HR-204-4.2-structure_aware-44-f86ffdd8"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -652,7 +652,7 @@
         },
         "retrieved_expected_section": {
           "passed": true,
-          "detail": "expected [('HR-204', '5')], retrieved [('HR-204', '2'), ('HR-204', '3'), ('HR-204', '4'), ('HR-204', '4.2')]"
+          "detail": "expected [('HR-204', '5')], retrieved [('HR-204', '1'), ('HR-204', '2'), ('HR-204', '3'), ('HR-204', '4.2')]"
         }
       },
       "passed": true
@@ -664,11 +664,11 @@
       "regression": true,
       "abstained": false,
       "context_ids": [
-        "HR-202-2.4-structure_aware-19-27d0d207",
-        "HR-204-3-structure_aware-36-8ee447c5",
-        "HR-202-2.2-structure_aware-17-bd32e550",
-        "HR-204-4.3-structure_aware-40-f84535a3",
-        "HR-204-4.2-structure_aware-39-1266d5f7"
+        "HR-202-2.4-structure_aware-19-02ab1dd8",
+        "HR-204-3-structure_aware-42-d1e5c42b",
+        "HR-204-4.1-structure_aware-43-aae6b180",
+        "HR-204-7-structure_aware-47-63189e31",
+        "HR-204-6-structure_aware-46-84c439c3"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -685,11 +685,11 @@
       "regression": true,
       "abstained": false,
       "context_ids": [
-        "HR-202-2.4-structure_aware-19-27d0d207",
-        "HR-204-3-structure_aware-36-8ee447c5",
-        "HR-202-2-structure_aware-15-52efb3a2",
-        "HR-204-4.2-structure_aware-39-1266d5f7",
-        "HR-202-2.1-structure_aware-16-56bba0ee"
+        "HR-202-2.4-structure_aware-19-02ab1dd8",
+        "HR-204-7-structure_aware-47-63189e31",
+        "HR-204-3-structure_aware-42-d1e5c42b",
+        "HR-204-4.1-structure_aware-43-aae6b180",
+        "HR-203-7-structure_aware-35-978a6b58"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -706,11 +706,11 @@
       "regression": true,
       "abstained": false,
       "context_ids": [
-        "HR-202-2-structure_aware-15-52efb3a2",
-        "HR-202-2.4-structure_aware-19-27d0d207",
-        "HR-202-2.5-structure_aware-20-d17f92b6",
-        "HR-202-1-structure_aware-14-1187a4d4",
-        "HR-202-2.1-structure_aware-16-56bba0ee"
+        "HR-202-2.4-structure_aware-19-02ab1dd8",
+        "HR-202-2.5-structure_aware-20-0bce572c",
+        "HR-202-2.1-structure_aware-16-dad014bc",
+        "HR-202-1-structure_aware-15-37ea7325",
+        "HR-202-2.3-structure_aware-18-0238abe3"
       ],
       "checks": {
         "refusal_is_correct": {
@@ -719,7 +719,7 @@
         },
         "retrieved_expected_section": {
           "passed": true,
-          "detail": "expected [('HR-202', '2.4')], retrieved [('HR-202', '1'), ('HR-202', '2'), ('HR-202', '2.1'), ('HR-202', '2.4')]"
+          "detail": "expected [('HR-202', '2.4')], retrieved [('HR-202', '1'), ('HR-202', '2.1'), ('HR-202', '2.3'), ('HR-202', '2.4')]"
         }
       },
       "passed": true

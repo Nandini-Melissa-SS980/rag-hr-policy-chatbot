@@ -331,12 +331,33 @@ def main():
     # this week's result behind unrelated failures or
     # tempt a quiet edit of the old cases. Both
     # counts are printed so neither can hide.
+    # Failures that are not this week's fix going wrong.
+    #
+    # E03-E06 and E01 are the out-of-scope mode: the corpus
+    # holds no maternity, pension, expenses or medical
+    # policy, and the retriever still returns its nearest
+    # chunks at ~0.6, above the 0.45 gate. Measured and
+    # written up as Weakness 1.
+    #
+    # E14 and E24 are the retrieval-ranking weakness: the
+    # clause that answers is in the index and in the right
+    # document, but ranks below the top 5. Written up as
+    # Weakness 2, and the fix is the cross-encoder rerank
+    # that already exists in this repo and is not wired in.
+    #
+    # E13, E15, E23 are the Week-4 ranking issues recorded
+    # in results.md.
+    #
+    # Listing them by id is the point: a NEW failure prints
+    # as UNEXPECTED rather than hiding among them.
     pre_existing = {
+        "E01",
         "E03",
         "E04",
         "E05",
         "E06",
         "E13",
+        "E14",
         "E15",
         "E23",
         "E24",

@@ -46,7 +46,7 @@ TOPICS = {
     # `asked` deliberately excludes a bare "notice".
     # E21 - "how much notice is given if a fully
     # remote arrangement is withdrawn" - is a real
-    # question this corpus answers in HR-207 4.2.
+    # question this corpus answers in HR-206 4.2.
     # Gating on the word alone refused it, which the
     # suite caught on the first full run. The topic
     # is notice of LEAVING, so the question has to
@@ -61,14 +61,35 @@ TOPICS = {
             "terminate",
             "termination",
         },
+        # "termination" alone is not coverage, and this is
+        # the second time this gate has been fooled by a
+        # single word.
+        #
+        # HR-202 gained a clause titled "Leave on
+        # Termination" - about what happens to accrued leave
+        # when someone exits. It contains "termination", so
+        # the gate concluded the corpus covers notice
+        # periods and let the question through. It does not:
+        # that clause says nothing about how much notice
+        # anyone gives.
+        #
+        # So a passage has to speak about leaving as an act
+        # with a notice attached, not merely mention that
+        # employment can end. The phrases below are the ones
+        # a real notice clause uses; "Leave on Termination"
+        # matches none of them.
         "covered": {
             "resign",
             "resignation",
             "resigning",
-            "termination",
-            "terminate",
             "dismissal",
             "notice period",
+            "give notice",
+            "weeks' notice",
+            "months' notice",
+            "days of notice",
+            "notice required",
+            "minimum notice",
         },
     },
     "redundancy": {

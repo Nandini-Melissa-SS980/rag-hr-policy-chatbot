@@ -413,3 +413,128 @@ def system_info():
             ),
         },
     }
+
+
+@router.get("/policies/{policy_id}")
+def policy_text(policy_id: str):
+    """
+    One policy's full text, read from the PDF the app
+    actually ingests.
+
+    Read from the PDF rather than from the Markdown source,
+    so what a reader sees in the modal is what the retriever
+    chunked. If those two ever diverge, the modal is the
+    place it should show.
+    """
+
+    import os
+    import re
+
+    from fastapi import HTTPException
+
+    # The id comes from a URL. Anything but the expected
+    # shape is rejected before it reaches the filesystem.
+    if not re.fullmatch(r"HR-\d{3}", policy_id):
+
+        raise HTTPException(
+            status_code=400,
+            detail=(
+                "A policy id looks like HR-201."
+            ),
+        )
+
+    path = os.path.join(
+        config.ADDENDA_DIR,
+        f"{policy_id}.pdf",
+    )
+
+    if not os.path.exists(path):
+
+        raise HTTPException(
+            status_code=404,
+            detail=f"No policy {policy_id}.",
+        )
+
+    try:
+        import pymupdf
+
+        document = pymupdf.open(path)
+
+        pages = [
+            page.get_text() for page in document
+        ]
+
+        document.close()
+
+    except Exception as error:
+
+        raise HTTPException(
+            status_code=500,
+            detail=(
+                "Could not read the policy: "
+                f"{type(error).__name__}"
+            ),
+        ) from error
+
+    header, body = split_header(
+        "\n".join(pages)
+    )
+
+    return {
+        "policy_id": policy_id,
+        "header": header,
+        "text": body,
+        "pages": len(pages),
+    }
+
+
+def split_header(text: str) -> tuple[dict, str]:
+    """
+    Pull the title and the labelled header lines off the
+    front, so the modal can render them as a block rather
+    than as the first paragraph of the policy.
+    """
+
+    import re
+
+    lines = text.split("\n")
+
+    header: dict = {}
+
+    body_start = 0
+
+    for index, line in enumerate(lines[:8]):
+
+        if index == 0:
+            header["title"] = line.strip()
+            body_start = 1
+            continue
+
+        # Several "Label: value" pairs per line. The
+        # lookahead stops each value at the next label
+        # rather than swallowing the rest of the line,
+        # which is what dropped Policy ID, Version and
+        # Effective Date on the first attempt.
+        found = dict(
+            re.findall(
+                r"([A-Z][A-Za-z ]*?):\s*"
+                r"(.*?)(?=\s+[A-Z][A-Za-z ]*?:|$)",
+                line.strip(),
+            )
+        )
+
+        if not found:
+            break
+
+        header.update(
+            {
+                key.strip(): value.strip()
+                for key, value in found.items()
+            }
+        )
+
+        body_start = index + 1
+
+    return header, "\n".join(
+        lines[body_start:]
+    ).strip()

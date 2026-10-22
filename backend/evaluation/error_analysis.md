@@ -54,10 +54,10 @@ assigned afterwards.
 | Trace | Question | Honest note | Code |
 | --- | --- | --- | --- |
 | T01 | How many days of annual leave do I get? | Rank 1 is the bare heading `2 Annual Leave` (14 chars, no information). The chunk that actually answers — §2.1, twenty-five days — is at rank 3. | empty-chunk |
-| T02 | How many days a week can I work from home? | Correct chunk (HR-207 §4.2) is rank 1. Rank 2 is HR-201 §2.1 standard working hours, unrelated. | ok, minor noise |
-| T03 | Which days do I have to come into the office? | Ranks 1–2 are the attendance policy. The answer — Tuesday and Wednesday anchor days, HR-207 §4.2 — is at rank 3, one slot from being cut. | wrong-policy-first |
+| T02 | How many days a week can I work from home? | Correct chunk (HR-206 §4.2) is rank 1. Rank 2 is HR-201 §2.1 standard working hours, unrelated. | ok, minor noise |
+| T03 | Which days do I have to come into the office? | Ranks 1–2 are the attendance policy. The answer — Tuesday and Wednesday anchor days, HR-206 §4.2 — is at rank 3, one slot from being cut. | wrong-policy-first |
 | T04 | Can I work from another country for a few weeks? | Rank 1 does contain the answer ("remote work must be performed from the employee's country of employment") but it sits in a chunk labelled `section=unknown`, so it cannot be cited properly. | unciteable |
-| T05 | Can I work fully remote? | HR-207 §4.2 at rank 1, which covers fully remote by exception. Clean. | ok |
+| T05 | Can I work fully remote? | HR-206 §4.2 at rank 1, which covers fully remote by exception. Clean. | ok |
 | T06 | Can I carry unused leave into next year? | HR-202 §2.5 correct at rank 1. Rank 2 is the empty `2 Annual Leave` heading. | ok, wasted slot |
 | T07 | Can I use my own laptop for work? | Answer is at rank 2 (§5, company data only on company-provided devices). Reasonable. | ok |
 | T08 | How am I rated in my review? | HR-203 §5.1 and §5.2 at ranks 1–2, both correct. Best trace in the batch. | ok |
@@ -67,7 +67,7 @@ assigned afterwards.
 | T12 | How much maternity leave do I get? | **Nothing in the corpus covers maternity leave.** The app retrieved annual leave sections at 0.70 and chose to answer. It will almost certainly report the twenty-five-day annual entitlement as maternity leave. | out-of-scope |
 | T13 | What is the pension contribution? | No pension policy exists. Retrieved annual leave chunks at 0.63 and chose to answer. | out-of-scope |
 | T14 | Do we get private health insurance? | No such policy. Retrieved annual leave and remote-working eligibility at 0.54 and chose to answer. | out-of-scope |
-| T15 | How do I claim travel expenses? | No travel policy. Retrieved HR-207 §4.3 *Equipment and Expenses* at 0.67 — which is about home-office allowance. The most dangerous case in the batch: the chunk is topically adjacent, so any answer will read as authoritative and be wrong. | out-of-scope |
+| T15 | How do I claim travel expenses? | No travel policy. Retrieved HR-206 §4.3 *Equipment and Expenses* at 0.67 — which is about home-office allowance. The most dangerous case in the batch: the chunk is topically adjacent, so any answer will read as authoritative and be wrong. | out-of-scope |
 | T16 | Is there a training budget? | No training policy. Retrieved the equipment/expenses section and an empty heading, and chose to answer. | out-of-scope |
 | T17 | leave? | Two of the three slots are empty headings (`2 Annual Leave`, `4 Making a Request`). Only one slot carries content. A one-word query gets a two-thirds-empty context. | empty-chunk |
 | T18 | How do I book time off? | Retrieved HR-201 working hours and rest breaks. The correct section — HR-202 §2.4 *Requesting and Taking Annual Leave* — is **absent from the top 3 entirely**. A very common question answered from the wrong policy. | wrong-policy-first |
@@ -87,7 +87,7 @@ entirely sub-sections, so chunks like `2 Annual Leave` (14 chars) and
 `3 Promotion` (11 chars) enter the index carrying no information.
 
 **Seven** such heading chunks are in the index — HR-201/2, HR-201/3,
-HR-202/2, HR-203/5, HR-204/4, HR-205/3, HR-207/4 — of which five appear
+HR-202/2, HR-203/5, HR-204/4, HR-205/3, HR-206/4 — of which five appear
 in this sample. An eighth chunk under 60 characters, HR-201/`unknown`
 (`"the first day back at work."`), is a page-boundary fragment rather than
 a heading; it belongs to group D but merges the same way.
