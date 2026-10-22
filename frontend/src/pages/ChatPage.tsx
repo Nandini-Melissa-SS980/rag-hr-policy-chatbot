@@ -45,6 +45,8 @@ export function ChatPage({
 
       const conversationId = appendTurn(userTurn);
 
+      const startedAt = Date.now();
+
       // Retrieval always runs: in retrieval-only mode it is
       // the answer, and otherwise it is the evidence shown
       // under the generated one. It also means a 429 on
@@ -52,10 +54,26 @@ export function ChatPage({
       const retrieved = await api.search({ question });
 
       if (retrievalOnly) {
+        // /api/search writes no trace, so these are measured
+        // here rather than read back from one. Tokens and
+        // cost are genuinely zero: no model was called.
+        // Labelled "retrieval-only" so a zero is never read
+        // as a missing measurement.
         appendTurn(
           {
             id: uid(),
             role: "assistant",
+            metrics: {
+              trace_id: "retrieval-only",
+              model: "none",
+              prompt_version: "-",
+              duration_ms: Date.now() - startedAt,
+              total_tokens: 0,
+              cost_usd: 0,
+              top_score: retrieved[0]?.score ?? 0,
+              retrieved: retrieved.length,
+              stages: {},
+            },
             content: retrieved.length
               ? `Retrieved ${retrieved.length} passage${retrieved.length === 1 ? "" : "s"} from the policy index. No answer was generated.`
               : "Nothing in the policy documents matched that question.",
@@ -86,6 +104,7 @@ export function ChatPage({
         updateTurn(conversationId, pendingId, {
           content: response.answer,
           sources: response.sources,
+          metrics: response.metrics,
           retrieved,
         });
       } catch (error) {

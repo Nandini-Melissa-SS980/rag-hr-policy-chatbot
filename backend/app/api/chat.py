@@ -4,7 +4,9 @@ from openai import OpenAIError, RateLimitError
 from app.models.schemas import (
     ChatRequest,
     ChatResponse,
+    RequestMetrics,
     SearchResult,
+    StageMetrics,
 )
 from app.services.answering import (
     answer_question,
@@ -198,4 +200,44 @@ def chat(
             "No answer was generated.",
         ),
         sources=sources,
+        metrics=metrics_from(trace),
+    )
+
+
+def metrics_from(trace: dict) -> RequestMetrics:
+    """
+    The trace, as the UI needs it.
+
+    Everything here was already recorded - this is a
+    projection, not a second measurement, so the number on
+    screen and the number in logs/requests.jsonl can never
+    disagree.
+    """
+
+    context = (trace.get("labels") or {}).get(
+        "context"
+    ) or []
+
+    return RequestMetrics(
+        trace_id=trace.get("trace_id", ""),
+        model=trace.get("model", ""),
+        prompt_version=trace.get(
+            "prompt_version",
+            "",
+        ),
+        duration_ms=trace.get("duration_ms", 0.0),
+        total_tokens=trace.get("total_tokens", 0),
+        cost_usd=trace.get("cost_usd", 0.0),
+        top_score=(
+            context[0].get("score", 0.0)
+            if context
+            else 0.0
+        ),
+        retrieved=len(context),
+        stages={
+            name: StageMetrics(**entry)
+            for name, entry in (
+                trace.get("cost_by_stage") or {}
+            ).items()
+        },
     )

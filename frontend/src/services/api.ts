@@ -12,6 +12,7 @@ import type {
   ChatResponse,
   SearchResult,
   StatsResponse,
+  SystemInfo,
 } from "@/types/api";
 
 const BASE = import.meta.env.VITE_API_BASE ?? "/api";
@@ -73,6 +74,9 @@ export const api = {
   health: () => request<{ status: string }>("/health"),
 
   stats: () => request<StatsResponse>("/stats"),
+
+  /** What the running system is made of. */
+  system: () => request<SystemInfo>("/system"),
 
   /** Retrieval only. Needs no model, so it works at 429. */
   search: (body: ChatRequest) =>

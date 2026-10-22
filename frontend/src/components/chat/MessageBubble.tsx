@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 import { User, TriangleAlert } from "lucide-react";
 import { BotGlyph } from "@/components/brand/Logo";
 import type { ChatTurn } from "@/types/api";
+import { MetricsBar } from "./MetricsBar";
 import { SourcesPanel } from "./SourcesPanel";
 
 function Avatar({ role }: { role: ChatTurn["role"] }) {
@@ -106,6 +107,10 @@ export function MessageBubble({ turn }: { turn: ChatTurn }) {
               <ReactMarkdown>{turn.content}</ReactMarkdown>
             )}
           </div>
+        )}
+
+        {!isUser && turn.metrics && (
+          <MetricsBar metrics={turn.metrics} />
         )}
 
         {!isUser && (

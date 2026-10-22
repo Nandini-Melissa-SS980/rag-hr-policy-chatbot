@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import {
   MessageSquare,
   FileText,
+  Cpu,
   History,
   Plus,
   Trash2,
@@ -25,6 +26,7 @@ interface SidebarProps {
 const NAV = [
   { to: "/", label: "Chat", icon: MessageSquare, end: true },
   { to: "/policies", label: "Policies", icon: FileText },
+  { to: "/system", label: "System", icon: Cpu },
 ];
 
 export function Sidebar({

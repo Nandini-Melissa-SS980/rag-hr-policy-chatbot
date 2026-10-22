@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 
 from app.api.chat import router
+from app.api.system import router as system_router
 
 
 app = FastAPI(
@@ -14,6 +15,7 @@ app = FastAPI(
 
 
 app.include_router(router)
+app.include_router(system_router)
 
 
 @app.get("/")
