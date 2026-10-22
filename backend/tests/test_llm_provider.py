@@ -263,16 +263,46 @@ def test_gemini_without_a_key_raises(monkeypatch):
     )
 
 
-def test_the_default_provider_is_openai():
+def test_the_default_provider_is_openai(monkeypatch):
     """
     Switching provider is opt-in. Weeks 4-11 reported
     numbers against OpenAI and a changed default would
     silently re-measure them.
+
+    Asserts the CODE default with the variable unset, not
+    whatever the developer's .env currently says - the first
+    version of this test failed the moment a real Gemini key
+    was configured, which is the environment doing its job
+    and the test asking the wrong question.
     """
 
-    from app.config import LLM_PROVIDER
+    import re
+    from pathlib import Path
 
-    assert LLM_PROVIDER == "openai"
+    # Read the source rather than the imported value.
+    # Reloading the module does not work: config.py calls
+    # load_dotenv(), which puts the developer's own .env
+    # back, so the import can only ever report what this
+    # machine is configured for - never what the code
+    # falls back to.
+    source = (
+        Path(__file__).resolve().parents[1]
+        / "app"
+        / "config.py"
+    ).read_text(encoding="utf-8")
+
+    match = re.search(
+        r'LLM_PROVIDER\s*=\s*os\.getenv\(\s*'
+        r'"LLM_PROVIDER"\s*,\s*"([^"]+)"',
+        source,
+    )
+
+    assert match, (
+        "LLM_PROVIDER is no longer read from the "
+        "environment with a literal default"
+    )
+
+    assert match.group(1) == "openai"
 
 
 def test_the_agent_loop_is_not_routed_through_the_shim():
