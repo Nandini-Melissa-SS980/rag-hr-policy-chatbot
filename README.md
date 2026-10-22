@@ -1,7 +1,39 @@
-# HR Policy RAG Chatbot
+# Policy Answer Desk
 
-Retrieval-augmented Q&A over HR policy PDFs. Answers come only from the
-retrieved policy text and carry citations.
+Answers an HR policy question **for a specific employee**: resolves their
+grade and entity from the employee record first, retrieves only the policy
+edition that was in force, lets the entity annex override the handbook, cites
+the clause with its version and effective date, and hands discretionary
+matters to an HR business partner rather than guessing.
+
+```bash
+cd backend
+python -m scripts.ingest_desk          # build the index, ~20s
+python -m app.desk --demo --today 2025-06-01
+```
+
+That is the whole system end to end. The same question asked by two employees
+returns two different answers from two different annexes, each cited with its
+version and effective date.
+
+| | |
+|---|---|
+| Entry point | `python -m app.desk` |
+| Eval suite | `python -m evaluation.week12.run_integrated` -> 32/32, judge agreement 100% |
+| Tests | `python -m pytest tests -m "not slow"` -> 202 passing |
+| Capstone docs | [`backend/evaluation/week12/`](backend/evaluation/week12/) |
+
+**Start here:** [DEMO.md](backend/evaluation/week12/DEMO.md) &middot;
+[ARCHITECTURE.md](backend/evaluation/week12/ARCHITECTURE.md) &middot;
+[SEAMS.md](backend/evaluation/week12/SEAMS.md) &middot;
+[WEAKNESSES.md](backend/evaluation/week12/WEAKNESSES.md) &middot;
+[COST.md](backend/evaluation/week12/COST.md)
+
+Built over twelve weeks; the sections below are the parts it is made of.
+
+---
+
+## The stack
 
 - API: FastAPI
 - Answers: OpenAI (`gpt-5-mini`)
