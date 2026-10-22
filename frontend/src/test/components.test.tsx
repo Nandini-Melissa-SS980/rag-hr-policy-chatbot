@@ -5,6 +5,7 @@ import { SourcesPanel } from "@/components/chat/SourcesPanel";
 import { QuickPrompts } from "@/components/chat/QuickPrompts";
 import { MessageBubble } from "@/components/chat/MessageBubble";
 import { Logo } from "@/components/brand/Logo";
+import { MetricsBar } from "@/components/chat/MetricsBar";
 import { scoreTone, titleFrom } from "@/lib/utils";
 import { POLICIES, QUICK_PROMPTS } from "@/lib/policies";
 
@@ -215,5 +216,101 @@ describe("Logo", () => {
     expect(
       screen.getByRole("img", { name: "HR360 Bot" }),
     ).toBeInTheDocument();
+  });
+});
+
+describe("MetricsBar", () => {
+  const base = {
+    trace_id: "R-abc123",
+    model: "gemini-3.8-flash",
+    prompt_version: "v2",
+    duration_ms: 1234,
+    total_tokens: 974,
+    cost_usd: 0.000318,
+    top_score: 0.833,
+    retrieved: 5,
+    stages: {
+      retrieval: {
+        duration_ms: 70,
+        input_tokens: 0,
+        output_tokens: 0,
+        cost_usd: 0,
+      },
+      generation: {
+        duration_ms: 1100,
+        input_tokens: 894,
+        output_tokens: 80,
+        cost_usd: 0.000318,
+      },
+    },
+  };
+
+  it("labels every figure", () => {
+    render(<MetricsBar metrics={base} />);
+
+    for (const label of [
+      "Score:",
+      "Time:",
+      "Tokens:",
+      "Cost:",
+    ]) {
+      expect(screen.getByText(label)).toBeInTheDocument();
+    }
+
+    expect(screen.getByText("0.833")).toBeInTheDocument();
+    expect(screen.getByText("974")).toBeInTheDocument();
+  });
+
+  it("shows a sub-cent cost to six places", () => {
+    // "$0.00" reads as free. At these prices the whole
+    // number is below a tenth of a cent, so rounding it
+    // away loses the only digits there are.
+    render(<MetricsBar metrics={base} />);
+
+    expect(
+      screen.getByText("$0.000318"),
+    ).toBeInTheDocument();
+  });
+
+  it("explains a zero cost on a failed request", () => {
+    // Retrieval ran, so the score and time are real.
+    // Omitting metrics here is how a failed request becomes
+    // unaccountable - and that is the request you most want
+    // to account for.
+    render(
+      <MetricsBar
+        metrics={{
+          ...base,
+          trace_id: "generation-failed",
+          model: "none",
+          total_tokens: 0,
+          cost_usd: 0,
+          stages: {},
+        }}
+      />,
+    );
+
+    expect(
+      screen.getByText(/no model was reached/i),
+    ).toBeInTheDocument();
+
+    expect(screen.getByText("0.833")).toBeInTheDocument();
+  });
+
+  it("hides the per-stage split until asked", async () => {
+    render(<MetricsBar metrics={base} />);
+
+    expect(screen.queryByText("retrieval")).toBeNull();
+
+    await userEvent.click(
+      screen.getByRole("button", { name: /per stage/i }),
+    );
+
+    expect(screen.getByText("retrieval")).toBeInTheDocument();
+    expect(screen.getByText("generation")).toBeInTheDocument();
+
+    // Retrieval costs latency and no money; generation
+    // costs both. That split is the actionable part.
+    expect(screen.getByText("free")).toBeInTheDocument();
   });
 });

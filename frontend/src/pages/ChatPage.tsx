@@ -108,15 +108,40 @@ export function ChatPage({
           retrieved,
         });
       } catch (error) {
+        // Does not name a provider. The app can run on
+        // OpenAI or Gemini, and an error that says "the
+        // OpenAI account has no credits" while Gemini is
+        // configured sends someone to the wrong billing
+        // page.
         const message =
           error instanceof ApiError && error.isQuota
-            ? "The language model is unavailable — the OpenAI account has no credits. Retrieval still works: switch to Retrieval only to see the passages this question matches."
+            ? "The language model is out of quota, so no answer was generated. Retrieval still works — the passages this question matched are below, and the Retrieval only toggle skips the model entirely."
             : error instanceof Error
               ? error.message
               : "Something went wrong.";
 
+        // Retrieval ran and succeeded even though
+        // generation failed, so there are real numbers to
+        // show: a score, a chunk count, and the time spent
+        // getting there. Omitting them on an error is how a
+        // failed request becomes unaccountable - which is
+        // exactly the request you most want to account for.
+        //
+        // Tokens and cost are zero because no model was
+        // reached, and that is the honest figure.
         updateTurn(conversationId, pendingId, {
           error: message,
+          metrics: {
+            trace_id: "generation-failed",
+            model: "none",
+            prompt_version: "-",
+            duration_ms: Date.now() - startedAt,
+            total_tokens: 0,
+            cost_usd: 0,
+            top_score: retrieved[0]?.score ?? 0,
+            retrieved: retrieved.length,
+            stages: {},
+          },
           retrieved,
         });
       }
