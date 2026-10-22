@@ -1,10 +1,9 @@
 import json
 
-from openai import OpenAI
-
-from app.config import (
-    OPENAI_API_KEY,
-    OPENAI_MODEL,
+from app.services.llm import (
+    active_model,
+    build_client,
+    complete,
 )
 from app.services.prompts import (
     CURRENT_PROMPT_VERSION,
@@ -40,14 +39,13 @@ class Generator:
             prompt_version
         )
 
-        if not OPENAI_API_KEY:
-            raise RuntimeError(
-                "OPENAI_API_KEY is not configured."
-            )
+        # Built through the shim, so LLM_PROVIDER decides
+        # which service this talks to. Raises here rather
+        # than at first request if the chosen provider has
+        # no key.
+        self.client = build_client()
 
-        self.client = OpenAI(
-            api_key=OPENAI_API_KEY
-        )
+        self.model = active_model()
 
     def generate(
         self,
@@ -105,40 +103,30 @@ Do not guess.
 Return JSON only.
 """
 
-        response = self.client.responses.create(
-            model=OPENAI_MODEL,
-            instructions=self.system_prompt,
-            input=user_prompt,
+        completion = complete(
+            self.client,
+            self.system_prompt,
+            user_prompt,
         )
 
-        raw_text = response.output_text.strip()
+        raw_text = completion.text
 
         # Reported so the caller's generation span
         # carries real token counts rather than an
         # estimate. Absent usage is recorded as zero,
         # never guessed.
-        usage = getattr(
-            response,
-            "usage",
-            None,
-        )
-
         meta = {
             "prompt_version": (
                 self.prompt_version
             ),
-            "input_tokens": getattr(
-                usage,
-                "input_tokens",
-                0,
-            )
-            or 0,
-            "output_tokens": getattr(
-                usage,
-                "output_tokens",
-                0,
-            )
-            or 0,
+            "model": completion.model,
+            "provider": completion.provider,
+            "input_tokens": (
+                completion.input_tokens
+            ),
+            "output_tokens": (
+                completion.output_tokens
+            ),
         }
 
         try:

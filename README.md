@@ -40,6 +40,40 @@ Built over twelve weeks; the sections below are the parts it is made of.
 - Embeddings: `BAAI/bge-small-en-v1.5` (local, via sentence-transformers)
 - Vector store: Chroma, persisted to `backend/vectorstore/`
 
+## Model provider
+
+The generator and the judge run on OpenAI by default. To use
+**Gemini Flash** instead, which has a free tier of roughly 1,500
+requests/day and needs no card:
+
+1. Get a key at <https://aistudio.google.com/apikey> (starts `AIza`)
+2. Add to `backend/.env`:
+
+```bash
+LLM_PROVIDER=gemini
+GEMINI_API_KEY=AIza...
+```
+
+3. Restart whatever is running. No code change.
+
+Both providers go through `app/services/llm.py`, which hides the
+difference: Gemini speaks `chat.completions` where OpenAI speaks
+`responses`, takes the system prompt as a message rather than an
+`instructions=` argument, reports `prompt_tokens` rather than
+`input_tokens`, and wraps JSON in a ```` ```json ```` fence that has
+to be stripped before parsing.
+
+**The Week-7 agent loop stays on OpenAI either way.** It does tool
+calling, the two providers disagree on the shape of a tool call, and
+the Week-8 trajectory eval and Week-10 race both read OpenAI's
+`function_call` items — switching it would invalidate numbers already
+reported. The loop is replayed in every eval, so it never needs a live
+model. A test pins this.
+
+A missing `GEMINI_API_KEY` under `LLM_PROVIDER=gemini` raises rather
+than falling back to OpenAI: a trace that names the wrong model is
+worse than an error.
+
 ## Repo layout
 
 ```

@@ -9,11 +9,10 @@ judge_v2 can be diffed.
 
 import json
 
-from openai import OpenAI
-
-from app.config import (
-    OPENAI_API_KEY,
-    OPENAI_MODEL,
+from app.services.llm import (
+    active_model,
+    build_client,
+    complete,
 )
 
 
@@ -74,18 +73,17 @@ class Judge:
         version: str = "v1",
     ):
 
-        if not OPENAI_API_KEY:
-            raise RuntimeError(
-                "OPENAI_API_KEY is not configured."
-            )
-
         self.version = version
 
         self.prompt = load_prompt(version)
 
-        self.client = OpenAI(
-            api_key=OPENAI_API_KEY
-        )
+        # Through the shim, so the judge follows
+        # LLM_PROVIDER like the generator does. Judging
+        # on one provider while answering on another
+        # would make the agreement number meaningless.
+        self.client = build_client()
+
+        self.model = active_model()
 
     def judge(
         self,
@@ -94,17 +92,17 @@ class Judge:
         retrieved: list[dict],
     ) -> dict:
 
-        response = self.client.responses.create(
-            model=OPENAI_MODEL,
-            instructions=self.prompt,
-            input=build_input(
+        completion = complete(
+            self.client,
+            self.prompt,
+            build_input(
                 question,
                 answer,
                 retrieved,
             ),
         )
 
-        raw_text = response.output_text.strip()
+        raw_text = completion.text
 
         try:
             data = json.loads(raw_text)

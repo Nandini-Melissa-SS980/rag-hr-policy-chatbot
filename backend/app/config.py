@@ -97,3 +97,34 @@ DESK_COLLECTION = os.getenv(
     "DESK_COLLECTION",
     "hr_policy_desk",
 )
+
+
+# ---------------------------------------------------
+# Provider selection.
+#
+# The generator and the judge go through
+# app/services/llm.py and honour this. The Week-7 agent
+# loop does not: it does tool calling, the two providers
+# disagree on the shape of a tool call, and the Week-8
+# and Week-10 numbers were measured against OpenAI's.
+# ---------------------------------------------------
+LLM_PROVIDER = os.getenv(
+    "LLM_PROVIDER",
+    "openai",
+).strip().lower()
+
+# Free tier, no card: https://aistudio.google.com/apikey
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
+GEMINI_MODEL = os.getenv(
+    "GEMINI_MODEL",
+    "gemini-2.0-flash",
+)
+
+# Gemini's OpenAI-compatible endpoint, so the same SDK
+# serves both providers and there is no second
+# dependency to install.
+GEMINI_BASE_URL = os.getenv(
+    "GEMINI_BASE_URL",
+    "https://generativelanguage.googleapis.com/v1beta/openai/",
+)
