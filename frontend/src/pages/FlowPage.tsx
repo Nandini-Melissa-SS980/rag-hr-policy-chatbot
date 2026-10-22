@@ -167,7 +167,7 @@ const STEPS: StepProps[] = [
     icon: ShieldCheck,
     title: "Guard",
     body: "A question about a colleague, or about a subject the corpus does not hold, is refused here.",
-    note: "Before retrieval too: a pension question scores 0.61 against an annual-leave clause, so no threshold can catch it afterwards.",
+    note: "Before retrieval too: a pension question scores 0.605 against an annual-leave clause, so no threshold can catch it afterwards.",
   },
   {
     icon: Database,
@@ -343,15 +343,15 @@ const BUDGET = [
   },
   {
     stage: "retrieve",
-    latency: "341 ms",
+    latency: "70 ms",
     cost: "free",
     why: "The embedding model runs locally, so this costs time and no money.",
   },
   {
     stage: "answer",
     latency: "~1 s",
-    cost: "$0.000286",
-    why: "The one model call. Input tokens dominate: prompt plus three clauses.",
+    cost: "$0.000318",
+    why: "The one model call. Input tokens dominate: 632 of them, prompt plus three clauses.",
   },
 ];
 

@@ -34,10 +34,13 @@ export function PoliciesPage() {
           className="mt-1.5 text-[13.5px] leading-relaxed"
           style={{ color: "var(--app-ink-muted)" }}
         >
-          HR360 Bot answers only from these six documents
-          {stats.data
-            ? `, split into ${stats.data.count} searchable passages`
-            : ""}
+          HR360 Bot answers only from these{" "}
+          {POLICIES.length} documents
+          {stats.isLoading
+            ? ", loading the passage count…"
+            : stats.data
+              ? `, split into ${stats.data.count} searchable passages`
+              : " (passage count unavailable — the backend is not reachable)"}
           . A question outside them should be refused rather
           than answered.
         </p>
@@ -98,10 +101,20 @@ export function PoliciesPage() {
             Not covered:
           </strong>{" "}
           notice periods and resignation, maternity and
-          parental leave, pensions, expenses, private medical
-          cover, and training budgets. Questions on these
-          should return a refusal — if one is answered
-          confidently, that is a bug worth reporting.
+          parental leave, pensions, private medical cover,
+          and training budgets. Questions on these should
+          return a refusal — if one is answered confidently,
+          that is a bug worth reporting.
+          <p className="mt-2">
+            <strong style={{ color: "var(--app-ink)" }}>
+              Partly covered:
+            </strong>{" "}
+            home-office equipment and the desk allowance are
+            in HR-206 §5, but travel and other expenses are
+            not. A question about claiming expenses may be
+            answered from the equipment clause, which is the
+            wrong answer to the right-sounding question.
+          </p>
         </div>
       </div>
 
